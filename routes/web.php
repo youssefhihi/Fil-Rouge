@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
-
+use App\Http\Controllers\GenreController;
 
 Route::middleware('guest')->group(function () {
 Route::get('register', [RegisterController::class, 'create'])->name('register');
@@ -20,17 +20,15 @@ Route::get('/', function () {
 });
 
 
-Route::middleware(['auth','verified'])->group(function () {
-   
+Route::middleware(['auth'])->group(function () {
+    Route::resource('/dashboard/genres', GenreController::class);
     Route::get('/dashboard/users', function () {
         return view('admin.users');
     });
     Route::get('/dashboard/add-book', function () {
         return view('admin.createBook');
     });
-    Route::get('/dashboard/genre', function () {
-        return view('admin.genres');
-    });
+
     Route::get('/dashboard/books', function () {
         return view('admin.books');
     });

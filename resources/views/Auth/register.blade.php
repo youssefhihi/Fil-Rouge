@@ -6,7 +6,7 @@
         </div>
         <div class="Registerbox ">
      
-          <form action="{{route('register.store')}}" method="post"  autocomplete="off" id="Registerform" class=" bg-white px-10 py-4 rounded-md z-10 flex gap-7">        
+          <form action="{{route('register')}}" method="post"  autocomplete="off" id="Registerform" class=" bg-white px-10 py-4 rounded-md z-10 flex gap-7">        
             @csrf
             @method('POST')
             <p class=" text-black font-semibold text-center text-2xl">Create Your Free Account</p>

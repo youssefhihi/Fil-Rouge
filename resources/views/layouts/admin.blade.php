@@ -21,6 +21,7 @@
     </main>
     
     <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/popup.js') }}"></script>
 </body>
 </html>
 
