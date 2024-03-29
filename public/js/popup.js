@@ -56,6 +56,7 @@ document.querySelectorAll('[id^="putGenre"]').forEach(input => {
       var errorMessage = document.getElementById('putMessageError' + this.dataset.genreId); // Use dataset.genreId instead of dataset.genreID
       if (!valid) {
           errorMessage.style.display = 'block'; // Show error message
+          this.classList.remove('dark:bg-green-50', 'dark:text-black', 'focus:border-green-500', 'dark:focus:border-green-600', 'focus:border-green-500', 'dark:focus:border-green-600', 'px-3', 'py-2', 'rounded-md', 'shadow-sm', 'focus:outline-none');
           this.classList.add('border-red-500', 'dark:bg-red-50', 'dark:text-black', 'focus:border-red-500', 'dark:focus:border-red-600', 'focus:border-red-500', 'dark:focus:border-red-600', 'px-3', 'py-2', 'rounded-md', 'shadow-sm', 'focus:outline-none');
       } else {
           errorMessage.style.display = 'none'; // Hide error message

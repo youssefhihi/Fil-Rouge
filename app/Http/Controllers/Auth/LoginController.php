@@ -20,8 +20,12 @@ class LoginController extends Controller
     public function store(LoginRequest $request)
     {
         $request->authenticate();
-        $request->session()->regenerate();
-        return redirect('/feed');
+        $request->session()->regenerate();        
+        if(auth()->user()->role === 'admin'){
+            return redirect('/dashboard')->with('welcome','Welcome Back');
+        }else{
+         return redirect('/feed')->with('welcome','Welcome Back');
+        }
     }
 
      /**

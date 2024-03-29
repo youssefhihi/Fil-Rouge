@@ -25,6 +25,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/users', function () {
         return view('admin.users');
     });
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    });
     Route::get('/dashboard/add-book', function () {
         return view('admin.createBook');
     });

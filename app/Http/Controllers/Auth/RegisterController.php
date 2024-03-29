@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+use App\Models\User;
+use App\Models\Client;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
-use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -22,9 +23,11 @@ class RegisterController extends Controller
     public function store(RegisterRequest $request)
     {
         $request->merge(['password' => Hash::make($request->password)]);
+        
         $user = User::create($request->validated());
-        event(new Registered($user));   
+        event(new Registered($user));
+        $user->client()->create();
         Auth::login($user);
-         return redirect('/feed');
+        return redirect('/feed');
     }
 }
