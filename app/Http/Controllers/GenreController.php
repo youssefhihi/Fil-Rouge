@@ -14,8 +14,7 @@ class GenreController extends Controller
      */
     public function index()
     {
-        $genres = Genre::get();
-        return view('admin.genres',compact('genres'));
+        return view('admin.genres');
     }
 
     /**
@@ -32,7 +31,7 @@ class GenreController extends Controller
     public function store(GenreRequest $request)
     {
         Genre::create($request->validated());
-        redirect()->back()->with('message','Genre added with success');
+       return  redirect()->back()->with('message','Genre added with success');
     }
 
     /**
@@ -57,7 +56,7 @@ class GenreController extends Controller
     public function update(GenreRequest $request, Genre $genre)
     {
         $genre->update($request->validated());
-        redirect()->back()->with('message','Genre updated with success');
+        return redirect()->back()->with('message','Genre updated with success');
     }
 
     /**
@@ -66,7 +65,7 @@ class GenreController extends Controller
     public function destroy(Genre $genre)
     {
         $genre->delete();
-        redirect()->back()->with('message','Genre updated with success');
+       return redirect()->back()->with('message','Genre updated with success');
     }
     
     public function restore(Genre $genre)
