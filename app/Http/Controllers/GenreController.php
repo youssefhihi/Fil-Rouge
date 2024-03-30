@@ -47,7 +47,7 @@ class GenreController extends Controller
      */
     public function edit(Genre $genre)
     {
-        //
+        return view('admin.editGenre',compact('genre'));
     }
 
     /**
@@ -56,7 +56,7 @@ class GenreController extends Controller
     public function update(GenreRequest $request, Genre $genre)
     {
         $genre->update($request->validated());
-        return redirect()->back()->with('message','Genre updated with success');
+        return redirect('/dashboard/genres')->with('message','Genre updated with success');
     }
 
     /**

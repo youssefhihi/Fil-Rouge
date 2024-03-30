@@ -87,7 +87,6 @@ document.querySelectorAll('.deleteButton').forEach(button => {
 
 
 
-
     function OpenUpdateGenre(id) {
       document.getElementById(`updateGenre${id}`).classList.remove('hidden');
       }
@@ -95,3 +94,25 @@ document.querySelectorAll('.deleteButton').forEach(button => {
       function CloseUpdateGenre(id) {
       document.getElementById(`updateGenre${id}`).classList.add('hidden');
       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ //  show Popup for add Author
+function openAddAuthor(){
+  document.getElementById('addAuthor').classList.remove('hidden');
+}
+  //  close Popup for add Author
+function closeAddAuthor(){
+  document.getElementById('addAuthor').classList.add('hidden');
+}

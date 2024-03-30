@@ -42,32 +42,13 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="deleteButton" data-index="{{$genre->id}}"><x-icon name="delete"/></button>
-                                    </form>
-                                    
-                                    <button type="button" onclick ="OpenUpdateGenre('{{$genre->id}}')"><x-icon name="update"/></button>
+                                    </form>                 
+                                    <a href="{{route('genres.edit',$genre)}}"><x-icon name="update"/></a>
                                 </td>
                             </tr>
                             
 
-                        <div id="updateGenre{{$genre->id}}" class="hidden min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
-                            <div class="absolute bg-black opacity-80 inset-0 z-0"></div>
-                            <div class="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white ">
-                                                    <!-- Form to add genre -->
-                                    <form method="POST" id="putGenreForm{{$genre->id}}"  action="{{route('genres.update',$genre) }}" class="space-y-4">
-                                    @csrf
-                                    @method('PUT')
-                                        <div class="flex flex-col">
-                                        <label for="name" class="text-md font-semibold font-normal mb-1 px-4"> new name</label>
-                                        <x-input class="block mt-1 w-full"  type="text" name="name" id="putGenre{{$genre->id}}" data-genre-id="{{$genre->id}}" value="{{$genre->name}}" />
-                                        <p id="putMessageError{{$genre->id}}"  class="hidden text-red-400 text-sm">Please use letters only and avoid numbers or special characters.</p>
-                                        <div class="flex space-x-8 justify-end mt-5">
-                                            <p onclick="CloseUpdateGenre('{{$genre->id}}')" class=" cursor-pointer mb-2 md:mb-0 bg-red-500 border border-red-500 px-5 py-1 text-sm shadow-sm font-medium tracking-wider text-white rounded-md hover:shadow-lg hover:bg-red-600"> Close</p>
-                                            <button type="submit" class="cursor-pointer mb-2 md:mb-0 bg-gray-900 border border-gray-500 px-5 py-1 text-sm shadow-sm font-medium tracking-wider text-white rounded-md hover:shadow-lg hover:bg-gray-700">Update</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                        
                         @endforeach
 
                         </tbody>

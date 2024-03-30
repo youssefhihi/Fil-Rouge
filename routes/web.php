@@ -1,9 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
 Route::middleware('guest')->group(function () {
 Route::get('register', [RegisterController::class, 'create'])->name('register');
@@ -22,9 +25,14 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('/dashboard/genres', GenreController::class);
-    Route::get('/dashboard/users', function () {
-        return view('admin.users');
-    });
+    Route::resource('/dashboard/books', BookController::class);
+    Route::get('/dashboard/users', [AdminController::class,'index']);
+    Route::patch('/dashboard/users/{user}/block', [AdminController::class,'block'])->name('users.block');
+    Route::patch('/dashboard/users/{user}', [AdminController::class,'canPost'])->name('users.canPost');
+        Route::resource('/dashboard/authors', AuthorController::class);
+
+
+
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     });

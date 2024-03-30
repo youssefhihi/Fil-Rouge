@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use App\trait\ImageUpload;
 
 class BookController extends Controller
 {
+    use ImageUpload;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -28,7 +31,17 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+
+            $Book = Book::create($request->validated());
+            $this->storeImg($Book, $request->file('image'));
+            
+            return redirect()->back()->with("success", "Book added with success.");
+        } catch (\Exception $e) {
+
+            return redirect()->back()->with("error", "Error.");
+
+        }
     }
 
     /**
@@ -44,7 +57,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        return view('admin.editBook',compact('book'));
     }
 
     /**
@@ -52,7 +65,15 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        try {
+
+            $book->update($request->validated());
+            $this->updateImg($book, $request->file('image'));
+            return redirect()->back()->with("success", "book updated with success.");
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with("error", "Error.");
+        }
     }
 
     /**
@@ -60,6 +81,11 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        try {
+            $book->delete();
+            return redirect()->back()->with("success", "Book deleted with success");
+        } catch (\Exception $e) {
+            return redirect()->back()->with("error", "Error!.");
+        }
     }
 }

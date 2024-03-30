@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Admin;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -12,7 +14,12 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        
+        $users = User::get();
+        return view('admin.users',compact('users'));
+    }
+
+    public function blockUser(){
     }
 
     /**
@@ -42,17 +49,37 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Admin $admin)
+    public function canPost(User $user)
     {
-        //
+        if($user->client->can_post){
+            $user->client->update([
+                'can_post' => False,
+            ]);
+        return redirect()->back()->with('message','user banned with success');
+        }else{
+            $user->client->update([
+                'can_post' => True,
+            ]);
+        return redirect()->back()->with('message','user can\'t post from now success');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Admin $admin)
+    public function block(User $user)
     {
-        //
+        if($user->client->is_banned){
+            $user->client->update([
+                'is_banned' => False,
+            ]);
+        return redirect()->back()->with('message','user banned with success');
+        }else{
+            $user->client->update([
+                'is_banned' => True,
+            ]);
+        return redirect()->back()->with('message','user banned with success');
+        }
     }
 
     /**
