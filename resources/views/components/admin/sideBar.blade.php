@@ -73,28 +73,31 @@
                     Users
                 </div>
             </a>
-            <a href="#" class =  "hover:bg-white w-full text-white hover:text-black dark:hover:text-black hover:ml-3 border-2 border-black p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">                 
+            <a href="/dashboard/genres" class =  "hover:bg-white w-full text-white hover:text-black dark:hover:text-black hover:ml-3 border-2 border-black p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">                 
                 <x-icon name="genre"/>                  
                 <div>
-                    Genre
+                    Genres
                 </div>
             </a>
-            <a href="#" class =  "hover:bg-white w-full text-white hover:text-black dark:hover:text-black hover:ml-3 border-2 border-black p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">               
-                <!-- <svg class="w-5 h-5" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M37.45 31.3667L35.7833 24.9333L30.5333 5.61667C30.4199 5.19057 30.1422 4.82679 29.7611 4.605C29.38 4.38321 28.9265 4.32148 28.5 4.43333L22.05 6.1C21.8961 5.92941 21.7085 5.79249 21.4991 5.69784C21.2898 5.60319 21.0631 5.55286 20.8333 5.55H4.16667C3.72464 5.55 3.30072 5.72559 2.98816 6.03815C2.67559 6.35072 2.5 6.77464 2.5 7.21667V33.8833C2.5 34.3254 2.67559 34.7493 2.98816 35.0618C3.30072 35.3744 3.72464 35.55 4.16667 35.55H20.8333C21.2754 35.55 21.6993 35.3744 22.0118 35.0618C22.3244 34.7493 22.5 34.3254 22.5 33.8833V20.55L26.1667 34.25C26.2643 34.6136 26.4822 34.9334 26.7849 35.1574C27.0875 35.3813 27.4571 35.4962 27.8333 35.4833C27.9773 35.4997 28.1227 35.4997 28.2667 35.4833L36.3167 33.3333C36.5295 33.2764 36.7289 33.1779 36.9034 33.0435C37.0779 32.909 37.224 32.7413 37.3333 32.55C37.5091 32.1813 37.5504 31.7626 37.45 31.3667ZM10.7833 32.2833H5.78333V28.95H10.7833V32.2833ZM10.7833 25.6167H5.78333V15.6167H10.7833V25.6167ZM10.7833 12.2833H5.78333V8.95H10.7833V12.2833ZM19.1167 32.2833H14.1167V28.95H19.1167V32.2833ZM19.1167 25.6167H14.1167V15.6167H19.1167V25.6167ZM19.1167 12.2833H14.1167V8.95H19.1167V12.2833ZM22.8667 9.38333L27.7 8.08333L28.5667 11.3L23.7333 12.6L22.8667 9.38333ZM27.1833 25.4833L24.6 15.8167L29.4333 14.5167L32.0167 24.1833L27.1833 25.4833ZM28.85 31.9167L27.9833 28.7L32.8167 27.4L33.6833 30.6167L28.85 31.9167Z" fill="currentColor"/>
-                </svg>                              -->
+            <a href="/dashboard/authors" class =  "hover:bg-white w-full text-white hover:text-black dark:hover:text-black hover:ml-3 border-2 border-black p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">                 
+                <x-icon name="authors"/>                  
+                <div>
+                    Authors
+                </div>
+            </a>
+            <a href="/dashboard/books" class =  "hover:bg-white w-full text-white hover:text-black dark:hover:text-black hover:ml-3 border-2 border-black p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">               
                 <x-icon name="books"/>                  
                 <div>
                     Books
                 </div>
             </a>
-            <a href="#" class =  "hover:bg-white w-full text-white hover:text-black dark:hover:text-black hover:ml-3 border-2 border-black p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">                 
+            <a href="/dashboard/reservations" class =  "hover:bg-white w-full text-white hover:text-black dark:hover:text-black hover:ml-3 border-2 border-black p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">                 
                 <x-icon name="reservation"/>                   
                 <div>
                     Reservations
                 </div>
             </a>
-            <a href="#" class =  "hover:bg-white w-full text-white hover:text-black dark:hover:text-black hover:ml-3 border-2 border-black p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">                 
+            <a href="/dashboard/emprunts" class =  "hover:bg-white w-full text-white hover:text-black dark:hover:text-black hover:ml-3 border-2 border-black p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">                 
             <x-icon name="emprunts"/>                  
                 <div>
                 Emprunts
@@ -109,22 +112,25 @@
         </div>
         <!-- MINI SIDEBAR-->
         <div class= "mini mt-20 flex flex-col space-y-2 w-full h-[calc(100vh)]">
-            <a href="#" class= "hover:bg-black justify-end pr-5 text-white hover:text-black hover:ml-3 border-2 border-black dark:hover:text-black w-full  p-3 rounded-full transform ease-in-out duration-300 flex">
+            <a href="/dashboard" class= "hover:bg-white justify-end pr-5 text-white hover:text-black hover:ml-3 border-2 border-black dark:hover:text-black w-full  p-3 rounded-full transform ease-in-out duration-300 flex">
                 <x-icon name="dashboard"/>              
             </a>
-            <a href="#" class= "hover:bg-black justify-end pr-5 text-white hover:text-black hover:ml-3 border-2 border-black dark:hover:text-black w-full   p-3 rounded-full transform ease-in-out duration-300 flex">
+            <a href="/dashboard/users" class= "hover:bg-white justify-end pr-5 text-white hover:text-black hover:ml-3 border-2 border-black dark:hover:text-black w-full   p-3 rounded-full transform ease-in-out duration-300 flex">
                 <x-icon name="users"/>              
             </a>
-            <a href="#" class= "hover:bg-black hover:ml-4 justify-end pr-5 text-white hover:text-black hover:ml-3 border-2 border-black dark:hover:text-black w-full  p-3 rounded-full transform ease-in-out duration-300 flex">
+            <a href="/dashboard/genres" class= "hover:bg-white hover:ml-4 justify-end pr-5 text-white hover:text-black hover:ml-3 border-2 border-black dark:hover:text-black w-full  p-3 rounded-full transform ease-in-out duration-300 flex">
                 <x-icon name="genre"/>                 
             </a>
-            <a href="#" class= "hover:bg-black hover:ml-4 justify-end pr-5 text-white hover:text-black hover:ml-3 border-2 border-black dark:hover:text-black w-full  p-3 rounded-full transform ease-in-out duration-300 flex">
+            <a href="/dashboard/authors" class= "hover:bg-white hover:ml-4 justify-end pr-4 text-white hover:text-black hover:ml-3 border-2 border-black dark:hover:text-black w-full  p-3 rounded-full transform ease-in-out duration-300 flex">
+                <x-icon name="authors"/>                 
+            </a>
+            <a href="/dashboard/books" class= "hover:bg-white hover:ml-4 justify-end pr-5 text-white hover:text-black hover:ml-3 border-2 border-black dark:hover:text-black w-full  p-3 rounded-full transform ease-in-out duration-300 flex">
                 <x-icon name="books"/>                  
             </a>
-            <a href="#" class= "hover:bg-black hover:ml-4 justify-end pr-5 text-white hover:text-black hover:ml-3 border-2 border-black dark:hover:text-black w-full  p-3 rounded-full transform ease-in-out duration-300 flex">
+            <a href="/dashboard/reservations" class= "hover:bg-white hover:ml-4 justify-end pr-5 text-white hover:text-black hover:ml-3 border-2 border-black dark:hover:text-black w-full  p-3 rounded-full transform ease-in-out duration-300 flex">
                 <x-icon name="reservation"/>                 
             </a>
-            <a href="#" class= "hover:bg-black hover:ml-4 justify-end pr-5 text-white hover:text-black hover:ml-3 border-2 border-black dark:hover:text-black w-full  p-3 rounded-full transform ease-in-out duration-300 flex">
+            <a href="/dashboard/emprunts" class= "hover:bg-white hover:ml-4 justify-end pr-5 text-white hover:text-black hover:ml-3 border-2 border-black dark:hover:text-black w-full  p-3 rounded-full transform ease-in-out duration-300 flex">
                 <x-icon name="emprunts"/>                 
             </a>
         </div>

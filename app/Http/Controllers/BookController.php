@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
-use Illuminate\Http\Request;
+use App\Models\Genre;
+use App\Models\Author;
 use App\trait\ImageUpload;
+use Illuminate\Http\Request;
+use App\Http\Requests\BookRequest;
 
 class BookController extends Controller
 {
@@ -23,23 +26,24 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $genres = Genre::get();
+        $authors = Author::get();
+        return view("admin.createBook",compact("genres","authors"));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BookRequest $request)
     {
         try {
 
             $Book = Book::create($request->validated());
-            $this->storeImg($Book, $request->file('image'));
-            
-            return redirect()->back()->with("success", "Book added with success.");
+            $this->storeImg($Book, $request->file('image'));       
+            return redirect("/dashboard/books")->with("message", "Book added with success.");
         } catch (\Exception $e) {
 
-            return redirect()->back()->with("error", "Error.");
+            return redirect()->back()->with("error", "Error: " . $e->getMessage());
 
         }
     }
@@ -57,13 +61,15 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        return view('admin.editBook',compact('book'));
+        $genres = Genre::get();
+        $authors = Author::get();
+        return view('admin.editBook',compact('book','genres','authors'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Book $book)
+    public function update(BookRequest $request, Book $book)
     {
         try {
 

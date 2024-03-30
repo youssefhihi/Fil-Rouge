@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 
 class Book extends Model
 {
@@ -20,4 +22,19 @@ class Book extends Model
         'quantity',
         'language',
     ];
+
+    /**
+     * Get the author's image.
+     */
+    public function image(): MorphOne
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function genre(){
+       return $this->belongsTo(Genre::class,'genre_id');
+    }
+    public function author(){
+        return $this->belongsTo(Author::class,'author_id');
+     }
 }

@@ -19,4 +19,7 @@ class Genre extends Model
     {
         return static::where('deleted_at', '<=', now()->subMonth());
     }
+    public function books(){
+       return $this->hasMany(Book::class,'genre_id');
+    }
 }

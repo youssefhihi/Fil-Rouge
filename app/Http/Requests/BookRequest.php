@@ -23,11 +23,12 @@ class BookRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:50|unique:books,title',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',    
             'genre_id' =>'required|exists:genres,id',
-            'author_id' =>'required|exists:author,id',
+            'author_id' =>'required|exists:authors,id',
             'description' => 'required|string',
             'ISBN'=> 'required|string|unique:books,ISBN',
-            'edition' =>'required|integer|max:4|min:4',
+            'edition' => 'required|date_format:Y-m',
             'publicationDate' =>'required|date',
             'pagesNumber' => 'required|integer',
             'quantity' => 'required|integer',

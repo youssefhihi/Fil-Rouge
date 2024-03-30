@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('city')->nullable(); 
             $table->string('country')->nullable(); 
             $table->text('bio')->nullable(); 
-            $table->boolean('is_banned')->default(true); 
-            $table->boolean('can_post')->default(true); 
+            $table->boolean('is_banned')->default(false); 
+            $table->boolean('can_post')->default(false); 
             $table->softDeletes(); 
             $table->timestamps();
         });
