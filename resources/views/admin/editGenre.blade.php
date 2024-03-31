@@ -20,5 +20,5 @@
                             </div>
                         </div>
 
-                        <x-error-input :messages="$errors->get('name')" />
+                        <x-error-alert :messages="$errors->all()" />
 </x-admin-layout>

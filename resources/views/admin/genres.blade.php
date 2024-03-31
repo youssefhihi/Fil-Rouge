@@ -1,7 +1,8 @@
 
 <x-admin-layout>
- <!-- CONTENT -->
-
+    <!-- CONTENT -->
+    <x-success-alert/>
+    <x-error-alert :messages="$errors->all()" />
  <title-pages name="Genres"/>
  
             <livewire:search-genre />
@@ -26,17 +27,8 @@
             </div>
         </div>
         
-        @if (session('message'))
-        <script>
-            swal("Success", "{{ session('message') }}", 'success', {
-                button: true,
-                button: "ok",
-                timer:3000,
-            });
-            </script>
-            @endif
 
-            <x-error-input :messages="$errors->get('name')" />
+
 
            
 

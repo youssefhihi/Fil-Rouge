@@ -52,6 +52,7 @@
                 </form>
             </div>
         </div>
-           
+        
+        <x-error-alert :messages="$errors->all()" />
 
 </x-admin-layout>

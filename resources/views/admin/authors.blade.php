@@ -1,9 +1,10 @@
 
 <x-admin-layout>
- <!-- CONTENT -->
-
+    <!-- CONTENT -->  
+    <x-success-alert/>
+    <x-error-alert :messages="$errors->all()" />
+    
  <title-pages name="authors"/>
- 
             <livewire:search-author />
 
             <div id="addAuthor" class="hidden min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
@@ -14,21 +15,7 @@
                     @csrf
                     @method('POST')
                         <div class="flex flex-col gap-5">
-                            <div class="flex items-center mx-auto space-x-6">
-                                <div class="shrink-0">
-                                <img id='preview_img' class="h-16 w-16 object-cover rounded-full" src="{{asset('imgs/manAuthor.png')}}" alt="Current profile photo" />
-                                </div>
-                                <label class="block">
-                                <span class="sr-only">Choose profile photo</span>
-                                <input type="file" onchange="loadFile(event)" name="image" class="block w-full text-sm text-slate-500
-                                    file:mr-4 file:py-2 file:px-4
-                                    file:rounded-full file:border-0
-                                    file:text-sm file:font-semibold
-                                    file:bg-gray-200 file:text-black
-                                    hover:file:bg-gray-300
-                                "/>
-                                </label>
-                            </div> 
+                            <x-image-input path="{{asset('imgs/manAuthor.png')}}" class="h-16 w-16 object-cover rounded-full"/> 
                         <div class="flex flex-col">                
                             <label for="name" class="text-md font-semibold font-normal mb-1 px-4"> new Author</label>
                             <x-input id="author" class="block mt-1 w-full" type="text" name="name" :value="old('name')" />
@@ -56,20 +43,7 @@
             });
             </script>
             @endif
-            @if (session('message'))
-        <script>
-            swal("Success", "{{ session('message') }}", 'success', {
-                button: true,
-                button: "ok",
-                // timer:3000,
-            });
-            </script>
-            @endif
-
-            <x-error-input :messages="$errors->get('name')" />
-            <x-error-input :messages="$errors->get('image')" />
-            <x-error-input :messages="$errors->get('gender')" />
-
+            
            
 
 </x-admin-layout>

@@ -1,15 +1,9 @@
 @props(['messages'])
 
 @if ($messages)
-    @foreach ($messages as $message)
-        <script>
-            swal({
-                title: "Error",
-                text: "{{ $message }}",
-                icon: "error",
-                timer: 3000,
-                buttons: false 
-            });
-        </script>
-    @endforeach
+    <ul {{ $attributes->merge(['class' => 'text-sm text-red-600 dark:text-red-400 space-y-1']) }}>
+        @foreach ((array) $messages as $message)
+            <li>{{ $message }}</li>
+        @endforeach
+    </ul>
 @endif

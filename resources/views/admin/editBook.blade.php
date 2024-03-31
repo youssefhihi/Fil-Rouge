@@ -6,23 +6,10 @@
 
 <form action="{{route('books.update',$book)}}" method="post" enctype="multipart/form-data">
         @csrf
-        @method('POST')
+        @method('PUT')
         <div class=" flex flex-col gap-5">
         <div class="grid xl:grid-cols-2 xl:gap-6">
-            <div class="flex items-center mx-auto space-x-6">
-                <div class="shrink-0">
-                <img id='preview_img' class="h-72 w-52 rounded-sm" src="{{asset('storage/' . $book->image->path)}}" alt="Current profile photo" />
-                </div>
-                <label class="block">
-                <span class="sr-only">Choose profile photo</span>
-                <input type="file" onchange="loadFile(event)" name="image" class="block w-full text-sm text-slate-500
-                        file:mr-4 file:py-2 file:px-4
-                        file:rounded-full file:border-0
-                        file:text-sm file:font-semibold
-                        file:bg-gray-200 file:text-black
-                        hover:file:bg-gray-300"/>
-                </label>
-            </div>     
+            <x-image-input path="{{asset('storage/' . $book->image->path)}}" class="h-72 w-52 rounded-sm"/>                  
                 <div class=""> 
                     <div class="relative z-0 mb-6 w-full group">
                         <input type="text" name="title" id="title" value="{{$book->title}}" class="block py-2.5 px-0 w-full text-md  bg-transparent border-0 border-b-2 border-gray-800 appearance-none  dark:border-black dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 peer" placeholder=" " required />
@@ -70,7 +57,7 @@
                         </label>
                     </div>
                     <div class="relative z-0 mb-6 w-full group">
-                        <input type="number" name="pagesNumber" value="{{$book->pagesNumber}}" id="pagesNumber" class="block py-2.5 px-0 w-full text-md  bg-transparent border-0 border-b-2 border-gray-800 appearance-none  dark:border-black dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 peer" placeholder=" " required />
+                        <input type="number" name="pagesNumber" value="{{$book->PagesNumber}}" id="pagesNumber" class="block py-2.5 px-0 w-full text-md  bg-transparent border-0 border-b-2 border-gray-800 appearance-none  dark:border-black dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 peer" placeholder=" " required />
                         <label for="pagesNumber" class="absolute text-md text-gray-500 dark:text-black duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-ray-600 peer-focus:dark:text-gray-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                             Number Of Pages
                         </label>
@@ -111,4 +98,5 @@
 		<button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
 	</form>
     </div>
+    <x-error-alert :messages="$errors->all()" />
 </x-admin-layout>

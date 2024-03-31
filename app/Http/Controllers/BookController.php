@@ -53,7 +53,8 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return view('admin.bookPage',compact('book'));
+
     }
 
     /**
@@ -72,7 +73,6 @@ class BookController extends Controller
     public function update(BookRequest $request, Book $book)
     {
         try {
-
             $book->update($request->validated());
             $this->updateImg($book, $request->file('image'));
             return redirect()->back()->with("success", "book updated with success.");
