@@ -25,7 +25,8 @@
         {{ $slot }}
     </main>
     
-    <!-- <script src="{{ asset('js/main.js') }}"></script> -->
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/client.js') }}"></script>
 </body>
 </html>
 

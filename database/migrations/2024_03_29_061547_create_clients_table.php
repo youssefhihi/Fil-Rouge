@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('city')->nullable(); 
             $table->string('country')->nullable(); 
             $table->text('bio')->nullable(); 
+            $table->timestamp('joined_at')->default(now());
             $table->boolean('is_banned')->default(false); 
             $table->boolean('can_post')->default(false); 
             $table->softDeletes(); 

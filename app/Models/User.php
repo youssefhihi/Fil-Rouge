@@ -49,13 +49,7 @@ class User extends Authenticatable
     }
 
 
-    /**
-     * Get the user's image.
-     */
-    public function image(): MorphOne
-    {
-        return $this->morphOne(Image::class, 'imageable');
-    }
+    
     
     public function client()
     {

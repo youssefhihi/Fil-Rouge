@@ -13,15 +13,12 @@
            
                 
                 <li class="">
-                <a href="/feed" class="flex flex-col px-2 items-center  {{ $page === 'feed' ? 'border-b-2 border-black text-black' : 'text-gray-500 hover:text-black' }}"> 
+                <a href="/home" class="flex flex-col px-2 items-center  {{ $page === 'feed' ? 'border-b-2 border-black text-black' : 'text-gray-500 hover:text-black' }}"> 
                         <x-icon name="home"/>
                         <span class="text-xs">Home</span>
                     </a> 
                 </li>           
          
-                  
-                
-
             <li class="">
             <a href="/books" class="flex flex-col px-2 items-center  {{ $page === 'books' ? 'border-b-2 border-black text-black' : 'text-gray-500 hover:text-black' }}"> 
                     <x-icon name="books"/>                     
@@ -30,13 +27,7 @@
             </li>
            
 
-            <!-- <li class="">
-                <a href="/message" class="flex flex-col items-center text-gray-500 hover:text-black">
-                   
-                        <x-icon name="message"/>                       
-                    <span class="text-xs">Message</span>
-                </a>
-            </li> -->
+            
            
             <li class="">
                 

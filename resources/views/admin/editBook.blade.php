@@ -9,7 +9,7 @@
         @method('PUT')
         <div class=" flex flex-col gap-5">
         <div class="grid xl:grid-cols-2 xl:gap-6">
-            <x-image-input path="{{asset('storage/' . $book->image->path)}}" class="h-72 w-52 rounded-sm"/>                  
+            <x-image-input path="{{asset('storage/' . $book->image->path)}}" page="book" class="h-72 w-52 rounded-sm"/>                  
                 <div class=""> 
                     <div class="relative z-0 mb-6 w-full group">
                         <input type="text" name="title" id="title" value="{{$book->title}}" class="block py-2.5 px-0 w-full text-md  bg-transparent border-0 border-b-2 border-gray-800 appearance-none  dark:border-black dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 peer" placeholder=" " required />

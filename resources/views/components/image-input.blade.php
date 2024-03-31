@@ -1,9 +1,9 @@
 
 
-@props(['path'])
+@props(['path','page'])
 
 
-<div class="flex items-center mx-auto space-x-6">
+<div class="{{ $page === 'post' ? 'flex flex-col gap-3' : 'flex items-center mx-auto space-x-6 ' }}">
     <div class="shrink-0">
         <img id='preview_img' src="{{$path}}" alt="image" {!! $attributes->merge(['class' => '']) !!}  />
     </div>

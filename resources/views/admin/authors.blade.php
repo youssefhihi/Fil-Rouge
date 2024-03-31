@@ -3,7 +3,7 @@
     <!-- CONTENT -->  
     <x-success-alert/>
     <x-error-alert :messages="$errors->all()" />
-    
+
  <title-pages name="authors"/>
             <livewire:search-author />
 
@@ -15,7 +15,7 @@
                     @csrf
                     @method('POST')
                         <div class="flex flex-col gap-5">
-                            <x-image-input path="{{asset('imgs/manAuthor.png')}}" class="h-16 w-16 object-cover rounded-full"/> 
+                            <x-image-input path="{{asset('imgs/manAuthor.png')}}" page="author" class="h-16 w-16 object-cover rounded-full"/> 
                         <div class="flex flex-col">                
                             <label for="name" class="text-md font-semibold font-normal mb-1 px-4"> new Author</label>
                             <x-input id="author" class="block mt-1 w-full" type="text" name="name" :value="old('name')" />

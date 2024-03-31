@@ -28,6 +28,6 @@ class RegisterController extends Controller
         event(new Registered($user));
         $user->client()->create();
         Auth::login($user);
-        return redirect('/feed');
+        return redirect('/profile');
     }
 }

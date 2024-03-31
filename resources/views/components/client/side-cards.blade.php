@@ -1,5 +1,7 @@
+@props(['genres'])
+
  <!-- Right sidebar -->
- <div class="right-sidebar w-4/12 h-14 relative">
+ <div class=" md:block hidden right-sidebar w-4/12 h-14 relative">
         <!-- First box -->
         <div class="">
         <div class="flex justify-between items-center mb-2 ml-2">
@@ -31,29 +33,14 @@
           </div>
   
           <div class="border border-gray-300 rounded bg-white p-3">        
-            
-              <div class="flex flex-col gap-1 px-4">
-                <a href="#" class="text-md font-semibold text-blue-500 hover:underline"> science</a href="#">
-                <p class="test-gray-400 text-sm ">more than 200+ books</p>
-              </div>
-              <div class="border border-black my-2"></div>
-              <div class="flex flex-col gap-1 px-4">
-                <a href="#" class="text-md font-semibold text-blue-500 hover:underline"> science</a href="#">
-                <p class="test-gray-400 text-sm ">more than 200+ books</p>
-              </div>
-              <div class="border border-black my-2"></div>
-              <div class="flex flex-col gap-1 px-4">
-                <a href="#" class="text-md font-semibold text-blue-500 hover:underline"> science</a href="#">
-                <p class="test-gray-400 text-sm ">more than 200+ books</p>
-              </div>
-              <div class="border border-black my-2"></div>
-              <div class="flex flex-col gap-1 px-4">
-                <a href="#" class="text-md font-semibold text-blue-500 hover:underline"> science</a href="#">
-                <p class="test-gray-400 text-sm ">more than 200+ books</p>
-              </div>
-              <div class="border border-black my-2"></div>
-              
+            @foreach ( $genres as $genre)           
+            <div class="flex flex-col gap-1 px-4">
+              <a href="#" class="text-md font-semibold text-blue-500 hover:underline"> {{genre->name}}</a>
+              <p class="test-gray-400 text-sm ">more than 200+ books</p>
             </div>
+            <div class="border border-black my-2"></div>
+            @endforeach
+          </div>
            
         </div>
         <div class="mt-7">
