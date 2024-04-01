@@ -66,9 +66,9 @@
         </div>
    
     </div>
-     <x-client.client-articles/>
-  
-   
+    <x-client.client-articles  :posts="$posts" />
+    
 </div>
-<x-client.side-cards/>
+
+<x-client.side-cards :genres="$genres" :books="$books" :authors="$authors"/>  
 </x-admin-layout>

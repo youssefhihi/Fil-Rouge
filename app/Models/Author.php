@@ -17,6 +17,7 @@ class Author extends Model
     protected $fillable = [
         'name',
         'gender',
+        
     ];
 
     public function prunable()

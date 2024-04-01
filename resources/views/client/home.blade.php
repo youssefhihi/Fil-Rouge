@@ -2,8 +2,9 @@
     @section('header')
     <x-client.navbar page="feed" /> 
     @endsection
+    
     <x-client.articles  :posts="$posts" />
-    <x-client.side-cards :genres="$genres"/>
+    <x-client.side-cards :genres="$genres" :books="$books" :authors="$authors"/>
     <x-success-alert/>
             @if (session('error'))
                 <script>
@@ -15,4 +16,4 @@
                  </script>
             @endif
             <x-error-alert :messages="$errors->all()" />
-</x-admin-layout>
+</x-client-layout>

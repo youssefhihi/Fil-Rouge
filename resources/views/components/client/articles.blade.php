@@ -144,9 +144,12 @@
                </p>
              </div>
              <!-- content -->
+             @if ($post->image)
+               
              <div class="h-50 w-full">
               <img src="{{asset('storage/'. $post->image->path)}}" alt="image" class="w-full h-full object-fill my-2">  
              </div>    
+             @endif
              <div class="mx-3 px-2 h-8 m-auto  flex flex-row justify-between space-x-4">
              <!--  like and comments -->
              <div class=" flex items-center">

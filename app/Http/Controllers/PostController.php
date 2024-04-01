@@ -7,6 +7,8 @@ use App\Models\Genre;
 use App\trait\ImageUpload;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
+use App\Models\Author;
+use App\Models\Book;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -17,16 +19,17 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $genres = Genre::withCount('books')->orderByDesc('books_count')->limit(4);
-        dd($genres);
+        $genres =  Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
+        $authors =  Author::withCount('books')->orderByDesc('books_count')->limit(4)->get();
+        $books =  Book::limit(4)->get();
         $type = $request->input('type');
-        if($type !== 'all'){
-            $posts = Post::where('type',$type)->orderByDesc('created_at')->get();       
-        }else{
-            $posts = Post::orderByDesc('created_at')->get();
+        $query = Post::orderByDesc('created_at');
+        if ($type !== 'all' && $type !== null) {
+            $query->where('type', $type);
         }
-        $posts = Post::orderByDesc('created_at')->get();
-        return view('client.home',compact('posts','genres'));
+        $posts = $query->get();
+        
+        return view('client.home',compact('posts','genres','books','authors'));
     
     }
 
