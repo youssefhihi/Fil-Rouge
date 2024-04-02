@@ -10,12 +10,12 @@
             @csrf
             <p class=" text-black font-semibold text-center text-2xl">Login to your Account</p>
 
-            <button class="flex items-center justify-center flex-none px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-black relative">
+            <a  href="{{route('google-auth')}}" class="flex items-center justify-center flex-none px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-black relative">
               <span class="absolute left-4">
                 <x-icon name="google"/>
               </span>
               <span>Sign in with Google</span>
-            </button>
+            </a>
             <div class="text-xl text-center text-gray-500">
                 __ OR __
             </div>

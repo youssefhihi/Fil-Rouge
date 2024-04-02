@@ -35,36 +35,7 @@ GenreInput.addEventListener('input', function(e) {
   }
 })
 
-//  regex for genre input to update new genre
 
-document.querySelectorAll('[id^="putGenreForm"]').forEach(form => {
-  form.addEventListener('submit', function(event) {
-    const genreID = this.getAttribute('id').replace('putGenreForm', '');
-    OpenUpdateGenre(genreID);
-    event.preventDefault();
-    const putGenreInput = document.getElementById(`putGenre${genreID}`);
-    if (genreRegex.test(putGenreInput.value)) {
-      this.submit();
-    }
-  });
-});
-
-document.querySelectorAll('[id^="putGenre"]').forEach(input => {
-  input.addEventListener('input', function(event) {
-      var currentValue = this.value;
-      var valid = genreRegex.test(currentValue);
-      var errorMessage = document.getElementById('putMessageError' + this.dataset.genreId); // Use dataset.genreId instead of dataset.genreID
-      if (!valid) {
-          errorMessage.style.display = 'block'; // Show error message
-          this.classList.remove('dark:bg-green-50', 'dark:text-black', 'focus:border-green-500', 'dark:focus:border-green-600', 'focus:border-green-500', 'dark:focus:border-green-600', 'px-3', 'py-2', 'rounded-md', 'shadow-sm', 'focus:outline-none');
-          this.classList.add('border-red-500', 'dark:bg-red-50', 'dark:text-black', 'focus:border-red-500', 'dark:focus:border-red-600', 'focus:border-red-500', 'dark:focus:border-red-600', 'px-3', 'py-2', 'rounded-md', 'shadow-sm', 'focus:outline-none');
-      } else {
-          errorMessage.style.display = 'none'; // Hide error message
-          this.classList.remove('border-red-500', 'dark:bg-red-50', 'dark:text-black', 'focus:border-red-500', 'dark:focus:border-red-600', 'focus:border-red-500', 'dark:focus:border-red-600', 'px-3', 'py-2', 'rounded-md', 'shadow-sm', 'focus:outline-none');
-          this.classList.add('dark:bg-green-50', 'dark:text-black', 'focus:border-green-500', 'dark:focus:border-green-600', 'focus:border-green-500', 'dark:focus:border-green-600', 'px-3', 'py-2', 'rounded-md', 'shadow-sm', 'focus:outline-none');
-      }
-  });
-});
 
 
 

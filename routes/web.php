@@ -11,6 +11,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\GoogleAuthController;
 
 Route::middleware('guest')->group(function () {
 Route::get('register', [RegisterController::class, 'create'])->name('register');
@@ -25,8 +26,8 @@ Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
 Route::get('/', function () {
     return view('welcome');
 });
-
-
+Route::get('/auth/google',[GoogleAuthController::class,'redirect'])->name('google-auth');
+Route::get('/auth/google/callback-url',[GoogleAuthController::class,'callbackGoogle']);
 Route::middleware(['auth'])->group(function () {
     Route::resource('/dashboard/genres', GenreController::class);
     Route::resource('/dashboard/books', BookController::class);
