@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Post;
 use App\Models\Genre;
 use App\Models\Author;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,5 +26,8 @@ class ProfileController extends Controller
         $posts = $query->get();
         return view('client.profile',compact('posts','genres','books','authors'));
     
+    }
+
+    public function password(User  $user){
     }
 }

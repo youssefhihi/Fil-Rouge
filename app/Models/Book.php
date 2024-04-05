@@ -23,6 +23,10 @@ class Book extends Model
         'language',
     ];
 
+    public function getRouteKeyName(){
+        return 'ISBN';
+    }
+
     /**
      * Get the author's image.
      */

@@ -68,7 +68,7 @@ class AuthorController extends Controller
 {
     try {
         $data = $request->validated();
-        if (!$request->hasFile('image') || !$request->file('image')) {
+        if (!$request->file('image')) {
             if($author->image){
             $data["image"] = $author->image->path;
             $author->update($data);

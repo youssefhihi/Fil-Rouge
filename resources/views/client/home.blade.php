@@ -6,14 +6,6 @@
     <x-client.articles  :posts="$posts" />
     <x-client.side-cards :genres="$genres" :books="$books" :authors="$authors"/>
     <x-success-alert/>
-            @if (session('error'))
-                <script>
-                    swal("Success", "{{ session('error') }}", 'error', {
-                        button: true,
-                        button: "ok",
-                        // timer:3000,
-                    });
-                 </script>
-            @endif
+           
             <x-error-alert :messages="$errors->all()" />
 </x-client-layout>

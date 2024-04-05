@@ -38,8 +38,8 @@
                             @method('DELETE')
                             <button type="button" class="deleteBookButton" data-index="{{$book->id}}"><x-icon name="delete"/></button>
                         </form>  
-                        <a href="{{route('books.edit',$book)}}"><x-icon name="update"/> </a> 
-                        <a href="{{route('books.show',$book)}}"><x-icon name="details"/></a>
+                        <a href="{{route('books.edit',$book->ISBN)}}"><x-icon name="update"/> </a> 
+                        <a href="{{route('books.show',$book->ISBN)}}"><x-icon name="details"/></a>
                     </div>  
                 </x-table.td>           
             </x-table.tr>

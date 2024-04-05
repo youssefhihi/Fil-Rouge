@@ -4,7 +4,7 @@
 <x-admin-layout>
 <div class="px-20">
 
-<form action="{{route('books.update',$book)}}" method="post" enctype="multipart/form-data">
+<form action="{{route('books.update',$book->ISBN)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class=" flex flex-col gap-5">

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Post extends Model
 {
@@ -22,6 +23,9 @@ class Post extends Model
     {
         return static::where('deleted_at', '<=', now()->subMonth());
     }
+
+    
+
 
      /**
      * Get the author's image.

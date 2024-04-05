@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
             $table->mediumText('description');
-            $table->bigInteger('ISBN');
+            $table->string('ISBN')->unique();
             $table->string('edition');
             $table->date('publicationDate');
             $table->integer('PagesNumber'); 
