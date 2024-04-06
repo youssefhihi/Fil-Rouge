@@ -38,4 +38,9 @@ class Client extends User
     public function posts(){
         return $this->hasMany(Post::class, 'client_id');
     }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class,'client_id');
+    }
 }

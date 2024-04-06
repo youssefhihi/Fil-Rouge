@@ -18,6 +18,7 @@ class AuthorFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'gender' => $this->faker->randomElement(['male', 'female'])
         ];
     }
 }

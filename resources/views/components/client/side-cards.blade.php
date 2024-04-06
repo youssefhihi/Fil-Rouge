@@ -90,7 +90,15 @@
               <div class="p-2 flex justify-between">
                 <a href="{{route('sortAuthor',$author)}}" class="flex ">
                     <div class="w-12 h-12 rounded-full mr-2">
+                      @if ($author->image)
                       <img src="{{asset('storage/' . $author->image->path)}}" alt="profile" class="w-full rounded-full">
+                                            @else
+                                                @if ($author->gender === 'female')
+                                                    <img class="w-full rounded-full" src="{{ asset('imgs/womanAuthor.png') }}" alt="">                                                
+                                                @else                                 
+                                                    <img class="w-full rounded-full" src="{{ asset('imgs/manAuthor.png') }}" alt="">                                                
+                                                @endif
+                                            @endif
                     </div>
                     <div>
                       <h3 class="flex" >

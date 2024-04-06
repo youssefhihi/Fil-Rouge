@@ -103,7 +103,9 @@
                 Emprunts
                 </div>
             </a>
-            <form method="POST" action="#" class =  "hover:bg-white w-full text-white hover:text-black dark:hover:text-black hover:ml-3 border-2 border-black p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">              
+            <form method="POST" action="{{route('logout')}}" class =  "hover:bg-white w-full text-white hover:text-black dark:hover:text-black hover:ml-3 border-2 border-black p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">              
+                @csrf
+                
                 <x-icon name="logout"/>                  
                    <button type="submit" >
                     Log Out

@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\ReservationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,10 +26,11 @@ Route::get('login', [LoginController::class, 'create'])->name('login');
 Route::post('login', [LoginController::class, 'store']);
 });
 Route::middleware(['auth'])->group(function () {
-Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
 Route::middleware(['auth','role:client'])->group(function () {
 Route::resource('/home', PostController::class);
+Route::resource('/reservation', ReservationController::class);
 Route::get('/profile', [ProfileController::class,'index'])->name('profile.index');
 Route::get('/books', [ClientController::class,'index'])->name('books.index');
 Route::get('/books/sort/{genre}', [ClientController::class,'sortGenre'])->name('sortGenre');

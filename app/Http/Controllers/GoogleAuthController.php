@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 use Laravel\Socialite\Facades\Socialite;
 
 class GoogleAuthController extends Controller
@@ -27,10 +28,12 @@ class GoogleAuthController extends Controller
                     'email' => $google_user->getEmail(),
                     'google_id' => $google_user->getId()
                ]);
+              
+             $new_user->client()->create();
+            
                event(new Registered($user));
-               $new_user->client()->create();
                Auth::login($new_user);
-               return redirect()->intended('/home');
+               return redirect('/home');
             }else{
                 Auth::login($user);
                 return redirect()->intended('/home');

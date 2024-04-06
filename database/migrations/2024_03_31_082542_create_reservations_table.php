@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->unsignedBigInteger('book_id');
+            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
+            $table->date('startDate');
+            $table->date('returnDate');
+            $table->boolean('is_returned')->default(false);
+            $table->string('message')->nullable();
             $table->timestamps();
         });
     }

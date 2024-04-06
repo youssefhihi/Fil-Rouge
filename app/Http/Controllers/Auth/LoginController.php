@@ -31,7 +31,7 @@ class LoginController extends Controller
      /**
      * Destroy an login session.
      */
-    public function destroy(Request $request)
+    public function logout(Request $request)
     {
         Auth::guard('web')->logout();
 
