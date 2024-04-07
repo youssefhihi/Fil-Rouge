@@ -3,8 +3,8 @@
     <x-client.navbar page="feed" /> 
     @endsection
     
-    <x-client.articles  :posts="$posts" />
-    <x-client.side-cards :genres="$genres" :books="$books" :authors="$authors"/>
+    <x-client.articles  :posts="$posts" :likes="$countLikes"/>
+    <x-client.side-cards :genres="$genres" :books="$books" :authors="$authors" />
     <x-success-alert/>
            
             <x-error-alert :messages="$errors->all()" />

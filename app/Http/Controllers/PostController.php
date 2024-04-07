@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\Rating;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -20,6 +21,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $genres =  Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
+        $countLikes = Rating::count();
         $authors =  Author::withCount('books')->orderByDesc('books_count')->limit(4)->get();
         $books =  Book::limit(4)->get();
         $type = $request->input('type');
@@ -29,9 +31,10 @@ class PostController extends Controller
         }
         $posts = $query->get();
         
-        return view('client.home',compact('posts','genres','books','authors'));
-    
+        return view('client.home',compact('posts','genres','books','authors','countLikes'));   
     }
+
+
 
     /**
      * Show the form for creating a new resource.

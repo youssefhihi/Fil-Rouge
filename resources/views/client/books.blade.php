@@ -3,7 +3,7 @@
     <x-client.navbar page="books" /> 
     @endsection
      <!-- CONTENT -->  
-     <x-success-alert/>
+     <x-success-alert :success="session('success')"/>
     <x-error-alert :messages="$errors->all()" />
 <div class="w-6/12 mx-2 ">
             <div class=" w-full flex flex-col gap-7  bg-white p-4 rounded-md"> 

@@ -43,4 +43,10 @@ class Client extends User
     {
         return $this->hasMany(Reservation::class,'client_id');
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Rating::class,'client_id');
+
+    }
 }

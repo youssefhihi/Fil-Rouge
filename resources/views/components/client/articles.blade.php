@@ -1,5 +1,5 @@
   <!-- article -->
-  @props(['posts'])
+  @props(['posts','likes'])
   <div class="w-6/12 mx-2">
          <!--Form   -->
          <!-- object-fill -->
@@ -153,11 +153,30 @@
              <div class="mx-3 px-2 h-8 m-auto  flex flex-row justify-between space-x-4">
              <!--  like and comments -->
              <div class=" flex items-center">
-               <button class="flex  outline-none rounded px-2  text-gray-600 hover:bg-gray-200">
-                <i class="far fa-heart text-xl mr-1.5"></i> 
-                <span >29 </span> 
-               </button>
 
+              @if (Auth::user()->client->likes->contains('post_id', $post->id))
+              @php
+                  $like = Auth::user()->client->likes->where('post_id', $post->id)->first();
+              @endphp
+              <form action="{{route('rating.destroy', $like)}}" method="post">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="flex  outline-none rounded px-2  text-gray-600 ">
+                  <x-icon name="like" class="text-xl text-red-600 mr-1.5"/>
+                  <span >{{$likes}} </span> 
+                </button>
+              </form>
+              @else               
+              <form action="{{route('rating.store')}}" method="post">
+                @csrf
+                @method('POST')
+                <input type="hidden" value="{{$post->id}}" name="post_id">
+                    <button type="submit" class="flex  outline-none rounded px-2  text-gray-600 ">
+                    <x-icon name="like" class="text-xl text-gray-500 mr-1.5"/>
+                      <span >{{$likes}}</span> 
+                    </button>
+              </form>
+              @endif
                <button class="flex  outline-none rounded  px-2  text-gray-600 hover:bg-gray-200">
                 <i class="far fa-comment-dots text-xl mr-1.5"></i> 
                 <span >10</span>  

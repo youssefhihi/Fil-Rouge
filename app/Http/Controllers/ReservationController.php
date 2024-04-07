@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ReservationRequest;
 use App\Models\Book;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ReservationEmail;
 
 class ReservationController extends Controller
 {
@@ -29,13 +31,29 @@ class ReservationController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(ReservationRequest $request)
-    {
+{
+    $data = $request->validated();
+    $data['client_id'] = Auth::user()->client->id;
+    $book = Book::find($data['book_id']);
 
-        $data = $request->validated();
-        $data['client_id'] = Auth::user()->client->id;
-        Reservation::create($data);
-        return redirect('/books')->with('success', 'the reservation has gone to admin he will see it to comfirm');
+    if ($book->quantity > 0) {
+        $new_quantity = $book->quantity - 1;
+
+        // Update the book's quantity
+        $book->update(['quantity' => $new_quantity]);
+
+        // Create the reservation
+        $reservation = Reservation::create($data);
+
+        // Send reservation email
+        Mail::to(Auth::user()->email)->send(new ReservationEmail($reservation->id));
+
+        return redirect('/books')->with('success', 'The reservation has been sent to the admin for confirmation.');
+    } else {
+        return redirect('/books')->with('success', 'Quantity not enough.');
     }
+}
+
 
     /**
      * Display the specified resource.

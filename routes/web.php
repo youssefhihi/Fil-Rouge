@@ -12,10 +12,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ReservationController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 });
 Route::middleware('guest')->group(function () {
 Route::get('/auth/google',[GoogleAuthController::class,'redirect'])->name('google-auth');
@@ -30,6 +31,7 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
 Route::middleware(['auth','role:client'])->group(function () {
 Route::resource('/home', PostController::class);
+Route::resource('/rating', RatingController::class);
 Route::resource('/reservation', ReservationController::class);
 Route::get('/profile', [ProfileController::class,'index'])->name('profile.index');
 Route::get('/books', [ClientController::class,'index'])->name('books.index');

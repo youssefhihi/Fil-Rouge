@@ -37,5 +37,10 @@ class Post extends Model
     public function client(){
         return $this->belongsTo(Client::class, 'client_id');
     }
+    public function likes()
+    {
+        return $this->hasMany(Rating::class,'post_id');
+
+    }
 
 }
