@@ -44,27 +44,62 @@
                 <div class="col-md-9">
                     <div class="tab-content">
                         <div class="tab-pane fade active show" id="account-general">
-                            <div class="card-body media align-items-center">
+                            <div class="card-body media align-items-center">             
+                            <div class="flex items-center space-x-6">
+                            <div class="shrink-0">
                                 @if (Auth::user()->client->image)
-                                <img src="{{asset('storage/' . Auth::user()->client->image->path)}}" alt
-                                    class="d-block ui-w-80">                           
+                                        <img id='preview_img' class="h-28 w-28 rounded-full" src="{{ asset('storage/'. Auth::user()->client->image->path) }}" alt="">                                                
                                 @else
                                     @if (Auth::user()->client->gender === 'female')
-                                        <img src="{{asset('imgs/profileFemale.png')}}" alt
-                                        class="d-block ui-w-80">  
-                                    @else
-                                        <img src="{{asset('imgs/profileMale.png')}}" alt
-                                        class="d-block ui-w-80">  
+                                        <img id='preview_img' class="h-28 w-28 rounded-full" src="{{ asset('imgs/profileFemale.png') }}" alt="">                                                
+                                    @else                                 
+                                        <img id='preview_img' class="h-28 w-28 rounded-full" src="{{ asset('imgs/profileMale.png') }}" alt="">                                                
                                     @endif
-                                @endif
-                                <div class="media-body ml-4">
-                                    <label class="btn btn-outline-primary">
-                                        Upload new photo
-                                        <input type="file" class="account-settings-fileinput">
-                                    </label> &nbsp;
-                                    <button type="button" class="btn btn-default md-btn-flat">delete</button>
-                                    <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
-                                </div>
+                                @endif                             
+                            </div>
+                            @if (Auth::user()->client->image)
+                            <form method="POST" action="{{route('updateImage')}}" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <label class="block">
+                                <span class="sr-only">Choose profile photo</span>
+                                <input type="file" onchange="loadFile(event)" name="image"  class="block w-full text-sm text-slate-500
+                                    file:mr-4 file:py-2 file:px-4
+                                    file:rounded-full file:border-0
+                                    file:text-sm file:font-semibold
+                                    file:bg-gray-200 file:text-black
+                                    hover:file:bg-gray-300
+                                "/>
+                                </label>
+                                <x-error-input class="mt-2" :messages="$errors->get('image')" />
+                                <button type="submit">okkk</button>
+                            </form>
+                                
+                            @else
+                            <form method="POST" action="{{route('uploadImage')}}" enctype="multipart/form-data">
+                                @csrf
+                                @method('POST')
+                                <label class="block">
+                                <span class="sr-only">Choose profile photo</span>
+                                <input type="file" onchange="loadFile(event)" name="image"  class="block w-full text-sm text-slate-500
+                                    file:mr-4 file:py-2 file:px-4
+                                    file:rounded-full file:border-0
+                                    file:text-sm file:font-semibold
+                                    file:bg-gray-200 file:text-black
+                                    hover:file:bg-gray-300
+                                "/>
+                                </label>
+                                <x-error-input class="mt-2" :messages="$errors->get('image')" />
+                                <button type="submit">ooook</button>
+                            </form>
+                            @endif
+                            <form action="{{ route('deleteImage') }}" method="post" onsubmit="return confirm('Are you sure you want to delete this image?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded-xl">Delete</button>
+                            </form>
+
+                            </div> 
                             </div>
                             <hr class="border-light m-0">
                             <form method="POST" action="{{route('profile.update')}}"  class="card-body">
@@ -377,6 +412,9 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/client.js') }}"></script>
 
 </body>
 </html>

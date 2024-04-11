@@ -14,9 +14,13 @@ use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\profileSocialeMedia;
 use App\Http\Requests\UpdateProfileInf;
 use Illuminate\Validation\Rules\Password;
+use App\trait\ImageUpload;
+
 
 class ProfileController extends Controller
 {
+    use ImageUpload;
+
     public function index(Request $request)
     {
         $id = Auth::user()->client->id;
@@ -75,5 +79,38 @@ class ProfileController extends Controller
         $user = Auth::user()->client;
         $user->update($request->validated());
         return redirect()->back()->with('success' , 'your Profile information updated with success');
+    }
+
+    public function uploadImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        $user = Auth::user()->client;
+        $this->storeImg($user, $request->file('image'));       
+        return redirect()->back()->with('success' , 'Image uploaded with success');
+
+    }
+    public function updateImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        $user = Auth::user()->client;
+        $this->updateImg($user, $request->file('image'));
+        return redirect()->back()->with('success' , 'Image uploaded with success');
+
+    }
+
+    public function deleteImage()
+    {
+        if(Auth::user()->client->image)
+        {
+        $user = Auth::user()->client->image->id;
+        $this->deleteImagef($user);
+        return redirect()->back()->with('success' , 'Image deleted with success');
+        }else{
+            return redirect()->back()->with('erro' , 'You don\'t have profile Image');
+        }
     }
 }

@@ -48,6 +48,9 @@ Route::patch('/edit-profile', [ProfileController::class,'update'])->name('profil
 Route::patch('/edit-password', [ProfileController::class,'password'])->name('password');
 Route::patch('/edit-profile-inf', [ProfileController::class,'updateInf'])->name('profile.updateInf');
 Route::patch('/edit-socialMedia-Links', [ProfileController::class,'socialeMedia'])->name('socialeMedia');
+Route::post('/edit-ImageProfile', [ProfileController::class,'uploadImage'])->name('uploadImage');
+Route::put('/edit-ImageProfile', [ProfileController::class,'updateImage'])->name('updateImage');
+Route::delete('/edit-DeleteImage', [ProfileController::class,'deleteImage'])->name('deleteImage');
 Route::get('/edit-profile', [ProfileController::class,'show']);
 
 

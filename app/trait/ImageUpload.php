@@ -32,4 +32,10 @@ trait ImageUpload
         $image->storeAs('public/', $imageName);
         return $imageName;
     }
+
+    public function deleteImagef($imageID)
+    {
+       $img = Image::find($imageID);
+        $img->delete();
+    }
 }
