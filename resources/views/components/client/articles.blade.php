@@ -7,7 +7,7 @@
             <div class="absolute bg-black opacity-80 inset-0 z-0"></div>
               <div class="w-full max-w-lg lg:max-w-full p-5 relative mx-auto my-auto rounded-xl shadow-lg h-full  bg-white overflow-y-auto ">
                                       <!-- Form to add Author -->
-                      <form method="POST"  action="{{route('home.store')}}" class="space-y-4 " enctype="multipart/form-data">
+                      <form method="POST"  action="{{route('post.store')}}" class="space-y-4 " enctype="multipart/form-data">
                       @csrf
                       @method('POST')
                       <div class="flex flex-col gap-5 lg:flex-row lg:justify-between lg:gap-0">

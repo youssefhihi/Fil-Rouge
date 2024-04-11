@@ -14,10 +14,11 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\WelcomeController;
 
-Route::get('/', function () {
-    return view('landing');
-});
+Route::get('/', [WelcomeController::class, 'data']);
+
 Route::middleware('guest')->group(function () {
 Route::get('/auth/google',[GoogleAuthController::class,'redirect'])->name('google-auth');
 Route::get('/auth/google/callback-url',[GoogleAuthController::class,'callbackGoogle']);
@@ -30,7 +31,12 @@ Route::middleware(['auth'])->group(function () {
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
 Route::middleware(['auth','role:client'])->group(function () {
-Route::resource('/home', PostController::class);
+Route::get('/home', [PostController::class,'index'])->name('home.index');
+Route::post('/home/post', [PostController::class,'store'])->name('post.store');
+Route::delete('/profile/{post}/delete', [PostController::class,'destroy'])->name('post.destroy');
+Route::get('/profile/{post}/edit', [PostController::class,'edit'])->name('post.edit');
+Route::put('/profile/{post}/update', [PostController::class,'update'])->name('post.update');
+Route::resource('/book-review', ReviewController::class);
 Route::resource('/rating', RatingController::class);
 Route::resource('/reservation', ReservationController::class);
 Route::get('/profile', [ProfileController::class,'index'])->name('profile.index');
@@ -38,13 +44,42 @@ Route::get('/books', [ClientController::class,'index'])->name('books.index');
 Route::get('/books/sort/{genre}', [ClientController::class,'sortGenre'])->name('sortGenre');
 Route::get('/books/ss{author}', [ClientController::class,'sortAuthor'])->name('sortAuthor');
 Route::get('/books/{book}', [ClientController::class,'show'])->name('book.details');
-Route::get('/editProfile', function () {
-    return view('client.editProfile');
+Route::patch('/edit-profile', [ProfileController::class,'update'])->name('profile.update');
+Route::patch('/edit-password', [ProfileController::class,'password'])->name('password');
+Route::patch('/edit-profile-inf', [ProfileController::class,'updateInf'])->name('profile.updateInf');
+Route::patch('/edit-socialMedia-Links', [ProfileController::class,'socialeMedia'])->name('socialeMedia');
+Route::get('/edit-profile', [ProfileController::class,'show']);
+
+
+Route::get('/test', function () {
+    return view('client.test');
 });
-Route::get('/bookPage', function () {
-    return view('client.bookPage');
 });
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Route::middleware(['auth','role:admin'])->group(function () {
     Route::resource('/dashboard/genres', GenreController::class);

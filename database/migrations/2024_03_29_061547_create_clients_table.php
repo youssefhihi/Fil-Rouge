@@ -15,12 +15,14 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('username')->unique()->nullable(); 
-            $table->string('gender')->nullable(); 
+            $table->enum('gender',['male','female'])->default('male'); 
+            $table->string('linkedIn')->nullable()->url();
+            $table->string('instagram')->nullable()->url();
+            $table->string('facebook')->nullable()->url();
+            $table->string('X')->nullable()->url();
             $table->string('phone')->nullable(); 
             $table->date('birthday')->nullable(); 
             $table->string('city')->nullable(); 
-            $table->string('country')->nullable(); 
             $table->text('bio')->nullable(); 
             $table->timestamp('joined_at')->default(now());
             $table->boolean('is_banned')->default(false); 

@@ -77,13 +77,13 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.editPost',compact('post'));
+        return view('client.editPost',compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {
         try {
             $data = $request->validated();
@@ -102,7 +102,7 @@ class PostController extends Controller
                 }
                 $post->update($data);
             }    
-            return redirect('dashboard/feed')->with("message", "post updated successfully.");
+            return redirect('/profile')->with("success", "post updated successfully.");
         } catch (\Exception $e) {
             return redirect()->back()->with("error", "Error: " . $e->getMessage());
         }
@@ -113,6 +113,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->back()->with("success", "post deleted successfully.");
+
     }
 }

@@ -13,12 +13,16 @@ class Client extends User
 
     protected $fillable = [
         'user_id',
-        'sex',
+        'gender',
         'phone',
         'birthday',
         'city',
         'country',
         'bio',
+        'linkedIn',
+        'instagram',
+        'facebook',
+        'X',
         'joined_at',
         'is_banned',
         'can_post',

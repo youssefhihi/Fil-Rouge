@@ -1,7 +1,7 @@
 @props(['genres','books','authors'])
 
  <!-- Right sidebar -->
- <div class=" md:block  right-sidebar w-4/12 h-14 relative">
+ <div class=" md:block hidden  right-sidebar w-4/12 h-14 relative">
         <!-- First box -->
         <div class="">
         <div class="flex justify-between items-center mb-2 ml-2">

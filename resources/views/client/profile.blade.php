@@ -26,12 +26,11 @@
                     </div>
                 </div>
             </div>
-            <!-- Follow Button -->
-            <div class="flex flex-col text-right">
-                <a href="#" class="flex justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring  rounded max-w-max border bg-transparent border-blue-500 text-blue-500 hover:border-blue-800 hover:border-blue-800 flex items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
-                    Edit Profile
+                <a href="/edit-profile" class="focus:outline-none " style="text-decoration:none;"> 
+                    <div class="px-4 py-2 font-normal rounded-xl border border-blue-600 text-blue-600 hover:text-white hover:bg-blue-600 duration-300 ease-in-out">
+                        Edit Profile
+                    </div>
                 </a>
-            </div>
         </div>
 
         <!-- Profile info -->

@@ -9,9 +9,12 @@
     <!-- links -->
     <link rel="stylesheet" href="{{asset('css/client.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+
     <!-- scripts -->
     <script src="https://kit.fontawesome.com/7d35781f0a.js" crossorigin="anonymous"></script> 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    
 
 </head>
 <body class="bg-[#FFE7C6]" >

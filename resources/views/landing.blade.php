@@ -6,6 +6,10 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"  rel="stylesheet" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
 
 </head>
 <body>
@@ -24,7 +28,16 @@
   
 <section class="container flex flex-col px-6 py-4 mx-auto space-y-6 md:h-128 md:py-16 md:flex-row md:items-center md:space-x-10">
     <div class="flex items-center justify-center w-full h-96 md:w-1/2">
-        <img class="object-cover w-full h-full max-w-2xl rounded-3xl" src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80" alt="apple watch photo">
+    <div id="default-carousel" class="relative w-full" data-carousel="slide">
+                    <!-- Carousel wrapper -->
+                    <div class="relative animate-bounce h-56 overflow-hidden rounded-lg md:h-96">
+                        @foreach ($books as $book )            
+                        <div class=" hidden duration-700 ease-in-out" data-carousel-item>
+                            <img src="{{asset('storage/' . $book->image->path)}}" class="home__image absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2  w-60 md:w-full" alt="...">
+                        </div>
+                        @endforeach      
+                    </div>   
+                </div>
     </div>
         <div class="max-w-lg md:mx-12 md:order-2">
                 <p class="mt-4 text-gray-600 text-xl ">

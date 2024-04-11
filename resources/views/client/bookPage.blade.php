@@ -2,6 +2,8 @@
 @section('header')
     <x-client.navbar page="books" /> 
 @endsection
+ 
+
 <div class="w-full m-auto mt-10 flex flex-col gap-5">
         <div class="flex space-x-10 w-full bg-white rounded-md p-5">
                 <div class="w-1/4">
@@ -24,7 +26,7 @@
 
                     </div>    
                     <div class="flex justify-between px-10 ">
-                        <div class="flex space-x-3">
+                        <div onclick="openReview()" class="flex space-x-3">
                             <div class="flex text-xl p-1 gap-1 text-yellow-600">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -46,5 +48,25 @@
     <x-client.articles-bookPage :posts="$posts"/>
 
     <x-client.side-cards :authors="$authors" :genres="$genres" :books="$topBooks"/></div>
-</div>
+<!-- 
+    <div id="review" class="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
+            <div class="absolute bg-black opacity-80 inset-0 z-0"></div>
+            <div class="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white ">
+                               
+                    <form method="POST" id="authorForm" action="{{route('authors.store') }}" class="space-y-4" enctype="multipart/form-data">
+                    @csrf
+                    @method('POST')
+                      <div class="rateyo" id="rating" 
+                      data-reteyo-rating="4" data-rateyo-num-satrs="5" data-rateyo-score="3">
+                      </div>
+                      <span class="result">0</span>
+                      <input type="hidden" name="starsCount">
+                      <button type="submit" class="bg-black text-white">
+                        add
+                      </button>
+                </form>
+            </div>
+        </div>
+</div> -->
+
 </x-client-layout>
