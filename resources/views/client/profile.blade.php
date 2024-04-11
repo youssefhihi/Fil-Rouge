@@ -8,18 +8,18 @@
         <img class="opacity-0 w-full h-full" src="https://pbs.twimg.com/profile_banners/2161323234/1585151401/600x200" alt="">
     </div>
     <div class="p-4 bg-white">
-        <div class="relative flex w-full">
+        <div class="relative  flex w-full">
             <!-- Avatar -->
             <div class="flex flex-1">
                 <div style="margin-top: -6rem;">
-                    <div style="height:9rem; width:9rem;" class="md rounded-full relative avatar">
+                    <div style="height:9rem; width:9rem;" class="rounded-full relative avatar">
                     @if (Auth::user()->client->image)
-                    <img style="height:9rem; width:9rem;" class="md rounded-full relative border-4 border-gray-900" src="{{Auth::user()->image->path}}" alt="">                       
+                    <img style="height:9rem; width:9rem;" class="rounded-full relative border-4 border-gray-900" src="{{Auth::user()->client->image->path}}" alt="">                       
                     @else
                     @if (Auth::user()->client->gender === 'female')
-                    <img style="height:9rem; width:9rem;" class="md rounded-full relative border-4 border-gray-900" src="{{asset('imgs/womanAuthor.png')}}" alt="">                       
+                    <img style="height:9rem; width:9rem;" class="rounded-full relative border-4 border-gray-900" src="{{asset('imgs/profileFemale.png')}}" alt="">                       
                     @else                       
-                    <img style="height:9rem; width:9rem;" class="md rounded-full relative border-4 border-gray-900" src="{{asset('imgs/manAuthor.png')}}" alt="">                       
+                    <img style="height:9rem; width:9rem;" class="rounded-full relative border-4 border-gray-900" src="{{asset('imgs/profileMale.png')}}" alt="">                       
                     @endif
                     @endif
                         <div class="absolute"></div>

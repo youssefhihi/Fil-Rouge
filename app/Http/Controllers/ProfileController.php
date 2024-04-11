@@ -104,13 +104,10 @@ class ProfileController extends Controller
 
     public function deleteImage()
     {
-        if(Auth::user()->client->image)
-        {
+       
         $user = Auth::user()->client->image->id;
         $this->deleteImagef($user);
         return redirect()->back()->with('success' , 'Image deleted with success');
-        }else{
-            return redirect()->back()->with('erro' , 'You don\'t have profile Image');
-        }
+       
     }
 }

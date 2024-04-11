@@ -74,7 +74,11 @@
                                 <x-error-input class="mt-2" :messages="$errors->get('image')" />
                                 <button type="submit">okkk</button>
                             </form>
-                                
+                            <form action="{{ route('deleteImage') }}" method="post" onsubmit="return confirm('Are you sure you want to delete this image?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded-xl">Delete</button>
+                            </form>
                             @else
                             <form method="POST" action="{{route('uploadImage')}}" enctype="multipart/form-data">
                                 @csrf
@@ -93,11 +97,7 @@
                                 <button type="submit">ooook</button>
                             </form>
                             @endif
-                            <form action="{{ route('deleteImage') }}" method="post" onsubmit="return confirm('Are you sure you want to delete this image?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded-xl">Delete</button>
-                            </form>
+                           
 
                             </div> 
                             </div>

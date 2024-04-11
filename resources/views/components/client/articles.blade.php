@@ -102,12 +102,12 @@
                   <a href="#" class="flex ">
                       <div class="w-12 h-12 rounded-full mr-2">
                         @if ($post->client->image)
-                        <img src="{{asset('storage/'. $post->client->image->path)}}" alt="profile" class="w-full">
+                        <img src="{{asset('storage/'. $post->client->image->path)}}" alt="profile" class="w-full rounded-full">
                         @else
                         @if (Auth::user()->client->gender === 'female')
-                        <img src="{{asset('imgs/womanAuthor.png')}}" alt="profile" class="w-full">
+                        <img src="{{asset('imgs/profileFemale.png')}}" alt="profile" class="w-full rounded-full">
                         @else          
-                        <img src="{{asset('imgs/manAuthor.png')}}" alt="profile" class="w-full">             
+                        <img src="{{asset('imgs/profileMale.png')}}" alt="profile" class="w-full rounded-full">             
                         @endif
                         @endif
                       </div>
@@ -153,7 +153,9 @@
              <div class="mx-3 px-2 h-8 m-auto  flex flex-row justify-between space-x-4">
              <!--  like and comments -->
              <div class=" flex items-center">
-
+             @php
+                $likesCount = $post->likes->where("post_id",$post->id)->count();          
+              @endphp
               @if (Auth::user()->client->likes->contains('post_id', $post->id))
               @php
                   $like = Auth::user()->client->likes->where('post_id', $post->id)->first();
@@ -163,7 +165,7 @@
                 @method('DELETE')
                 <button type="submit" class="flex  outline-none rounded px-2  text-gray-600 ">
                   <x-icon name="like" class="text-xl text-red-600 mr-1.5"/>
-                  <span >{{$likes}} </span> 
+                  <span >{{$likesCount}} </span> 
                 </button>
               </form>
               @else               
@@ -173,7 +175,7 @@
                 <input type="hidden" value="{{$post->id}}" name="post_id">
                     <button type="submit" class="flex  outline-none rounded px-2  text-gray-600 ">
                     <x-icon name="like" class="text-xl text-gray-500 mr-1.5"/>
-                      <span >{{$likes}}</span> 
+                      <span >{{$likesCount}}</span> 
                     </button>
               </form>
               @endif

@@ -12,12 +12,12 @@
             <a href="/profile" class="flex ">
                 <div class="w-12 h-12 rounded-full mr-2">
                   @if (Auth::user()->client->image)
-                  <img src="{{Auth::user()->image->path}}" alt="profile" class="w-full">
+                  <img src="{{asset('storage/' . Auth::user()->client->image->path)}}" alt="profile" class="w-full rounded-full">
                     @else
                     @if (Auth::user()->client->gender === 'female')
-                    <img src="{{asset('imgs/womanAuthor.png')}}" alt="profile" class="w-full">
+                    <img src="{{asset('imgs/profileFemale.png')}}" alt="profile" class="w-full">
                     @else                       
-                    <img src="{{asset('imgs/manAuthor.png')}}" alt="profile" class="w-full">
+                    <img src="{{asset('imgs/profileMale.png')}}" alt="profile" class="w-full">
                     @endif
                     @endif
                 </div>
