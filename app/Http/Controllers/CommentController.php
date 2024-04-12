@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rating;
+use App\Models\Comment;
 use Illuminate\Http\Request;
-use App\Http\Requests\RatingRequest;
 use Illuminate\Support\Facades\Auth;
 
-class RatingController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,18 +27,19 @@ class RatingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(RatingRequest $request)
-{
-    $data = $request->validated();
-    $data['client_id'] = Auth::user()->client->id;
-    $rating = Rating::create($data);
-    return response()->json(['status' => true]);
-}
+    public function store(Request $request)
+    {
+        $data = $request->validated();
+        $data['client_id'] = Auth::user()->client->id;
+        Comment::create($data);
+        return redirect()->back();
+        
+    }
 
     /**
      * Display the specified resource.
      */
-    public function show(Rating $rating)
+    public function show(Comment $comment)
     {
         //
     }
@@ -47,7 +47,7 @@ class RatingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Rating $rating)
+    public function edit(Comment $comment)
     {
         //
     }
@@ -55,17 +55,18 @@ class RatingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(RatingRequest $request, Rating $rating)
+    public function update(Request $request, Comment $comment)
     {
-        //
+        $comment->update($request->validated());
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Rating $rating)
-{
-    $rating->delete();
-    return response()->json(['success' => true]);
-}
+    public function destroy(Comment $comment)
+    {
+        $comment->delete();
+        return redirect()->back();
+    }
 }

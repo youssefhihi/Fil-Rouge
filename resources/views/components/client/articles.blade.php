@@ -160,21 +160,21 @@
               @php
                   $like = Auth::user()->client->likes->where('post_id', $post->id)->first();
               @endphp
-              <form action="{{route('rating.destroy', $like)}}" method="post">
+              <form action="{{route('rating.destroy', $like)}}" method="post" id="removeLike" data-rating-id="{{$like->id}}">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="flex  outline-none rounded px-2  text-gray-600 ">
-                  <x-icon name="like" class="text-xl text-red-600 mr-1.5"/>
+                <button  onclick="removeLike(this)" id="unlike" type="submit" class="flex text-red-600 outline-none rounded px-2  text-gray-600 ">
+                  <x-icon name="like" class="text-xl  mr-1.5"/>
                   <span >{{$likesCount}} </span> 
                 </button>
               </form>
               @else               
-              <form action="{{route('rating.store')}}" method="post">
+              <form action="{{route('rating.store')}}" method="post" >
                 @csrf
                 @method('POST')
                 <input type="hidden" value="{{$post->id}}" name="post_id">
-                    <button type="submit" class="flex  outline-none rounded px-2  text-gray-600 ">
-                    <x-icon name="like" class="text-xl text-gray-500 mr-1.5"/>
+                    <button onclick="addLike(this)" id="like" type="submit" class="flex text-gray-500 outline-none rounded px-2  text-gray-600 ">
+                    <x-icon name="like" class="text-xl  mr-1.5"/>
                       <span >{{$likesCount}}</span> 
                     </button>
               </form>
@@ -186,8 +186,58 @@
              </div> 
               </div>
             </section>
+
           @endforeach
           </article>
         </div>
 
+
+            <script>
+  function addLike(button) {
+    var form = button.closest('form');
+    $.ajax({
+        url: '/rating',
+        method: 'POST',
+        data: form.serialize(),
+        success: function (response) {
+            
+            if (response.status == true) 
+            {
+              var likesCount = parseInt(button.find('span').text());
+              var likesCount = parseInt(button.find('span').text());
+                button.find('span').text(likesCount - 1);
+                button.removeClass('liked');
+                button.find('x-icon').attr('name', 'like');
+
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
+
+function removeLike(button) {
+    var form = button.closest('form');
+    var ratingId = form.data('rating-id');
+    $.ajax({
+        url: '/rating/' + ratingId, // Correct URL for DELETE request
+        method: 'DELETE',
+        success: function (response) {
+            var likesCount = parseInt(button.find('span').text());
+            button.find('span').text(likesCount - 1);
+            button.closest('form').removeAttr('data-rating-id');
+            button.attr('onclick', 'addLike(this)');
+            button.find('x-icon').attr('name', 'like');
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
+
+
+
+        </script>
+        
   

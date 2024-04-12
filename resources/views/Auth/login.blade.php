@@ -1,8 +1,8 @@
 <x-visitor-layout>
-<div class="card w-full p-5 ">
+<div class="card w-full p-5 mb-20 mt-28">
     <div class=" flex rounded-lg justify-center">
         <div class=" hidden lg:block lg:w-1/2 bg-cover"
-            style="background-image:url('https://images.unsplash.com/photo-1546514714-df0ccc50d7bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=667&q=80')">
+            style="background-image:url('{{asset('imgs/register.jpeg')}}')">
         </div>
         <div class="box ">
      

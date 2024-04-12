@@ -238,10 +238,13 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
     </svg>
 @elseif($name === "logout")
-<svg xmlns="http://www.w3.org/2000/svg"class="w-5 h-5 text-white" viewBox="0 0 24 24">
+<div      
+{!! $attributes->merge(['class' => '']) !!} >
+<svg xmlns="http://www.w3.org/2000/svg"class="w-5 h-5 " viewBox="0 0 24 24">
     <path fill="currentColor" d="M12 3.25a.75.75 0 0 1 0 1.5a7.25 7.25 0 0 0 0 14.5a.75.75 0 0 1 0 1.5a8.75 8.75 0 1 1 0-17.5"/>
     <path fill="currentColor" d="M16.47 9.53a.75.75 0 0 1 1.06-1.06l3 3a.75.75 0 0 1 0 1.06l-3 3a.75.75 0 1 1-1.06-1.06l1.72-1.72H10a.75.75 0 0 1 0-1.5h8.19z"/>
 </svg>
+</div>
 @elseif($name ==="accept")
 <div class="rounded-full p-1 text-green-600 hover:bg-green-600 hover:text-white transition-colors duration-300">
 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-green" viewBox="0 0 24 24">
