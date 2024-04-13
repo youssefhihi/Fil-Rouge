@@ -17,7 +17,7 @@
     
 
 </head>
-<body class="bg-[#FFE7C6]" >
+<body class="bg-gray-200" >
 
 
     <x-client.navbar page="profile" /> 
@@ -58,7 +58,7 @@
                                 @endif                             
                             </div>
                             @if (Auth::user()->client->image)
-                            <form method="POST" action="{{route('updateImage')}}" enctype="multipart/form-data">
+                            <form  method="POST" action="{{route('updateImage')}}" enctype="multipart/form-data" >
                                 @csrf
                                 @method('PUT')
                                 <label class="block">
@@ -72,7 +72,7 @@
                                 "/>
                                 </label>
                                 <x-error-input class="mt-2" :messages="$errors->get('image')" />
-                                <button type="submit">okkk</button>
+                                <button type="submit" class="bg-black w-full mt-4  text-white px-3 rounded-xl">save</button>
                             </form>
                             <form action="{{ route('deleteImage') }}" method="post" onsubmit="return confirm('Are you sure you want to delete this image?')">
                                 @csrf
@@ -80,7 +80,7 @@
                                 <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded-xl">Delete</button>
                             </form>
                             @else
-                            <form method="POST" action="{{route('uploadImage')}}" enctype="multipart/form-data">
+                            <form method="POST" action="{{route('uploadImage')}}" enctype="multipart/form-data" class="flex space-x-10 ">
                                 @csrf
                                 @method('POST')
                                 <label class="block">
@@ -94,7 +94,7 @@
                                 "/>
                                 </label>
                                 <x-error-input class="mt-2" :messages="$errors->get('image')" />
-                                <button type="submit">ooook</button>
+                                <button type="submit" class="bg-black text-white px-3 rounded-xl">save</button>
                             </form>
                             @endif
                            
@@ -102,48 +102,83 @@
                             </div> 
                             </div>
                             <hr class="border-light m-0">
-                            <form method="POST" action="{{route('profile.update')}}"  class="card-body">
+                            <form id="editProfile" method="POST" action="{{route('profile.update')}}"  class="card-body">
                             @csrf
                             @method('PATCH')
                                 <div class="form-group">
                                     <label class="form-label">Username</label>
-                                    <input type="text" name="username" class="form-control mb-1" value="{{Auth::user()->username}}">
+                                    <input id="username" type="text" name="username" class="form-control focus:outline-none" value="{{Auth::user()->username}}">
+                                    <p id="usernameRegex" class="hidden text-red-400 border-b-2 border-red-500 font-mono pl-3">Invalid username format</p>
+                                    <x-error-input :messages="$errors->get('username')" class="mt-2" />
                                 </div>
+                                
+                                
                                 <div class="form-group">
                                     <label class="form-label">Name</label>
-                                    <input type="text" name="name" class="form-control" value="{{Auth::user()->name}}">
+                                    <input id="fullname" type="text" name="name" class="form-control" value="{{Auth::user()->name}}">
+                                    <p id="nameRegex" class="hidden text-red-400 text-sm">Invalid name (Stephen Gardner)</p>
+                                    <x-error-input :messages="$errors->get('name')" class="mt-2" />
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">E-mail</label>
-                                    <input type="text" name="email" class="form-control mb-1" value="{{Auth::user()->email}}">
+                                    <input id="email" type="text" name="email" class="form-control mb-1" value="{{Auth::user()->email}}">
+                                    <p id="emailRegex" class="hidden text-red-400 text-sm">Invalid email (name@example.com)</p>
+                                    <x-error-input :messages="$errors->get('email')" class="mt-2" />
                                 </div>
                                 <div class="flex justify-end w-full">
                                 <button type="submit"class="cursor-pointer  mb-2 md:mb-0 bg-gray-900 border border-gray-500 px-5 py-1 text-md shadow-sm font-medium tracking-wider text-white rounded-md hover:shadow-lg hover:bg-gray-700">Save</button>
                                 </div>
-                                <!-- <div class="form-group">
-                                    <label class="form-label">Company</label>
-                                    <input type="text" class="form-control" value="Company Ltd.">
-                                </div> -->
+                               
                             </form>
                         </div>
                         <div class="tab-pane fade" id="account-change-password">
-                            <form method="post" action="{{ route('password') }}" class="card-body pb-2">
+                            
+                        <div id="msgError" class=" hidden flex m-5 bg-red-100 text-red-800 pl-4 text-center pr-10 py-4 rounded relative" role="alert">
+                            <div class="inline-block max-sm:mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-red-500 inline mr-4" viewBox="0 0 32 32">
+                                <path
+                                d="M16 1a15 15 0 1 0 15 15A15 15 0 0 0 16 1zm6.36 20L21 22.36l-5-4.95-4.95 4.95L9.64 21l4.95-5-4.95-4.95 1.41-1.41L16 14.59l5-4.95 1.41 1.41-5 4.95z"
+                                data-original="#ea2d3f" />
+                            </svg>
+                            <strong class="font-bold text-base">Error!</strong>
+                            </div>
+                            <span id="error" class="block sm:inline text-sm mx-4 max-sm:ml-0 max-sm:mt-1"></span>                         
+                        </div>
+                        <div id="msg" class = " hidden flex bg-green-100 m-5 text-green-800 pl-4 text-center pr-10 py-4 rounded relative" role="alert">
+                            <div class="inline-block max-sm:mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-green-500 inline mr-4" viewBox="0 0 512 512">
+                                <ellipse cx="256" cy="256" fill="#32bea6" data-original="#32bea6" rx="256" ry="255.832" />
+                                <path fill="#fff" d="m235.472 392.08-121.04-94.296 34.416-44.168 74.328 57.904 122.672-177.016 46.032 31.888z"
+                                data-original="#ffffff" />
+                            </svg>
+                            <strong class="font-bold text-base">Success!</strong>
+                            </div>
+                            <span id="success" class="block sm:inline text-sm mx-4 max-sm:ml-0 max-sm:mt-1"></span>
+                            
+                        </div>
+                            <form id="changePassword" method="post"  class="card-body pb-2">
                                 @csrf
                                 @method('PATCH')
                                 <div class="form-group">
                                     <label class="form-label">Current password</label>
                                     <input name="current_password" type="password" class="form-control">
+                                    <x-error-input :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">New password</label>
-                                    <input name="password" type="password" class="form-control">
+                                    <input id="newPassword" name="password" type="password" class="form-control">
+                                    <p id="newPasswordRegex" class="hidden text-red-400 text-sm">Password must contain at least 8 characters, including uppercase letters, lowercase letters, numbers, and special characters.</p>
+                                    <x-error-input :messages="$errors->updatePassword->get('password')" class="mt-2" />
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Repeat new password</label>
-                                    <input name="password_confirmation" type="password" class="form-control">
+                                    <input id="reapetPassword" name="password_confirmation" type="password" class="form-control">
+                                    <p id="reapetPasswordRegex" class="hidden text-red-400 text-sm">Passwords do not match.</p>
+                                    <x-error-input :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
                                 </div>
+
                                 <div class="flex justify-end w-full">
-                                <button type="submit"class="cursor-pointer  mb-2 md:mb-0 bg-gray-900 border border-gray-500 px-5 py-1 text-md shadow-sm font-medium tracking-wider text-white rounded-md hover:shadow-lg hover:bg-gray-700">Save</button>
+                                <button type="submit" onclick="changePassword(this)" class="cursor-pointer  mb-2 md:mb-0 bg-gray-900 border border-gray-500 px-5 py-1 text-md shadow-sm font-medium tracking-wider text-white rounded-md hover:shadow-lg hover:bg-gray-700">Save</button>
                                 </div>
                             </form >
                         </div>
@@ -413,8 +448,42 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
     
+    <script src="{{ asset('js/editProfileRegex.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-    <script src="{{ asset('js/client.js') }}"></script>
+    <script src="{{ asset('js/changePasswordRegex.js') }}"></script>
 
+  
+    <script>
+function changePassword(button) {
+    var form = $(button).closest('form');
+    $.ajax({
+        url: "{{ route('password') }}",
+        method: 'PATCH',
+        data: form.serialize(), 
+        success: function (result) {
+            $('#msg').removeClass('hidden')
+            $('#success').css('display','block');
+            jQuery('#success').html(result.success);
+            jQuery(form)[0].reset();  
+        },
+        error: function (xhr, status, error) {
+            $('#msgError').removeClass('hidden')
+            $('#error').css('display','block');
+            if (xhr.responseJSON && xhr.responseJSON.errors) {
+                var errorsHtml = '<ul>';
+                $.each(xhr.responseJSON.errors, function(key, value) {
+                    errorsHtml += '<li>' + value + '</li>';
+                });
+                errorsHtml += '</ul>';
+                jQuery('#error').html(errorsHtml);
+            } else {
+                jQuery('#error').html('An error occurred. Please try again later.');
+            }         
+            jQuery(form)[0].reset();  
+        }
+    });
+}
+
+</script>
 </body>
 </html>

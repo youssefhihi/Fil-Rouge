@@ -1,29 +1,10 @@
 @props(['page'])
-
-<header class="bg-white w-full fixed top-0 left-0 right-0 z-50">
-      <nav class="flex justify-between items-center bg-white text-black p-1 ">
-        <div class="flex items-center space-x-20">
-            <img src="https://source.unsplash.com/random" alt="Logo" class="h-10">
-            <form action="" class="ml-4 flex border-b-2 border-[#532E1C] ">
-                <input type="search" name="search" placeholder="Search by book, genre ..." class="text-sm  text-black px-3 py-1 pr-8 focus:outline-none ">
-                <button type="submit"><i class="fas fa-search text-sm mt-2 "></i></button>
-            </form>
-        </div>
-        @if ($page === 'books')  
-        <div class="flex space-x-1  ">
-            <div onclick="openSearch()" class=" cursor-pointer flex space-x-3  px-2 border-b-2 border-black  ">
-              <p class="bg-transparent w-full h-full text-md  outline-none text-gray-500">Search Book by title,genre ...</p>
-              <i class="fas fa-search text-sm pt-1 "></i>
-            </div>
-        </div>
-        
-        
-        <div id="SearchInput" class=" hidden min-w-screen lg:p-14 h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
+<div id="SearchInput" class=" hidden min-w-screen absolute p-14 h-screen animated fadeIn faster   fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
             <div class="absolute bg-black opacity-80 inset-0 z-0"></div>
-            <form  class=" max-w-5xl rounded-2xl bg-white w-full px-4 absolute fixed top-10 dark:text-white dark:bg-black">
+            <form  class=" max-w-5xl rounded-2xl bg-white w-full px-4 absolute fixed  top-14 lg:top-10 dark:text-white dark:bg-black">
                 <div class="relative flex flex-col">
                     <input type="text" name="search" id="search" class="w-full border-b-2 h-12 shadow p-4 bg-black  dark:border-gray-700  focus:outline-none" placeholder="search Book By Title ,Genre, Author">
-                     <svg class="text-teal-400 h-5 w-5 absolute top-3.5 right-3 fill-current dark:text-teal-300"
+                     <svg class="text-teal-400 h-5 w-5 absolute top-3.5  right-3 fill-current dark:text-teal-300"
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
                             x="0px" y="0px" viewBox="0 0 56.966 56.966"
                             style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve">
@@ -37,27 +18,47 @@
                 </div>
             </form>
             <div onclick="closeSearch()">
-                <svg  class="text-black bg-white rounded-full  h-19 w-7 absolute top-4 right-10 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg  class="text-black bg-white sm:right-1/2 rounded-full  h-19 w-7 absolute top-4 lg:right-10 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
 
             </div>
 
         </div>
+<header class="hidden lg:block bg-white w-full fixed top-0 left-0 right-0 z-40">
+      <nav class="flex justify-between items-center bg-white text-black p-1 ">
+        <div class="flex items-center space-x-20">
+            <img src="{{asset('imgs/logo.png')}}" alt="Logo" class="h-16">
+            <form method="get" action="{{route('home.index')}}" class="ml-4 flex border-b-2 border-black ">
+                @csrf
+                <input type="search" name="search" placeholder="Search ..." class="text-sm  text-black px-3 py-1 pr-8 focus:outline-none ">
+                <button type="submit"><i class="fas fa-search text-sm mt-2 "></i></button>
+            </form>
+        </div>
+        @if ($page === 'books')  
+        <div class="flex space-x-1  ">
+            <div onclick="openSearch()" class=" cursor-pointer flex space-x-3  px-2 border-b-2 border-black  ">
+              <p class="bg-transparent w-full h-full text-md  outline-none text-gray-500">Search Book by title,genre ...</p>
+              <i class="fas fa-search text-sm pt-1 "></i>
+            </div>
+        </div>
+        
+        
+        
         
         @endif
         <ul class="flex space-x-10">
            
                 
                 <li class="">
-                <a href="/home" class="flex flex-col px-2 items-center  {{ $page === 'feed' ? 'border-b-2 border-[#532E1C] text-[#532E1C]' : 'text-gray-500 hover:text-[#532E1C]' }}"> 
+                <a href="/home" class="flex flex-col px-2 items-center  {{ $page === 'feed' ? 'border-b-2 border-black text-black' : 'text-gray-500 hover:text-black' }}"> 
                         <x-icon name="home"/>
                         <span class="text-xs">Home</span>
                 </a> 
                 </li>           
          
             <li class="">
-            <a href="/books" class="flex flex-col px-2 items-center  {{ $page === 'books' ? 'border-b-2 border-[#532E1C] text-[#532E1C]' : 'text-gray-500 hover:text-[#532E1C]' }}"> 
+            <a href="/books" class="flex flex-col px-2 items-center  {{ $page === 'books' ? 'border-b-2 border-black text-black' : 'text-gray-500 hover:text-black' }}"> 
                     <x-icon name="books"/>                     
                     <span class="text-xs">Books</span>
                 </a>
@@ -68,7 +69,7 @@
            
             <li class="">
                 
-            <a href="/notification" class="flex flex-col px-2 items-center  {{ $page === 'notif' ? 'border-b-2 border-[#532E1C] text-[#532E1C]' : 'text-gray-500 hover:text-[#532E1C]' }}"> 
+            <a href="/notification" class="flex flex-col px-2 items-center  {{ $page === 'notif' ? 'border-b-2 border-black text-black' : 'text-gray-500 hover:text-black' }}"> 
                 <x-icon name="notif"/>
                     <span class="text-xs">Notification</span>
                 </a>
@@ -77,15 +78,23 @@
 
            
             <li class="">
-                <a href="/profile" class="flex flex-col items-center px-2 text-[#C5A880] hover:text-[#532E1C]">
-                    <img src="doctor.png" alt="" class="rounded-full h-7 w-7  ">
-                    <span class="">Me</span>
+                <a href="/profile" class="flex flex-col items-center px-2 text-gray-500 hover:text-black">
+                @if (Auth::user()->client->image)             
+                    <img src="{{asset('storage/' .Auth::user()->client->image->path)}}" alt="" class="rounded-full h-7 w-7  ">
+                    @else
+                    @if (Auth::user()->client->gender === "female")
+                    <img src="{{asset('imgs/profileFemale.png')}}" alt="" class="rounded-full h-7 w-7  ">
+                    @else
+                    <img src="{{asset('imgs/profileMale.png')}}" alt="" class="rounded-full h-7 w-7  ">
+                    @endif 
+                    @endif                    
+            <span class="">Me</span>
                 </a>
             </li>
         
-            <div class="border-r-4 border-[#C5A880]  "></div>
+            <div class="border-r-4 border-gray-500  "></div>
             <li class="/">       
-                    <div class="flex flex-col items-center text-[#C5A880] hover:text-[#532E1C] ">
+                    <div class="flex flex-col items-center text-gray-500 hover:text-black ">
                     <x-icon name="about"/>
                       <span class="text-xs">about us</span>
                     </div>
@@ -104,6 +113,60 @@
         </ul>
       </nav>
     </header>
+    <header id="bottom-navigation" class="block lg:hidden fixed inset-x-0 top-0 z-10 bg-white shadow">
+		<div id="tabs" class="flex justify-evenly items-center">
+                <img src="{{asset('imgs/logo.png')}}" alt="Logo" class="h-16">
+                @if ( $page === 'books')
+                <div class="flex space-x-1  ">
+                    <div onclick="openSearch()" class=" cursor-pointer flex space-x-3  px-2 border-b-2 border-black  ">
+                    <p class="bg-transparent w-full h-full text-md  outline-none text-gray-500">Search Book by title,genre ...</p>
+                    <i class="fas fa-search text-sm pt-1 "></i>
+                    </div>
+                </div>
+                @else
+                    
+                <form method="get" action="{{route('home.index')}}" class="ml-4 flex border-b-2 border-black ">
+                    @csrf
+                    <input type="search" name="search" placeholder="Search ..." class="text-sm  text-black px-3 py-1 pr-8 focus:outline-none ">
+                    <button type="submit"><i class="fas fa-search text-sm mt-2 "></i></button>
+                </form>
+                @endif
+		</div>
+</header>
+
+<header id="bottom-navigation" class="block lg:hidden fixed inset-x-0 bottom-0 z-10 bg-white shadow">
+		<div id="tabs" class="flex justify-between">
+			<a href="/home" class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
+				 <x-icon name="home" class="inline-block mb-1"/> 
+				<span class="tab tab-home block text-xs">Home</span>
+            </a>
+			<a href="/books" class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
+            <x-icon name="books" class="inline-block mb-1"/> 
+
+				<span class="tab tab-kategori block text-xs">Books</span>
+			</a>
+			<a href="/notif" class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
+                <x-icon name="notif" class="inline-block mb-1"/> 
+				<span class="tab tab-explore block text-xs">Notification</span>
+			</a>
+            <a href="/profile" class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
+                @if (Auth::user()->client->image)             
+                    <img src="{{asset('storage/' .Auth::user()->client->image->path)}}" alt="" class="inline-block mb-1 rounded-full h-7 w-7  ">
+                @else
+                    @if (Auth::user()->client->gender === "female")
+                        <img src="{{asset('imgs/profileFemale.png')}}" alt="" class="rounded-full h-7 w-7 inline-block mb-1 ">
+                    @else
+                        <img src="{{asset('imgs/profileMale.png')}}" alt="" class="rounded-full h-7 w-7 inline-block mb-1 ">
+                    @endif 
+                @endif
+                <span class="tab tab-account block text-xs">Account</span>
+            </a>
+			<a href="/" class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
+                 <x-icon name="about" class="inline-block mb-1"/> 
+				<span class="tab tab-whishlist block text-xs">About Us</span>
+			</a>    
+		</div>
+</header>
 
 
     <script>

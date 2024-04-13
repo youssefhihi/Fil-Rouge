@@ -1,6 +1,8 @@
   <!-- article -->
-  @props(['posts','likes'])
-  <div class="w-6/12 mx-2">
+  @props(['posts'])
+  <div class="lg:w-6/12 md:7/12 mx-2">
+  <x-success-message class="m-3"/>   
+  <x-error-message class="m-3"/> 
          <!--Form   -->
          <!-- object-fill -->
          <div id="addPost" class=" hidden min-w-screen lg:p-14 h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
@@ -12,7 +14,7 @@
                       @method('POST')
                       <div class="flex flex-col gap-5 lg:flex-row lg:justify-between lg:gap-0">
                             <div class="flex justify-center mx-auto lg:mx-0 lg:w-1/2">
-                              <x-image-input page="post" path="{{asset('imgs/manAuthor.png')}}" class="h-80  w-64 object-fill rounded-sm"/> 
+                              <x-image-input page="post" path="{{asset('imgs/postImage.png')}}" class="h-80  w-64 object-fill rounded-sm"/> 
                             </div>                         
                           <div class="flex flex-col mt-10 lg:w-1/2">                
                               <x-textarea name="description" label="description"/>
@@ -55,21 +57,21 @@
             </div>
           </div>
           <!-- Icons -->
-          <div class="py-2 flex justify-between items-center">
-            <button onclick="openAddPost()" class="py-3 px-2 rounded flex items-center hover:bg-gray-200">
-              <span class="font-bold pr-1">Advice</span>
-              <x-icon name="advice"/>
+          <div class="py-2 flex justify-between items-center font-serif">
+            <button onclick="openAddPost()" class="flex space-x-1  text-black font-normal py-1 px-3 rounded-md  transform hover:scale-105  transition duration-300 ease-in-out">
+              <span class="text-md pr-1">Advice</span>
+              <x-icon class="rounded-md p-1 bg-gradient-to-r from-red-700 to-red-300 text-white  hover:from-red-600 hover:to-red-200" name="advice"/>
             </button>
 
-            <button onclick="openAddPost()" class="py-3 px-2 rounded flex items-center hover:bg-gray-200">
-              <span class="font-bold pr-1">Question</span>
-              <x-icon name="question"/>
+            <button onclick="openAddPost()" class="flex space-x-1  text-black font-normal py-1 px-3 rounded-md  transform hover:scale-105  transition duration-300 ease-in-out">
+              <span class="text-md pr-1">Question</span>
+              <x-icon class="rounded-md p-1 bg-gradient-to-r from-red-700 to-red-300 text-white  hover:from-red-600 hover:to-red-200"  name="question"/>
             </button>
 
 
-            <button onclick="openAddPost()" class="py-3 px-2 rounded flex items-center hover:bg-gray-200">
-            <span class="font-bold pr-1 ">General </span>
-            <x-icon name="general"/>
+            <button onclick="openAddPost()" class="flex space-x-1  text-black font-normal py-1 px-3 rounded-md  transform hover:scale-105  transition duration-300 ease-in-out">
+            <span class="text-md pr-1 ">General </span>
+            <x-icon  class="rounded-md p-1 bg-gradient-to-r from-red-700 to-red-300  text-white hover:from-red-600 hover:to-red-200" name="general"/>
             </button>
           </div>
          </div>
@@ -221,7 +223,7 @@ function removeLike(button) {
     var form = button.closest('form');
     var ratingId = form.data('rating-id');
     $.ajax({
-        url: '/rating/' + ratingId, // Correct URL for DELETE request
+        url: '/rating/' + ratingId, 
         method: 'DELETE',
         success: function (response) {
             var likesCount = parseInt(button.find('span').text());

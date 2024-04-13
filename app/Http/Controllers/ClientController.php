@@ -89,6 +89,27 @@ class ClientController extends Controller
             
         }
     }
+
+
+    public function bigSearch(Request $request){
+        $search = '%'.$request->input('search') .'%';
+
+        $posts = Post::where('description', 'like', $search)
+        ->orWhereHas('client', function($query) use ($search) {
+            $query->whereAny([
+                'username',
+                'city',
+                'bio',
+            ], 'like', $search);
+        })
+        ->orWhereHas('client.user', function($query) use ($search) {
+            $query->where('name', 'like', $search);
+        })
+        ->get();
+                
+        return view("client.home",compact('posts','search'));
+
+    }
     
     /**
      * Show the form for creating a new resource.

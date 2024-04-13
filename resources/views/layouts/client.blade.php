@@ -14,7 +14,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
-<body class="bg-[#FFE7C6]" >
+<body class="bg-gray-100" >
 
 
     
@@ -23,7 +23,7 @@
     </header>
     
     <!-- Main content -->
-    <main class="w-11/12 m-auto mt-20 flex justify-evenly" >
+    <main class="lg:w-11/12 w-full m-auto mt-20 flex justify-evenly" >
         {{ $slot }}
     </main>
     

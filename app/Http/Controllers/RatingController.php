@@ -33,6 +33,7 @@ class RatingController extends Controller
     $data = $request->validated();
     $data['client_id'] = Auth::user()->client->id;
     $rating = Rating::create($data);
+    
     return response()->json(['status' => true]);
 }
 

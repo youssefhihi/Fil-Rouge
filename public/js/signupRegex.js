@@ -21,7 +21,7 @@ var ReapeatPasswordInputHelp = document.getElementById('confirmPasswordRegex');
 
 const NameRegex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
 const EmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const PasswordRegex = /^(?=.*[0-9])(?!.*[^0-9a-zA-Z-_@])[a-zA-Z0-9-_@]{8,}$/;
+const PasswordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
 // Submit only after all values are correct function
 

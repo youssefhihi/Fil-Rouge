@@ -4,8 +4,7 @@
 @endsection
      <!-- User card-->
      <div class="w-7/12 mx-2">
-    <div class="w-full bg-cover bg-no-repeat bg-center" style="height: 200px; background-image: url(https://pbs.twimg.com/profile_banners/2161323234/1585151401/600x200);">
-        <img class="opacity-0 w-full h-full" src="https://pbs.twimg.com/profile_banners/2161323234/1585151401/600x200" alt="">
+    <div class="w-full bg-cover bg-no-repeat bg-center" style="height: 200px; background-image: url({{asset('imgs/bannerProfile.jpeg')}});">
     </div>
     <div class="p-4 bg-white">
         <div class="relative  flex w-full">

@@ -21,17 +21,33 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $genres =  Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
-        $countLikes = Rating::count();
         $authors =  Author::withCount('books')->orderByDesc('books_count')->limit(4)->get();
         $books =  Book::limit(4)->get();
         $type = $request->input('type');
+        $search = '%'.$request->input('search') .'%';
         $query = Post::orderByDesc('created_at');
-        if ($type !== 'all' && $type !== null) {
-            $query->where('type', $type);
+        if($type){
+            if ($type !== 'all' && $type !== null) {
+                $query->where('type', $type);
+            }
+
+        }else if($search){
+            $query = Post::where('description', 'like', $search)
+            ->orWhereHas('client', function($query) use ($search) {
+                $query->whereAny([
+                    'city',
+                    'bio',
+                ], 'like', $search);
+            })
+            ->orWhereHas('client.user', function($query) use ($search) {
+                $query->whereAny(['username','name'], 'like', $search);
+            });
+            
+            
         }
         $posts = $query->get();
         
-        return view('client.home',compact('posts','genres','books','authors','countLikes'));   
+        return view('client.home',compact('posts','genres','books','authors'));   
     }
 
 
@@ -50,13 +66,18 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         try{
-            $data = $request->validated();
-            $data['client_id'] = Auth::user()->client->id;
-            $post = Post::create($data); 
-            if($request->hasFile('image') || $request->file('image')){         
-                $this->storeImg($post, $request->file('image'));
-            }         
-            return redirect()->back()->with("success", "author added with success.");
+            if(Auth::user()->client->can_post){
+                return redirect()->back()->with("error", "Sorry, you're unable to post at the moment. Please reach out to the administrator for assistance.");
+            }else{
+                
+                $data = $request->validated();
+                $data['client_id'] = Auth::user()->client->id;
+                $post = Post::create($data); 
+                if($request->hasFile('image') || $request->file('image')){         
+                    $this->storeImg($post, $request->file('image'));
+                }         
+                return redirect()->back()->with("success", "Great! Your post has been successfully added.");
+            }
         } catch (\Exception $e) {
 
             return redirect()->back()->with("error", "Error: " . $e->getMessage());

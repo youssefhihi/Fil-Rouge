@@ -15,6 +15,8 @@ use App\Http\Requests\profileSocialeMedia;
 use App\Http\Requests\UpdateProfileInf;
 use Illuminate\Validation\Rules\Password;
 use App\trait\ImageUpload;
+use Illuminate\Support\Facades\Validator;
+
 
 
 class ProfileController extends Controller
@@ -56,16 +58,21 @@ class ProfileController extends Controller
     }
 
     public function password(Request $request){
-        $validated = $request->validateWithBag(
-            'updatePassword',[
+
+        $validator = Validator::make($request->all(), [
             'current_password' => ['required', 'current_password'],
             'password' => ['required', Password::defaults(), 'confirmed'],
         ]);
     
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+    
         $request->user()->update([
-            'password' => Hash::make($validated['password']),
+            'password' => Hash::make($request->password),
         ]);
-        return redirect('/profile')->with('success' , 'profile updated with seccess');
+           
+        return response()->json(['success' => 'password updated with success'],200);
 
     }
     public function updateInf(UpdateProfileInf $request)

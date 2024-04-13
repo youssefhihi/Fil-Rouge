@@ -5,7 +5,7 @@
      <!-- CONTENT -->  
      <x-success-alert :success="session('success')"/>
     <x-error-alert :messages="$errors->all()" />
-<div class="w-6/12 mx-2 ">
+<div class="lg:w-6/12 w-full mx-5 lg:2 mb-24 lg:mb-0  ">
             <div class=" w-full flex flex-col gap-7  bg-white p-4 rounded-md"> 
               @foreach ($books as $book)                
               <div class="flex space-x-10 w-full border border-black rounded-md p-2">
