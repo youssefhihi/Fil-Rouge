@@ -6,7 +6,7 @@
 		<div class="container mx-auto text-center text-white">
 			<h1 class="text-5xl font-medium font-normal mb-6">Now In Morroco</h1>
 			<p class="text-xl mb-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <button class="relative px-8 py-2 rounded-xl bg-white isolation-auto z-10 border-2 border-red-500 text-red-600 hover:text-white font-normal font-semibold
+            <button class="relative px-8 py-2 rounded-xl backdrop-filter backdrop-blur-md isolation-auto z-10 border-2 border-red-500 text-red-600 hover:text-white font-normal font-semibold
                     before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-right-full before:hover:right-0 before:rounded-full  before:bg-red-600 before:-z-10  before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700">Join Us</button>                </div>
 		</div>
 	</div>

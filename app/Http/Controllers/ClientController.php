@@ -42,7 +42,54 @@ class ClientController extends Controller
     }
 
 
-
+    public function search(Request $request){
+        if($request->ajax())
+        {
+            $query = $request->get('query');
+            $output =[];
+            if($query != ''){
+                $data = Book::where('title', 'like', '%'.$query.'%')
+                            ->orWhereHas('genre', function($genreQuery) use ($query) {
+                                $genreQuery->where('name', 'like', '%'.$query.'%');
+                            })
+                            ->orWhereHas('author', function($authorQuery) use ($query) {
+                                $authorQuery->where('name', 'like', '%'.$query.'%');
+                            })
+                            ->get();
+    
+                $total_data = $data->count();
+                if($total_data > 0){
+                foreach($data as $book){
+                array_push($output,'<a href="' .route('book.details',$book).'" class="mt-4 flex space-x-4 px-3">
+                <img src="' . asset('storage/' . $book->image->path ).'" alt="" class="h-24 w-16" >  
+                <div class="flex flex-col gap-2">
+                  <div class=" flex flex-col ">
+                    <p class="text-white capitalize text-xl hover:underline">' . $book->title. '</p>
+                  </div>
+                  <p class="test-gray-400 text-center text-sm ">' . $book->genre->name . '</p>
+                </div>
+                </a>
+                <div class="border border-black dark:border-gray-500 my-2"></div>
+                ');
+                }
+                }else{
+                    $output = ' 
+                    <div class="flex justify-center px-3">
+                    <p class="text-center text-3xl text-gray-500 mb-6 mt-10 font-serif">No data found for <b>"'. $query .'"</b></p>
+                    </div>';
+                }
+            } else {
+                $output = 'No query provided';
+            }
+            $data = [
+                'table_data' => $output,
+                'total_data' => $total_data,
+            ];
+            echo json_encode($data);
+            
+        }
+    }
+    
     /**
      * Show the form for creating a new resource.
      */

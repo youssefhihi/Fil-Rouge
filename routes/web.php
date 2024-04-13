@@ -32,6 +32,7 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
 Route::middleware(['auth','role:client'])->group(function () {
 Route::get('/home', [PostController::class,'index'])->name('home.index');
+Route::get('/books/search', [ClientController::class,'search'])->name('search');
 Route::post('/home/post', [PostController::class,'store'])->name('post.store');
 Route::delete('/profile/{post}/delete', [PostController::class,'destroy'])->name('post.destroy');
 Route::get('/profile/{post}/edit', [PostController::class,'edit'])->name('post.edit');
