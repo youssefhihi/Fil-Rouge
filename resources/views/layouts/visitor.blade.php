@@ -12,9 +12,9 @@
     <!-- scripts -->
     <script src="https://kit.fontawesome.com/7d35781f0a.js" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"  rel="stylesheet" />  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
- 
+
+    
+    
 </head>
 <body class="bg-red-700  bg-opacity-30">
 <header class=" text-white w-full fixed left-0 top-0 z-20">

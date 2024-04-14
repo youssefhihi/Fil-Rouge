@@ -70,7 +70,7 @@
               
               <p class="test-gray-400 text-md ml-2">{{$book->author->name}}</p>
             </div>
-            <p class="test-gray-400 text-sm ">6 users recently</p>
+            <p class="test-gray-400 text-sm ">{{$book->reservations_not_returned_count}} Readers have this Book</p>
           </div>
           </a>
           <div class="border border-black my-2"></div>

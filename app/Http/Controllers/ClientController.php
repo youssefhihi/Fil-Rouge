@@ -18,7 +18,9 @@ class ClientController extends Controller
     {
         $genres =  Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
         $authors =  Author::withCount('books')->orderByDesc('books_count')->limit(4)->get();
-        $topBooks =  Book::limit(4)->get(); 
+        $topBooks =  Book::withCount('reservationsNotReturned')
+                            ->orderByDesc('reservations_not_returned_count')->limit(4)
+                            ->get(); 
         $books = Book::orderByDesc('created_at')->get();    
         return view('client.books',compact('genres','topBooks','books','authors'));
     
@@ -27,7 +29,9 @@ class ClientController extends Controller
     public function sortGenre(Genre $genre){ 
         $genres =  Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
         $authors =  Author::withCount('books')->orderByDesc('books_count')->limit(4)->get();
-        $topBooks =  Book::limit(4)->get(); 
+        $topBooks =  Book::withCount('reservationsNotReturned')
+                            ->orderByDesc('reservations_not_returned_count')->limit(4)
+                            ->get();
         $books =  Book::where("genre_id",$genre->id)->get();
         return view('client.booksSort',compact('genres','topBooks','books','authors'));
 
@@ -36,7 +40,9 @@ class ClientController extends Controller
     public function sortAuthor(Author $author){ 
         $genres =  Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
         $authors =  Author::withCount('books')->orderByDesc('books_count')->limit(4)->get();
-        $topBooks =  Book::limit(4)->get();      
+        $topBooks =  Book::withCount('reservationsNotReturned')
+                            ->orderByDesc('reservations_not_returned_count')->limit(4)
+                            ->get();     
         $books =  Book::where("author_id",$author->id)->get();   
         return view('client.booksSort',compact('genres','topBooks','books','authors'));
     }
@@ -133,7 +139,9 @@ class ClientController extends Controller
     public function show(Book $book)
     {   $genres =  Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
         $authors =  Author::withCount('books')->orderByDesc('books_count')->limit(4)->get();
-        $topBooks =  Book::limit(4)->get(); 
+        $topBooks = Book::withCount('reservationsNotReturned')
+                        ->orderByDesc('reservations_not_returned_count')->limit(4)
+                        ->get(); 
         $posts = Post::where('description', 'like', '%' . $book->title . '%')->get();
         return view("client.bookPage",compact('genres','topBooks','book','authors','posts'));
     }

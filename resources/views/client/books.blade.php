@@ -3,10 +3,11 @@
     <x-client.navbar page="books" /> 
     @endsection
      <!-- CONTENT -->  
-     <x-success-alert :success="session('success')"/>
-    <x-error-alert :messages="$errors->all()" />
+  
 <div class="lg:w-6/12 w-full mx-5 lg:2 mb-24 lg:mb-0  ">
-            <div class=" w-full flex flex-col gap-7  bg-white p-4 rounded-md"> 
+    <x-success-message/>
+    <x-error-message/>
+    <div class=" w-full flex flex-col gap-7  bg-white p-4 rounded-md"> 
               @foreach ($books as $book)                
               <div class="flex space-x-10 w-full border border-black rounded-md p-2">
                   <a href="{{route('book.details',$book)}}" class="w-1/4">
@@ -63,11 +64,13 @@
                     <!-- Start Date -->
                     <label for="startDate" class="block text-sm font-medium text-gray-700">Start Date</label>
                     <input type="date" name="startDate" id="startDate" class="block w-full mt-1 rounded-md shadow-sm focus:ring-brown-500 focus:border-indigo-500 sm:text-sm">
-                    
+                    <x-error-input :messages="$errors->get('startDate')" class="mt-2" />
                     <!-- Return Date -->
                     <label for="returnDate" class="block text-sm font-medium text-gray-700">Return Date</label>
                     <input type="date" name="returnDate" id="returnDate" class="block w-full mt-1 rounded-md shadow-sm focus:ring-brown-500 focus:border-indigo-500 sm:text-sm">                     
+                    <x-error-input :messages="$errors->get('returnDate')" class="mt-2" />
                     <x-textarea name="message" label="message"/>
+                    <x-error-input :messages="$errors->get('message')" class="mt-2" />
                     <button type="submit">ok</button>
                 </form>
             </div>

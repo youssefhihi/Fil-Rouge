@@ -31,28 +31,30 @@ class ReservationController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(ReservationRequest $request)
-{
-    $data = $request->validated();
-    $data['client_id'] = Auth::user()->client->id;
-    $book = Book::find($data['book_id']);
-
-    if ($book->quantity > 0) {
-        $new_quantity = $book->quantity - 1;
-
-        // Update the book's quantity
-        $book->update(['quantity' => $new_quantity]);
-
-        // Create the reservation
-        $reservation = Reservation::create($data);
-
-        // Send reservation email
-        Mail::to(Auth::user()->email)->send(new ReservationEmail($reservation->id));
-
-        return redirect('/books')->with('success', 'The reservation has been sent to the admin for confirmation.');
-    } else {
-        return redirect('/books')->with('success', 'Quantity not enough.');
+    {
+        $data = $request->validated();
+        $book = Book::find($data['book_id']);
+        $client = Auth::user()->client;
+        $data['client_id'] = $client->id;
+        $reservedBooksCount = $client->reservations()->where('is_returned', false)->count();
+        $existingReservation = $client->reservations()->where('book_id', $data['book_id'])->where('is_returned', false)->exists();
+        if ($existingReservation) {
+            return redirect('/books')->with('error', 'You have already reserved this book and it has not been returned yet.');
+        }   
+        if ($reservedBooksCount >= 3) {
+            return redirect('/books')->with('error', 'You have already reserved the maximum number of books allowed.');
+        }
+        if ($book->quantity > 0) {
+            $new_quantity = $book->quantity - 1;
+            $book->update(['quantity' => $new_quantity]);
+            $reservation = Reservation::create($data);
+            //send Email
+            // Mail::to(Auth::user()->email)->send(new ReservationEmail($reservation->id));
+            return redirect('/books')->with('success', 'The reservation has been sent to the admin for confirmation.');
+        } else {
+            return redirect('/books')->with('success', 'Quantity not enough.');
+        }
     }
-}
 
 
     /**

@@ -22,7 +22,9 @@ class PostController extends Controller
     {
         $genres =  Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
         $authors =  Author::withCount('books')->orderByDesc('books_count')->limit(4)->get();
-        $books =  Book::limit(4)->get();
+        $books = Book::withCount('reservationsNotReturned')
+                                ->orderByDesc('reservations_not_returned_count')->limit(4)
+                                ->get();
         $type = $request->input('type');
         $search = '%'.$request->input('search') .'%';
         $query = Post::orderByDesc('created_at');

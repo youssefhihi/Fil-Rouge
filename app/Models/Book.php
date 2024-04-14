@@ -46,4 +46,9 @@ class Book extends Model
     {
         return $this->hasMany(Reservation::class,'book_id');
     }
+
+    public function reservationsNotReturned()
+    {
+        return $this->hasMany(Reservation::class,'book_id')->where('is_returned', false);
+    }
 }
