@@ -165,9 +165,9 @@
               <form action="{{route('rating.destroy', $like)}}" method="post" id="removeLike" data-rating-id="{{$like->id}}">
                 @csrf
                 @method('DELETE')
-                <button  onclick="removeLike(this)" id="unlike" type="submit" class="flex text-red-600 outline-none rounded px-2  text-gray-600 ">
+                <button  onclick="removeLike(this)" id="unlike" type="button" class="flex text-red-600 outline-none rounded px-2  text-gray-600 ">
                   <x-icon name="like" class="text-xl  mr-1.5"/>
-                  <span >{{$likesCount}} </span> 
+                  <span  >{{$likesCount}} </span> 
                 </button>
               </form>
               @else               
@@ -175,9 +175,9 @@
                 @csrf
                 @method('POST')
                 <input type="hidden" value="{{$post->id}}" name="post_id">
-                    <button onclick="addLike(this)" id="like" type="submit" class="flex text-gray-500 outline-none rounded px-2  text-gray-600 ">
+                    <button onclick="addLike(this)" type="button" id="like" class="flex text-gray-500 outline-none rounded px-2  text-gray-600 ">
                     <x-icon name="like" class="text-xl  mr-1.5"/>
-                      <span >{{$likesCount}}</span> 
+                      <span id="span">{{$likesCount}}</span> 
                     </button>
               </form>
               @endif
@@ -196,28 +196,17 @@
 
             <script>
   function addLike(button) {
-    var form = button.closest('form');
-    $.ajax({
-        url: '/rating',
-        method: 'POST',
-        data: form.serialize(),
-        success: function (response) {
-            
-            if (response.status == true) 
-            {
-              var likesCount = parseInt(button.find('span').text());
-              var likesCount = parseInt(button.find('span').text());
-                button.find('span').text(likesCount - 1);
-                button.removeClass('liked');
-                button.find('x-icon').attr('name', 'like');
-
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error(error);
-        }
-    });
-}
+      var form = button.closest('form');
+      $.ajax({
+          url: "{{route('rating.store')}}",
+          data: form.serialize(),
+          method: 'POST',
+          success: function (result) {
+              $('#span').html(result.countLikes);
+              $(form).unbind();
+          },
+      });
+  }
 
 function removeLike(button) {
     var form = button.closest('form');

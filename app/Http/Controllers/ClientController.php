@@ -54,7 +54,7 @@ class ClientController extends Controller
             $query = $request->get('query');
             $output =[];
             if($query != ''){
-                $data = Book::where('title', 'like', '%'.$query.'%')
+                $data = Book::whereAny(['ISBN','title'], 'like', '%'.$query.'%')
                             ->orWhereHas('genre', function($genreQuery) use ($query) {
                                 $genreQuery->where('name', 'like', '%'.$query.'%');
                             })
@@ -97,25 +97,7 @@ class ClientController extends Controller
     }
 
 
-    public function bigSearch(Request $request){
-        $search = '%'.$request->input('search') .'%';
-
-        $posts = Post::where('description', 'like', $search)
-        ->orWhereHas('client', function($query) use ($search) {
-            $query->whereAny([
-                'username',
-                'city',
-                'bio',
-            ], 'like', $search);
-        })
-        ->orWhereHas('client.user', function($query) use ($search) {
-            $query->where('name', 'like', $search);
-        })
-        ->get();
-                
-        return view("client.home",compact('posts','search'));
-
-    }
+   
     
     /**
      * Show the form for creating a new resource.
@@ -142,7 +124,9 @@ class ClientController extends Controller
         $topBooks = Book::withCount('reservationsNotReturned')
                         ->orderByDesc('reservations_not_returned_count')->limit(4)
                         ->get(); 
-        $posts = Post::where('description', 'like', '%' . $book->title . '%')->get();
+        $posts = Post::where('description', 'like', '%' . $book->title . '%')
+                        ->orWhere('description', 'like', '%' . $book->description . '%')
+                        ->get();
         return view("client.bookPage",compact('genres','topBooks','book','authors','posts'));
     }
 

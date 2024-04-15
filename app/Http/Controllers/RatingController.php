@@ -33,8 +33,8 @@ class RatingController extends Controller
     $data = $request->validated();
     $data['client_id'] = Auth::user()->client->id;
     $rating = Rating::create($data);
-    
-    return response()->json(['status' => true]);
+    $countLikes = Rating::where('post_id',$rating->post_id)->count();   
+    return response()->json(['countLikes' => $countLikes]);
 }
 
     /**
