@@ -9,6 +9,7 @@ use App\Models\Book;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ReservationEmail;
+use App\Mail\RefuseResevationMail;
 
 class ReservationController extends Controller
 {
@@ -17,6 +18,9 @@ class ReservationController extends Controller
      */
     public function index()
     { 
+        $reservations = Reservation::where('is_returned', false)->where('is_taken', false)->get();
+    
+        return view('admin.reservations',compact('reservations'));
     }
 
     /**
@@ -49,7 +53,7 @@ class ReservationController extends Controller
             $book->update(['quantity' => $new_quantity]);
             $reservation = Reservation::create($data);
             //send Email
-            // Mail::to(Auth::user()->email)->send(ReservationEmail($reservation->id));
+            Mail::to(Auth::user()->email)->send(new ReservationEmail($reservation->id));
             return redirect('/books')->with('success', 'The reservation has been sent to the admin for confirmation.');
         } else {
             return redirect('/books')->with('success', 'Quantity not enough.');
@@ -76,16 +80,32 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Reservation $reservation)
+    public function update(Reservation $reservation)
     {
-        //
+
+    try{
+        $reservation->update(['is_taken' => true]);
+        return redirect()->back()->with('success','success');
+    } catch (\Exception $e){
+         dd($e->getMessage());
+        return redirect()->back()->with("error", "Error: " . $e->getMessage());
+        
+    }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Reservation $reservation)
+    public function destroy(Request $request,Reservation $reservation)
     {
-        //
+        $request->validate([
+            'sendEmail' => 'nullable',
+            'message' => 'required_if:sendEmail,true'
+        ]);
+       
+        if($request->message){
+         Mail::to($reservation->client->user->email)->send(new RefuseResevationMail($reservation->id,$request->message));
+        }
+        $reservation->delete();
     }
 }

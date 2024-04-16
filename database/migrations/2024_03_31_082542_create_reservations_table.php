@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('startDate');
             $table->date('returnDate');
             $table->boolean('is_returned')->default(false);
+            $table->boolean('is_taken')->default(false);
             $table->string('message')->nullable();
             $table->timestamps();
         });

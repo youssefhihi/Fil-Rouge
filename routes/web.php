@@ -11,6 +11,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\EmpruntsController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ReservationController;
@@ -91,19 +92,18 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::get('/dashboard/users', [AdminController::class,'index']);
     Route::patch('/dashboard/users/{user}/block', [AdminController::class,'block'])->name('users.block');
     Route::patch('/dashboard/users/{user}', [AdminController::class,'canPost'])->name('users.canPost');
+    Route::get('/dashboard/emprunts', [EmpruntsController::class,'emprunts']);
+    Route::get('/dashboard/reservations/today', [EmpruntsController::class,'todaysReservation']);
     Route::resource('/dashboard/authors', AuthorController::class);
+    Route::resource('/dashboard/reservations', ReservationController::class);
     
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     });
     
 
-    Route::get('/dashboard/emprunts', function () {
-        return view('admin.emprunts');
-    });
-    Route::get('/dashboard/reservation', function () {
-        return view('admin.reservations');
-    });
+
+   
     Route::get('/dashboard/messages', function () {
         return view('admin.messages');
     });

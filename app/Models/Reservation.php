@@ -2,18 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Reservation extends Model
 {
     use HasFactory;
+    protected $dates = ['returnDate','startDate'];
     protected $fillable = [
         'client_id',
         'book_id',
         'startDate',
         'returnDate',
         'is_returned',
+        'is_taken',
         'message',
     ];
 
@@ -32,5 +35,22 @@ class Reservation extends Model
     public function book()
     {
         return $this->belongsTo(Book::class,'book_id');
+    }
+
+
+
+    public function daysUntilReturn()
+    {
+        $today = Carbon::today();
+        $returnDate = $this->returnDate;
+
+        return $today->diffInDays($returnDate);
+    }
+
+    public function duration()
+    {
+        $startDate = Carbon::parse($this->startDate);
+        $returnDate = Carbon::parse($this->returnDate);
+        return $startDate->diffInDays($returnDate);
     }
 }
