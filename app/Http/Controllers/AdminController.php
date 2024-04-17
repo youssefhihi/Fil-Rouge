@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Client;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -15,8 +17,16 @@ class AdminController extends Controller
     public function index()
     {
         
-        $users = User::get();
+        $users = User::where('role','client')->get();
         return view('admin.users',compact('users'));
+    }
+
+    public function dashboard()
+    {
+        $usersCount = User::where('role','client')->count();
+        $booksCount = Book::count();
+        $reservationCount = Reservation::where('')->count();
+        return view('admin.dashboard',compact('usersCount'));
     }
 
     public function blockUser(){

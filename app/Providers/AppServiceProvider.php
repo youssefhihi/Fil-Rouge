@@ -2,11 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Repositories\GenreRepository;
-use App\Repositories\GenreRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\GenreRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,11 +25,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // View::composer('layouts.organizerSideBar', function ($view) {
-        //     $id = Auth::user()->organizer->id;
-       
-        //     $view->with('reservationCount');
-        // });
+        View::composer('layouts.sideBar', function ($view) {
+          $reservationCount =  Reservation::where('is_returned', false)->where('is_taken', false)->count();
+          $empruntsCount =  Reservation::where('is_returned', false)->where('is_taken', true)->count();
+          $view->with([
+            'reservationCount' => $reservationCount,
+            'empruntsCount' => $empruntsCount,
+            ]);        
+        });
        
     }
 }

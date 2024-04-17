@@ -96,12 +96,22 @@
                 <div>
                     Reservations
                 </div>
+                @if ($reservationCount > 0)
+                <div class="pl-4">
+                <span class="bg-red-500 text-white text-xs font-semibold px-1.5 py-0.5 rounded-full"> {{ $reservationCount }} </span>
+                </div>
+                @endif
             </a>
             <a href="/dashboard/emprunts" class =  "hover:bg-white w-full text-white hover:text-black dark:hover:text-black hover:ml-3 border-2 border-black p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">                 
             <x-icon name="emprunts"/>                  
                 <div>
                 Emprunts
                 </div>
+                @if ($empruntsCount > 0)
+                <div class="pl-4">
+                <span class="bg-red-500 text-white text-xs font-semibold px-1.5 py-0.5 rounded-full"> {{ $empruntsCount }} </span>
+                </div>
+                @endif
             </a>
             <form method="POST" action="{{route('logout')}}" class =  "hover:bg-white w-full text-white hover:text-black dark:hover:text-black hover:ml-3 border-2 border-black p-2 pl-8 rounded-full transform ease-in-out duration-300 flex flex-row items-center space-x-3">              
                 @csrf

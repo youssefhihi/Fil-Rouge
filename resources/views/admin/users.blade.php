@@ -15,8 +15,15 @@
                 <x-table.td>
                     <a href="#" class="flex items-center">
                         <div class="flex-shrink-0 h-10 w-10">
-                            <img class="h-10 w-10 rounded-full" src="https://i.pravatar.cc/150?img=1" alt="">
-                        </div>
+                        @if ($user->client->image)
+                         <img class="h-14 w-16 rounded-full" src="{{asset('storage/'. $user->client->image->path)}}" alt="">
+                        @else
+                        @if ($user->client->gender === 'female')
+                        <img class="h-14 w-16 rounded-full" src="{{asset('imgs/profileFemale.png')}}" alt="">                       
+                        @else                       
+                        <img class="h-14 w-16 rounded-full" src="{{asset('imgs/profileMale.png')}}" alt="">                       
+                        @endif
+                        @endif                        </div>
                         <div class="ml-4">
                             <div class="text-sm font-medium text-gray-900">
                                 {{$user->name}}
