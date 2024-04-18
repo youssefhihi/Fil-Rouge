@@ -1,6 +1,6 @@
 
   
-  @props(['posts'])
+  @props(['posts','page'])
 
          <!-- Sort -->
          <form id="sortForm" method="GET" action="{{ route('profile.index') }}" class="space-y-4">
@@ -57,6 +57,8 @@
                           </div>
                       </div>
                   </a>
+                  @if ($page === "profile")
+                      
                   <div class="relative">
                       <button onclick="toggleDropDown('{{ $post->id }}')" id="dropDown{{ $post->id }}" data-index="{{ $post->id }}" class="dots w-7 h-7 flex justify-center items-center rounded-full hover:bg-gray-200">
                           <span class="w-1 h-1 mr-0.5 bg-gray-600 rounded-full"></span>
@@ -73,6 +75,7 @@
                       </div>
 
                   </div>
+                  @endif
               </div>
 
              <!-- post article -->

@@ -54,6 +54,7 @@ Route::post('/edit-ImageProfile', [ProfileController::class,'uploadImage'])->nam
 Route::put('/edit-ImageProfile', [ProfileController::class,'updateImage'])->name('updateImage');
 Route::delete('/edit-DeleteImage', [ProfileController::class,'deleteImage'])->name('deleteImage');
 Route::get('/edit-profile', [ProfileController::class,'show']);
+Route::get('/{post}', [ProfileController::class,'userProfile'])->name('user.profile');
 
 
 Route::get('/test', function () {
@@ -96,11 +97,7 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::get('/dashboard/reservations/today', [EmpruntsController::class,'todaysReservation']);
     Route::resource('/dashboard/authors', AuthorController::class);
     Route::resource('/dashboard/reservations', ReservationController::class);
-    
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    });
-    
+    Route::get('/dashboard',[AdminController::class,'dashboard']);
 
 
    

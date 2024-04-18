@@ -33,18 +33,18 @@ class RatingController extends Controller
     $data = $request->validated();
     $data['client_id'] = Auth::user()->client->id;
     $rating = Rating::create($data);
-    $countLikes = Rating::where('post_id',$rating->post_id)->count();   
-    return response()->json(['countLikes' => $countLikes]);
+    $countLikes = Rating::where('post_id',$rating->post_id)->count();  
+    return response()->json(['countLikes' => $countLikes , 'like_id' => $rating->id]);
 }
 
-    /**
-     * Display the specified resource.
+/**
+ * Display the specified resource.
      */
     public function show(Rating $rating)
     {
         //
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
@@ -52,7 +52,7 @@ class RatingController extends Controller
     {
         //
     }
-
+    
     /**
      * Update the specified resource in storage.
      */
@@ -60,13 +60,15 @@ class RatingController extends Controller
     {
         //
     }
-
+    
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Rating $rating)
-{
-    $rating->delete();
-    return response()->json(['success' => true]);
-}
+    {
+        $rating->delete();
+        $countLikes = Rating::where('post_id',$rating->post_id)->count(); 
+        $post = $rating->post->id; 
+        return response()->json(['countLikes' => $countLikes,'post'=> $post]);
+    }
 }

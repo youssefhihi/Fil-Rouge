@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(GenreRepositoryInterface::class, GenreRepository::class);
 
+
     }
 
     /**

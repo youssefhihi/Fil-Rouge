@@ -49,7 +49,7 @@
             <div class="flex justify-start space-x-5 my-5">
                 @if ( Auth::user()->client->linkedIn )                   
                 <button class="flex justify-center items-center">
-                <a  href="{{ Auth::user()->client->linkedIn }}"  class="group flex justify-center p-2 rounded-md drop-shadow-xl bg-[#0077b5] from-gray-800 text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:from-[#331029] hover:to-[#310413]">
+                <a target="_blanc" href="{{ Auth::user()->client->linkedIn }}"  class="group flex justify-center p-2 rounded-md drop-shadow-xl bg-[#0077b5] from-gray-800 text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:from-[#331029] hover:to-[#310413]">
                     <x-icon name="linkedIn"/>
                     <span class="absolute opacity-0 group-hover:opacity-100 group-hover:text-gray-700 group-hover:text-sm group-hover:-translate-y-10 duration-700">
                     Linkedin
@@ -112,7 +112,7 @@
         </div>
    
     </div>
-    <x-client.client-articles  :posts="$posts" />
+    <x-client.client-articles  :posts="$posts" page="profile" />
     
 </div>
 

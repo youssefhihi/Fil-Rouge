@@ -1,5 +1,5 @@
   <!-- article -->
-  @props(['posts'])
+  @props(['posts','page'])
   <div class="lg:w-6/12 md:7/12 mx-2">
   <x-success-message class="m-3"/>   
   <x-error-message class="m-3"/> 
@@ -75,8 +75,11 @@
             </button>
           </div>
          </div>
-
-         <form id="sortForm" method="GET" action="{{ route('home.index') }}" class="space-y-4">
+          @if ($page === 'user_profile')
+          <form id="sortForm" method="GET" action="{{ route('home.index') }}" class="space-y-4">
+          @else            
+          <form id="sortForm" method="GET" action="{{ route('home.index') }}" class="space-y-4">
+          @endif
               <div class="outline-none w-full h-8 flex items-center text-xs">
                   <div class="h-0.5 w-11/12 bg-gray-300"></div>
                   <p class="w-3/12 text-right font-light">
@@ -101,22 +104,22 @@
           <section class="post bg-white py-2 my-2 border rounded">
              <!-- top -->
               <div class="p-2 flex justify-between">
-                  <a href="#" class="flex ">
-                      <div class="w-12 h-12 rounded-full mr-2">
+                  <div class="flex ">
+                      <a href="{{route('user.profile',  $post)}} " class="w-12 h-12 rounded-full mr-2">
                         @if ($post->client->image)
                         <img src="{{asset('storage/'. $post->client->image->path)}}" alt="profile" class="w-full rounded-full">
                         @else
-                        @if (Auth::user()->client->gender === 'female')
+                        @if ($post->client->gender === 'female')
                         <img src="{{asset('imgs/profileFemale.png')}}" alt="profile" class="w-full rounded-full">
                         @else          
                         <img src="{{asset('imgs/profileMale.png')}}" alt="profile" class="w-full rounded-full">             
                         @endif
                         @endif
-                      </div>
+                      </a>
                       <div>
-                        <h3 class="flex " >
-                          <span class="text-gray-700 font-bold hover:text-blue-500 hover:underline ">{{$post->client->user->name}}</span>                 
-                        </h3>
+                        <a href="{{route('user.profile',$post)}} " >
+                          <span class="text-gray-700 font-bold hover:text-gray-500 hover:underline ">{{$post->client->user->name}}</span>                 
+                        </a>
                         <div class="time text-sm text-gray-500 flex space-x-2 items-center">
                           <span>{{$post->created_at}}</span>
                           <div class=" flex space-x-2 text-md  text-black font-semibold">
@@ -131,7 +134,7 @@
                           </div> 
                         </div>
                       </div>
-                  </a>
+                  </div>
 
                   <button  class="dots w-7 h-7 flex justify-center items-center rounded-full hover:bg-gray-200">
                       <span class="w-1 h-1 mr-0.5 bg-gray-600 rounded-full"></span>
@@ -162,28 +165,29 @@
               @php
                   $like = Auth::user()->client->likes->where('post_id', $post->id)->first();
               @endphp
-              <form action="{{route('rating.destroy', $like)}}" method="post" id="removeLike" data-rating-id="{{$like->id}}">
+              <form method="post" id="removeLike" >
                 @csrf
                 @method('DELETE')
-                <button  onclick="removeLike(this)" id="unlike" type="button" class="flex text-red-600 outline-none rounded px-2  text-gray-600 ">
+                <button  onclick="removeLike(this,'{{$like->id}}')"  class="flex text-red-600 outline-none rounded px-2  text-gray-600 ">
                   <x-icon name="like" class="text-xl  mr-1.5"/>
-                  <span  >{{$likesCount}} </span> 
+                  <span class="span" >{{$likesCount}} </span> 
                 </button>
               </form>
               @else               
-              <form action="{{route('rating.store')}}" method="post" >
+              <form  method="post" >
                 @csrf
                 @method('POST')
+                <div></div>
                 <input type="hidden" value="{{$post->id}}" name="post_id">
-                    <button onclick="addLike(this)" type="button" id="like" class="flex text-gray-500 outline-none rounded px-2  text-gray-600 ">
+                    <button onclick="addLike(this)" id="like" class="flex text-gray-500 outline-none rounded px-2  text-gray-600 ">
                     <x-icon name="like" class="text-xl  mr-1.5"/>
-                      <span id="span">{{$likesCount}}</span> 
+                      <span class="span">{{$likesCount}}</span> 
                     </button>
               </form>
               @endif
-               <button class="flex  outline-none rounded  px-2  text-gray-600 hover:bg-gray-200">
+               <button onclick="openComment(this)" class="flex  outline-none rounded  px-2  text-gray-600 hover:bg-gray-200">
                 <i class="far fa-comment-dots text-xl mr-1.5"></i> 
-                <span >10</span>  
+                <span  >10</span>  
                </button>
              </div> 
               </div>
@@ -195,37 +199,89 @@
 
 
             <script>
-  function addLike(button) {
-      var form = button.closest('form');
+
+    function openComment(button){
+      $(button).on('click',function(event){
       $.ajax({
-          url: "{{route('rating.store')}}",
-          data: form.serialize(),
+          url: "{{route('comment.store')}}",
+          data: jQuery(form).serialize(),
           method: 'POST',
           success: function (result) {
-              $('#span').html(result.countLikes);
+            $(button).find('.span').html(result.countLikes);
+            console.log(result.countLikes);
+              const newForm = `
+                @csrf
+                @method('DELETE')
+                <button  onclick="removeLike(this,'${result.like_id}')"  id="unlike" class="flex text-red-600 outline-none rounded px-2  text-gray-600 ">
+                  <x-icon name="like" class="text-xl  mr-1.5"/>
+                  <span class="span" >${result.countLikes} </span> 
+                </button>`;
+              $(form).html(newForm);
               $(form).unbind();
           },
       });
-  }
+    })
 
-function removeLike(button) {
-    var form = button.closest('form');
-    var ratingId = form.data('rating-id');
-    $.ajax({
-        url: '/rating/' + ratingId, 
-        method: 'DELETE',
-        success: function (response) {
-            var likesCount = parseInt(button.find('span').text());
-            button.find('span').text(likesCount - 1);
-            button.closest('form').removeAttr('data-rating-id');
-            button.attr('onclick', 'addLike(this)');
-            button.find('x-icon').attr('name', 'like');
-        },
-        error: function (xhr, status, error) {
-            console.error(error);
-        }
-    });
+    }
+
+  function addLike(button) {
+      var form = button.closest('form');
+    $(form).on('submit',function(event){
+      event.preventDefault();
+
+
+      $.ajax({
+          url: "{{route('rating.store')}}",
+          data: jQuery(form).serialize(),
+          method: 'POST',
+          success: function (result) {
+            $(button).find('.span').html(result.countLikes);
+            console.log(result.countLikes);
+              const newForm = `
+                @csrf
+                @method('DELETE')
+                <button  onclick="removeLike(this,'${result.like_id}')"  id="unlike" class="flex text-red-600 outline-none rounded px-2  text-gray-600 ">
+                  <x-icon name="like" class="text-xl  mr-1.5"/>
+                  <span class="span" >${result.countLikes} </span> 
+                </button>`;
+              $(form).html(newForm);
+              $(form).unbind();
+          },
+      });
+    })
+
 }
+
+function removeLike(button, id) {
+    var form = button.closest('form');
+$(form).on('submit',function(event){
+  event.preventDefault();
+    $.ajax({
+        url: '/rating/' + id, 
+        data:jQuery(form).serialize(),
+        method: 'DELETE',
+        success: function (result) {
+          $(button).find('.span').html(result.countLikes);
+              const newForm = `
+              @csrf
+              @method('post')
+              <input type="hidden" value="${result.post}" name="post_id">
+                    <button onclick="addLike(this)" id="like" class="flex text-gray-500 outline-none rounded px-2  text-gray-600 ">
+                    <x-icon name="like" class="text-xl  mr-1.5"/>
+                      <span class="span">${result.countLikes} </span> 
+                    </button>`;
+              $(form).html(newForm);
+              $(form).unbind();
+        },
+       
+    });
+  })
+
+
+}
+
+
+
 
 
 

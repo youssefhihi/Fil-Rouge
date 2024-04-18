@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
-use App\Http\Requests\ReservationRequest;
-use App\Models\Book;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use App\Mail\ReservationEmail;
 use App\Mail\RefuseResevationMail;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Jobs\SendReturnReminderEmail;
+use App\Http\Requests\ReservationRequest;
 
 class ReservationController extends Controller
 {
@@ -52,7 +53,8 @@ class ReservationController extends Controller
             $new_quantity = $book->quantity - 1;
             $book->update(['quantity' => $new_quantity]);
             $reservation = Reservation::create($data);
-            //send Email
+            //send Email     
+            // SendReturnReminderEmail::dispatch();       
             Mail::to(Auth::user()->email)->send(new ReservationEmail($reservation->id));
             return redirect('/books')->with('success', 'The reservation has been sent to the admin for confirmation.');
         } else {

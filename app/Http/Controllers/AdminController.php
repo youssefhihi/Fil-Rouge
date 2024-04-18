@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Post;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Client;
@@ -25,8 +26,11 @@ class AdminController extends Controller
     {
         $usersCount = User::where('role','client')->count();
         $booksCount = Book::count();
-        $reservationCount = Reservation::where('')->count();
-        return view('admin.dashboard',compact('usersCount'));
+        $monthlyReservation = Reservation::where('is_returned',true)->where('is_taken',true)->whereDate('created_at', '>=', now()->subMonth())->count();
+        $weekReservation = Reservation::where('is_returned',true)->where('is_taken',true)->whereDate('created_at', '>=', now()->subweek())->count();
+        $newRegistrations = User::where('role', 'client')->whereDate('created_at', '>=', now()->subMonth())->count();
+        $dailyPosts = Post::whereDate('created_at','>=',now()->subDays())->count();
+        return view('admin.dashboard',compact('dailyPosts','booksCount','usersCount','weekReservation','monthlyReservation','newRegistrations'));
     }
 
     public function blockUser(){
@@ -91,6 +95,9 @@ class AdminController extends Controller
         return redirect()->back()->with('message','user banned with success');
         }
     }
+
+
+    
 
     /**
      * Remove the specified resource from storage.

@@ -7,15 +7,16 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Genre;
 use App\Models\Author;
+use App\Models\Client;
+use App\trait\ImageUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileRequest;
-use App\Http\Requests\profileSocialeMedia;
 use App\Http\Requests\UpdateProfileInf;
-use Illuminate\Validation\Rules\Password;
-use App\trait\ImageUpload;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
+use App\Http\Requests\profileSocialeMedia;
 
 
 
@@ -116,5 +117,19 @@ class ProfileController extends Controller
         $this->deleteImagef($user);
         return redirect()->back()->with('success' , 'Image deleted with success');
        
+    }
+
+
+    public function userProfile(Post $post)
+    {
+        $client = $post->client;
+        $posts = $client->posts;
+        $user = $client->user;
+        $postsCount = $client->posts->count();
+        $countLikes = $client->likes->count();
+        $genres =  Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
+        $authors =  Author::withCount('books')->orderByDesc('books_count')->limit(4)->get();
+        $books =  Book::limit(4)->get();
+        return view('client.profile-user',compact('books','authors','genres','user','posts','postsCount','countLikes'));
     }
 }
