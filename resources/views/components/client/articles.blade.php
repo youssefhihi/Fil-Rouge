@@ -185,7 +185,7 @@
                     </button>
               </form>
               @endif
-               <button onclick="openComment(this)" class="flex  outline-none rounded  px-2  text-gray-600 hover:bg-gray-200">
+               <button  onclick="openComment(this)" class="flex  outline-none rounded  px-2  text-gray-600 hover:bg-gray-200">
                 <i class="far fa-comment-dots text-xl mr-1.5"></i> 
                 <span  >10</span>  
                </button>
@@ -199,30 +199,17 @@
 
 
             <script>
+          function openComment(button)
+          {
+            var button = document.getElementById('comment') ;
+             $(button).on('click',function(event){
+                $.ajax({
+                  url:"{{route('comment.show', ${}}}"
+                })
 
-    function openComment(button){
-      $(button).on('click',function(event){
-      $.ajax({
-          url: "{{route('comment.store')}}",
-          data: jQuery(form).serialize(),
-          method: 'POST',
-          success: function (result) {
-            $(button).find('.span').html(result.countLikes);
-            console.log(result.countLikes);
-              const newForm = `
-                @csrf
-                @method('DELETE')
-                <button  onclick="removeLike(this,'${result.like_id}')"  id="unlike" class="flex text-red-600 outline-none rounded px-2  text-gray-600 ">
-                  <x-icon name="like" class="text-xl  mr-1.5"/>
-                  <span class="span" >${result.countLikes} </span> 
-                </button>`;
-              $(form).html(newForm);
-              $(form).unbind();
-          },
-      });
-    })
+            })
+          }
 
-    }
 
   function addLike(button) {
       var form = button.closest('form');

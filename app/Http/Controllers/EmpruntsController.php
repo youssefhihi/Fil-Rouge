@@ -29,11 +29,23 @@ class EmpruntsController extends Controller
         return view("admin.TodaysReservation" ,compact("reservations","today"));
     }
 
-    public function returnBook(Reservation $reservation){
-
-         
-        Mail::to(Auth::user()->email)->send(new ReturnReminderEmail($reservation->id));
+    public function returnBook(){
+        $TodayDate = Carbon::today();
+        $reservations = Reservation::where('is_returned', false)->where('is_taken', true)->whereDate('returnDate',$TodayDate)->get();
+        return view('admin.ReturnBooks',compact('reservations'));
         
 
+    }
+
+    public function update(Reservation $reservation)
+    {
+        try{
+            $reservation->update(['is_returned' => true]);
+            return redirect()->back()->with('success','success');
+        } catch (\Exception $e){
+             dd($e->getMessage());
+            return redirect()->back()->with("error", "Error: " . $e->getMessage());
+            
+        }
     }
 }

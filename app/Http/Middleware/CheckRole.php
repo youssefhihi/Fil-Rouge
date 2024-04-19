@@ -17,7 +17,7 @@ class CheckRole
     {
         // Check if the authenticated user has the specified roles
         if (! $request->user() || ! in_array($request->user()->role, $roles)) { 
-            abort(403, 'Unauthorized.');
+            abort(403);
         }
 
         return $next($request);

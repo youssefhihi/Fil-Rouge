@@ -98,11 +98,11 @@
             <div class="pt-3 flex justify-between px-16 items-center w-full ">
                 <div class=" gap-1">
                     <x-icon name="post"/>
-                    <p class="text-gray-700">10</p>
+                    <p class="text-gray-700">{{$postCount}}</p>
                 </div>
                 <div class=" gap-1">
                     <x-icon name="heart"/>
-                    <p class="text-gray-700">13</p>
+                    <p class="text-gray-700">{{$likesCount}}</p>
                 </div>
                 <div class=" gap-1">
                     <x-icon name="comments"/>

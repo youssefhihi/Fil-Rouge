@@ -88,24 +88,21 @@ Route::get('/test', function () {
 
 
 Route::middleware(['auth','role:admin'])->group(function () {
+    Route::get('/dashboard',[AdminController::class,'dashboard']);
     Route::resource('/dashboard/genres', GenreController::class);
     Route::resource('/dashboard/books', BookController::class);
     Route::get('/dashboard/users', [AdminController::class,'index']);
     Route::patch('/dashboard/users/{user}/block', [AdminController::class,'block'])->name('users.block');
     Route::patch('/dashboard/users/{user}', [AdminController::class,'canPost'])->name('users.canPost');
+    Route::patch('/dashboard/emprunts/return-date/{reservation}', [EmpruntsController::class,'update'])->name('updateReturn');
     Route::get('/dashboard/emprunts', [EmpruntsController::class,'emprunts']);
+    Route::get('/dashboard/emprunts/return-date', [EmpruntsController::class,'returnBook']);
     Route::get('/dashboard/reservations/today', [EmpruntsController::class,'todaysReservation']);
     Route::resource('/dashboard/authors', AuthorController::class);
     Route::resource('/dashboard/reservations', ReservationController::class);
-    Route::get('/dashboard',[AdminController::class,'dashboard']);
 
 
    
-    Route::get('/dashboard/messages', function () {
-        return view('admin.messages');
-    });
-    Route::get('/books/book-sort', function () {
-        return view('client.booksSort');
-    });
+  
 });
 

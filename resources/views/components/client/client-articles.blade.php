@@ -25,59 +25,45 @@
          @foreach($posts as $post)
           <section class="post bg-white py-2 my-2 border rounded">
              <!-- top -->
-             <div class="p-2 flex justify-between">
-                  <a href="#" class="flex">
-                      <div class="w-12 h-12 rounded-full mr-2">
-                          @if ($post->client->image)
-                          <img src="{{asset('storage/'. $post->client->image->path)}}" alt="profile" class="w-full rounded-full">
-                          @else
-                          @if (Auth::user()->client->gender === 'female')
-                          <img src="{{asset('imgs/profileFemale.png')}}" alt="profile" class="w-full">
-                          @else          
-                          <img src="{{asset('imgs/profileMale.png')}}" alt="profile" class="w-full">             
-                          @endif
-                          @endif
-                      </div>
+              <div class="p-2 flex justify-between">
+                  <div class="flex ">
+                      <a href="{{route('user.profile',  $post)}} " class="w-12 h-12 rounded-full mr-2">
+                        @if ($post->client->image)
+                        <img src="{{asset('storage/'. $post->client->image->path)}}" alt="profile" class="w-full rounded-full">
+                        @else
+                        @if ($post->client->gender === 'female')
+                        <img src="{{asset('imgs/profileFemale.png')}}" alt="profile" class="w-full rounded-full">
+                        @else          
+                        <img src="{{asset('imgs/profileMale.png')}}" alt="profile" class="w-full rounded-full">             
+                        @endif
+                        @endif
+                      </a>
                       <div>
-                          <h3 class="flex">
-                              <span class="text-gray-700 font-bold hover:text-blue-500 hover:underline">{{$post->client->user->name}}</span>
-                          </h3>
-                          <div class="time text-sm text-gray-500 flex space-x-2 items-center">
-                              <span>{{$post->created_at}}</span>
-                              <div class=" flex space-x-2 text-md  text-black font-semibold">
-                                  <p class="capitalize">{{$post->type}}</p>
-                                  @if ($post->type === 'question')
-                                  <x-icon name="question"/>
-                                  @elseif ($post->type === 'advice')
-                                  <x-icon name="advice"/>
-                                  @else
-                                  <x-icon name="general"/>
-                                  @endif
-                              </div>
-                          </div>
+                        <a href="{{route('user.profile',$post)}} " >
+                          <span class="text-gray-700 font-bold hover:text-gray-500 hover:underline ">{{$post->client->user->name}}</span>                 
+                        </a>
+                        <div class="time text-sm text-gray-500 flex space-x-2 items-center">
+                          <span>{{$post->created_at}}</span>
+                          <div class=" flex space-x-2 text-md  text-black font-semibold">
+                            <p class="capitalize">{{$post->type}}</p>
+                            @if ($post->type === 'question')
+                              <x-icon name="question"/>
+                            @elseif ($post->type === 'advice')
+                              <x-icon name="advice"/>
+                            @else
+                              <x-icon name="general"/>
+                            @endif
+                          </div> 
+                        </div>
                       </div>
-                  </a>
-                  @if ($page === "profile")
-                      
-                  <div class="relative">
-                      <button onclick="toggleDropDown('{{ $post->id }}')" id="dropDown{{ $post->id }}" data-index="{{ $post->id }}" class="dots w-7 h-7 flex justify-center items-center rounded-full hover:bg-gray-200">
-                          <span class="w-1 h-1 mr-0.5 bg-gray-600 rounded-full"></span>
-                          <span class="w-1 h-1 mr-0.5 bg-gray-600 rounded-full"></span>
-                          <span class="w-1 h-1 mr-0.5 bg-gray-600 rounded-full"></span>
-                      </button>
-                      <div id="dropdownMenu{{ $post->id }}" class="hidden absolute z-20 right-0 top-0 mt-9 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                          <a href="{{ route('post.edit', $post) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" >Update</a>
-                          <form action="{{ route('post.destroy', $post) }}" id="deletePost{{ $post->id }}" method="POST" class="hover:bg-gray-100 bg-red-600">
-                              @csrf
-                              @method('DELETE')
-                              <button type="button" data-index="{{$post->id}}" class="deletePostButton block px-4 py-2 text-sm text-gray-700" >Delete</button>
-                          </form>
-                      </div>
-
                   </div>
-                  @endif
-              </div>
 
+                  <button  class="dots w-7 h-7 flex justify-center items-center rounded-full hover:bg-gray-200">
+                      <span class="w-1 h-1 mr-0.5 bg-gray-600 rounded-full"></span>
+                      <span class="w-1 h-1 mr-0.5 bg-gray-600 rounded-full"></span>
+                      <span class="w-1 h-1 mr-0.5 bg-gray-600 rounded-full"></span>
+                  </button>
+              </div>
              <!-- post article -->
              <div class="px-2">
                <p class="py-2">
@@ -94,46 +80,111 @@
              <div class="mx-3 px-2 h-8 m-auto  flex flex-row justify-between space-x-4">
              <!--  like and comments -->
              <div class=" flex items-center">
-               <button class="flex  outline-none rounded px-2  text-gray-600 hover:bg-gray-200">
-                <i class="far fa-heart text-xl mr-1.5"></i> 
-                <span >29 </span> 
-               </button>
-
-               <button class="flex  outline-none rounded  px-2  text-gray-600 hover:bg-gray-200">
+             @php
+                $likesCount = $post->likes->where("post_id",$post->id)->count();          
+              @endphp
+              @if (Auth::user()->client->likes->contains('post_id', $post->id))
+              @php
+                  $like = Auth::user()->client->likes->where('post_id', $post->id)->first();
+              @endphp
+              <form method="post" id="removeLike" >
+                @csrf
+                @method('DELETE')
+                <button  onclick="removeLike(this,'{{$like->id}}')"  class="flex text-red-600 outline-none rounded px-2  text-gray-600 ">
+                  <x-icon name="like" class="text-xl  mr-1.5"/>
+                  <span class="span" >{{$likesCount}} </span> 
+                </button>
+              </form>
+              @else               
+              <form  method="post" >
+                @csrf
+                @method('POST')
+                <div></div>
+                <input type="hidden" value="{{$post->id}}" name="post_id">
+                    <button onclick="addLike(this)" id="like" class="flex text-gray-500 outline-none rounded px-2  text-gray-600 ">
+                    <x-icon name="like" class="text-xl  mr-1.5"/>
+                      <span class="span">{{$likesCount}}</span> 
+                    </button>
+              </form>
+              @endif
+               <button  class="flex  outline-none rounded  px-2  text-gray-600 hover:bg-gray-200">
                 <i class="far fa-comment-dots text-xl mr-1.5"></i> 
-                <span >10</span>  
+                <span  >10</span>  
                </button>
              </div> 
               </div>
             </section>
+
           @endforeach
           </article>
-          <script>
-   
+ 
+               <script>
 
-   document.querySelectorAll('.deletePostButton').forEach(button => {
-  button.addEventListener('click', function() {
-            const postID = this.getAttribute('data-index');
-            if (confirm("Are you sure you want to delete this item? ")) {
-                document.getElementById('deletePost' + postID).submit();
-            }
-        });
+    
+
+function addLike(button) {
+    var form = button.closest('form');
+  $(form).on('submit',function(event){
+    event.preventDefault();
+
+
+    $.ajax({
+        url: "{{route('rating.store')}}",
+        data: jQuery(form).serialize(),
+        method: 'POST',
+        success: function (result) {
+          $(button).find('.span').html(result.countLikes);
+          console.log(result.countLikes);
+            const newForm = `
+              @csrf
+              @method('DELETE')
+              <button  onclick="removeLike(this,'${result.like_id}')"  id="unlike" class="flex text-red-600 outline-none rounded px-2  text-gray-600 ">
+                <x-icon name="like" class="text-xl  mr-1.5"/>
+                <span class="span" >${result.countLikes} </span> 
+              </button>`;
+            $(form).html(newForm);
+            $(form).unbind();
+        },
     });
- // Define the function to toggle dropdown
- function toggleDropDown(id) {
-        var dropdown = document.getElementById(`dropdownMenu${id}`);
-        dropdown.classList.toggle('hidden');
+  })
 
-        // Add event listeners to all dropdown buttons to close dropdowns when another button is clicked
-        var buttons = document.querySelectorAll('.dots');
-        buttons.forEach(function(button) {
-            if (button.getAttribute('data-index') != id) {
-                button.addEventListener('click', function() {
-                    dropdown.classList.add('hidden');
-                });
-            }
-        });
-    }
+}
+
+function removeLike(button, id) {
+  var form = button.closest('form');
+$(form).on('submit',function(event){
+event.preventDefault();
+  $.ajax({
+      url: '/rating/' + id, 
+      data:jQuery(form).serialize(),
+      method: 'DELETE',
+      success: function (result) {
+        $(button).find('.span').html(result.countLikes);
+            const newForm = `
+            @csrf
+            @method('post')
+            <input type="hidden" value="${result.post}" name="post_id">
+                  <button onclick="addLike(this)" id="like" class="flex text-gray-500 outline-none rounded px-2  text-gray-600 ">
+                  <x-icon name="like" class="text-xl  mr-1.5"/>
+                    <span class="span">${result.countLikes} </span> 
+                  </button>`;
+            $(form).html(newForm);
+            $(form).unbind();
+      },
+     
+  });
+})
+
+
+}
+
+
+
+
+
+
+      
+
           </script>
          
          

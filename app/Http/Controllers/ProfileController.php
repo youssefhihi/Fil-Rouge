@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Genre;
 use App\Models\Author;
 use App\Models\Client;
+use App\Models\Rating;
 use App\trait\ImageUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,13 +31,15 @@ class ProfileController extends Controller
         $genres =  Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
         $authors =  Author::withCount('books')->orderByDesc('books_count')->limit(4)->get();
         $books =  Book::limit(4)->get();
+        $likesCount = Rating::where('client_id',$id)->count();
+        $postCount = Post::where('client_id',$id)->count();
         $type = $request->input('type');
         $query = Post::where("client_id",$id)->orderByDesc('created_at');
         if ($type !== 'all' && $type !== null) {
             $query->where('type', $type);
         }
         $posts = $query->get();
-        return view('client.profile',compact('posts','genres','books','authors'));
+        return view('client.profile',compact('postCount','likesCount','posts','genres','books','authors'));
     
     }
 
@@ -122,14 +125,21 @@ class ProfileController extends Controller
 
     public function userProfile(Post $post)
     {
-        $client = $post->client;
-        $posts = $client->posts;
-        $user = $client->user;
-        $postsCount = $client->posts->count();
-        $countLikes = $client->likes->count();
-        $genres =  Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
-        $authors =  Author::withCount('books')->orderByDesc('books_count')->limit(4)->get();
-        $books =  Book::limit(4)->get();
-        return view('client.profile-user',compact('books','authors','genres','user','posts','postsCount','countLikes'));
+
+        if($post->client->user->id == Auth::user()->id)
+        {
+            return redirect('/profile');
+        }else{
+            
+            $client = $post->client;
+            $posts = $client->posts;
+            $user = $client->user;
+            $postsCount = $client->posts->count();
+            $countLikes = $client->likes->count();
+            $genres =  Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
+            $authors =  Author::withCount('books')->orderByDesc('books_count')->limit(4)->get();
+            $books =  Book::limit(4)->get();
+            return view('client.profile-user',compact('books','authors','genres','user','posts','postsCount','countLikes'));
+        }
     }
 }

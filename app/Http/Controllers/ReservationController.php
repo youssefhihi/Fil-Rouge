@@ -55,7 +55,7 @@ class ReservationController extends Controller
             $reservation = Reservation::create($data);
             //send Email     
             // SendReturnReminderEmail::dispatch();       
-            Mail::to(Auth::user()->email)->send(new ReservationEmail($reservation->id));
+            // Mail::to(Auth::user()->email)->send(new ReservationEmail($reservation->id));
             return redirect('/books')->with('success', 'The reservation has been sent to the admin for confirmation.');
         } else {
             return redirect('/books')->with('success', 'Quantity not enough.');
