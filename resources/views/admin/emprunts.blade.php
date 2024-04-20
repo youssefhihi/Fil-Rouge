@@ -33,44 +33,7 @@
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-            @forelse ($reservations as $reservation )
-                
-            <tr>
-                 <td class="px-2 py-4 whitespace-nowrap">
-                     <div class="flex items-center">
-                         <div class="flex-shrink-0">
-                         @if ($reservation->client->image)
-                         <img class="h-14 w-14 rounded-full" src="{{asset('storage/'. $reservation->client->image->path)}}" alt="">
-                        @else
-                        @if ($reservation->client->gender === 'female')
-                        <img class="h-14 w-14 rounded-full" src="{{asset('imgs/profileFemale.png')}}" alt="">                       
-                        @else                       
-                        <img class="h-14 w-14 rounded-full" src="{{asset('imgs/profileMale.png')}}" alt="">                       
-                        @endif
-                        @endif
-                         </div>
-                         <div class="text-sm font-medium text-gray-900 ml-4">
-                             {{$reservation->client->user->name}}
-                         </div>
-                     </div>
-                 </td>
-                 <td class="px-5 py-4 whitespace-nowrap">
-                     <div class="flex items-center">
-                         <div class="flex-shrink-0">
-                             <img class="h-20 w-14" src="{{asset('storage/'. $reservation->book->image->path)}}" alt="">
-                         </div>
-                         
-                     </div>
-                 </td>
-                 <td class="px-6 py-4 whitespace-nowrap text-md text-gray-500">
-
-                     <span>{{ $reservation->daysUntilReturn() }} </span> Days
-                 </td>
-               
-             </tr>
-            @empty
-                noo
-            @endforelse
+          
 
         </tbody>
     </table>

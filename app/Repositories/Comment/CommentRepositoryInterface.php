@@ -1,9 +1,9 @@
 <?php
-namespace App\Repositories;
+namespace App\Repositories\Comment;
 
-interface GenreRepositoryInterface {
+interface CommentRepositoryInterface {
     
-  
+    public function get($get);
     public function insert($request);
     public function update($request,$genre);
     public function destroy($genre);

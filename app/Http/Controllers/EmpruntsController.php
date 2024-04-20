@@ -24,7 +24,7 @@ class EmpruntsController extends Controller
 
         $currentDate = Carbon::today();
         $tomorrowDate = Carbon::tomorrow();      
-        $reservations = Reservation::where('is_taken',false)->whereDate('startDate', $currentDate)->orWhereDate('startDate', $tomorrowDate)->get();
+        $reservations = Reservation::where('is_taken', false)->whereIn('startDate', [$currentDate, $tomorrowDate])->get();        
         $today = $currentDate->format('Y-m-d');
         return view("admin.TodaysReservation" ,compact("reservations","today"));
     }
@@ -42,6 +42,22 @@ class EmpruntsController extends Controller
         try{
             $reservation->update(['is_returned' => true]);
             return redirect()->back()->with('success','success');
+        } catch (\Exception $e){
+             dd($e->getMessage());
+            return redirect()->back()->with("error", "Error: " . $e->getMessage());
+            
+        }
+    }
+
+    public function returnMail(Reservation $reservation)
+    {
+        try{
+            // Mail::to($reservation->client->user->email)->send(new ReturnReminderEmail($reservation->id));
+            $count = $reservation->send_email + 1;
+            $reservation->update([
+                'send_email' => $count,
+            ]);
+           return redirect()->back()->with('success','Email sent successfully');
         } catch (\Exception $e){
              dd($e->getMessage());
             return redirect()->back()->with("error", "Error: " . $e->getMessage());

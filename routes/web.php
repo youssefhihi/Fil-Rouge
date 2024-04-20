@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\EmpruntsController;
 use App\Http\Controllers\Auth\ForgetPassword;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ReservationController;
@@ -43,6 +44,7 @@ Route::post('/home/post', [PostController::class,'store'])->name('post.store');
 Route::delete('/profile/{post}/delete', [PostController::class,'destroy'])->name('post.destroy');
 Route::get('/profile/{post}/edit', [PostController::class,'edit'])->name('post.edit');
 Route::put('/profile/{post}/update', [PostController::class,'update'])->name('post.update');
+Route::get('/comment/{id}', [CommentController::class,'show'])->name('comment.show');
 Route::resource('/book-review', ReviewController::class);
 Route::resource('/rating', RatingController::class);
 Route::resource('/reservation', ReservationController::class);
@@ -93,13 +95,14 @@ Route::get('/test', function () {
 
 
 Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->group(function () {
-    Route::get('/', [AdminController::class, 'index'])->name('dashboard.index');
+    Route::get('/statistic', [AdminController::class, 'index'])->name('dashboard.index');
     Route::get('/users', [AdminController::class,'users']);
     Route::resource('/books', BookController::class);
     Route::resource('/genres', GenreController::class);
     Route::patch('/users/{user}/block', [AdminController::class,'block'])->name('users.block');
     Route::patch('/users/{user}', [AdminController::class,'canPost'])->name('users.canPost');
     Route::patch('/emprunts/return-date/{reservation}', [EmpruntsController::class,'update'])->name('updateReturn');
+    Route::post('/emprunts/return-Email/{reservation}', [EmpruntsController::class,'returnMail'])->name('returnMail');
     Route::get('/emprunts', [EmpruntsController::class,'emprunts']);
     Route::get('/emprunts/return-date', [EmpruntsController::class,'returnBook']);
     Route::get('/reservations/today', [EmpruntsController::class,'todaysReservation']);

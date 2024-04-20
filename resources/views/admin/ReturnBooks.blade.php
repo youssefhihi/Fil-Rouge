@@ -1,4 +1,5 @@
 <x-admin-layout>
+    <x-success-alert/>
  <!-- CONTENT -->
  <nav class = "flex px-5 py-3 text-gray-700 mb-6 rounded-lg bg-gray-300  " aria-label="Breadcrumb">
             <ol class = "flex justify-center items-center  space-x-1 md:space-x-3">
@@ -17,7 +18,6 @@
                 </li>
             </ol>
 </nav>
-
     <table class="min-w-full divide-y divide-gray-200 overflow-x-auto mt-10">
         <thead class="bg-gray-50">
             <tr>
@@ -64,12 +64,40 @@
                      </div>
                  </td>
                 
-                 <td class=" py-10   whitespace-nowrap text-sm text-gray-500"> 
-                    <form method="post" action="{{route('updateReturn', $reservation)}}">
-                        @csrf
-                        @method('PATCH')
-                        <button type="submit" class=" bg-transparent flex justify-evenly rounded-xl text-lg border-2 border-green-500 shadow-lg hover:bg-green-500 text-green-500 hover:text-white duration-300 cursor-pointer active:scale-[0.98] px-2 py-0.5">Returned<x-icon name="accept"/></button>
-                    </form>                                  
+                 <td class=" py-10 text-center  whitespace-nowrap text-sm text-gray-500"> 
+                    <div class="flex space-x-2 ">
+                        <form  method="post" action="{{route('returnMail', $reservation)}}">
+                            @csrf
+                        <div class="group relative ">
+                            <button class="">
+                            <x-icon name="sendEmail" class="w-9 h-9 "/>
+                            </button>
+                            <span class="absolute -top-14 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 px-3 rounded-lg border border-gray-300 bg-white py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">
+                                @if ($reservation->send_email > 0)
+                                already send  {{$reservation->send_email}} emails                              
+                                @else                            
+                                Send Return Email 
+                                @endif
+                                <span>
+                                     </span
+                            ></span>
+                        </div>
+                        </form>
+                        <form method="post" action="{{route('updateReturn', $reservation)}}">
+                            @csrf
+                            @method('PATCH')
+                           
+                            <div class="group relative ">
+                            <button class="">
+                                <x-icon name="accept" class="w-7 h-7 "/>
+                            </button>
+                            <span
+                                class="absolute -top-14 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 px-3 rounded-lg border border-gray-300 bg-white py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out group-hover:scale-100"
+                            >Returned <span> </span
+                            ></span>
+                        </div>
+                        </form>
+                    </div>                                 
                  </td>
              </tr>
                       

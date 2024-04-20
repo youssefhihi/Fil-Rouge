@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('is_returned')->default(false);
             $table->boolean('is_taken')->default(false);
             $table->string('message')->nullable();
+            $table->integer('send_email')->default(0);
             $table->timestamps();
         });
     }

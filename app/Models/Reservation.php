@@ -17,7 +17,9 @@ class Reservation extends Model
         'returnDate',
         'is_returned',
         'is_taken',
+        'send_email',
         'message',
+
     ];
 
 

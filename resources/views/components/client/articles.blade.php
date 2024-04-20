@@ -5,6 +5,9 @@
   <x-error-message class="m-3"/> 
          <!--Form   -->
          <!-- object-fill -->
+         <div id="comment-popup" class="hidden" >
+         
+        </div>
          <div id="addPost" class=" hidden min-w-screen lg:p-14 h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
             <div class="absolute bg-black opacity-80 inset-0 z-0"></div>
               <div class="w-full max-w-lg lg:max-w-full p-5 relative mx-auto my-auto rounded-xl shadow-lg h-full  bg-white overflow-y-auto ">
@@ -185,9 +188,8 @@
                     </button>
               </form>
               @endif
-               <button  onclick="openComment(this)" class="flex  outline-none rounded  px-2  text-gray-600 hover:bg-gray-200">
+               <button   onclick="openComment(this,'{{$post->id}}')" class="flex  outline-none rounded  px-2  text-gray-600 hover:bg-gray-200">
                 <i class="far fa-comment-dots text-xl mr-1.5"></i> 
-                <span  >10</span>  
                </button>
              </div> 
               </div>
@@ -199,7 +201,38 @@
 
 
             <script>
-         
+
+function comment(data) {
+        var popup = $('#comment-popup');
+        if (data && data.comments && Array.isArray(data.comments)) {
+            popup.empty(); // Clear any existing comments
+            data.comments.forEach(function(comment) {
+                popup.append('<div>' + comment.text + '</div>'); // Append each comment
+            });
+            popup.show(); // Show the popup after adding comments
+        } else {
+            console.error('Invalid comment data:', data);
+        }
+    }
+
+    // Function to open comments via AJAX
+    function openComment(button, id) {
+        $(button).on('click', function(event) {
+            $.ajax({
+                url: "{{ route('comment.show', '') }}" + '/' + id,
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    comment(data); // Call the comment function with retrieved data
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        });
+    }
+
 
 
   function addLike(button) {

@@ -1,7 +1,6 @@
-<!-- component -->
-<!-- This is an example component -->
-
 <x-admin-layout>
+<x-success-alert/>
+
 <div class="w-11/12 m-auto mt-10 flex flex-col gap-5">
         <div class="flex space-x-10 w-full bg-white rounded-md p-5">
                 <a href="" class="w-1/4">

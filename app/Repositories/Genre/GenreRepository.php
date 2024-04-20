@@ -1,21 +1,25 @@
 <?php
-namespace App\Repositories;
+namespace App\Repositories\Genre;
 use App\Models\Genre;
 
 class GenreRepository implements GenreRepositoryInterface {
  
     public function insert($request){
-        Genre::create($request->validated());
+       return Genre::create($request->validated());
     }
 
+    public function all()
+    {
+        return Genre::get();
 
+    }
     public function update($request,$genre)
     {
-        $genre->update($request->validated());
+       return $genre->update($request->validated());
     }
     
     public function destroy($genre)
     {
-        $genre->delete();
+       return $genre->delete();
     }
 }

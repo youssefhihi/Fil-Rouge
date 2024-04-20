@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Services\CommentService;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
+    public function __construct(protected CommentService $CommentService) {
+      }
     /**
      * Display a listing of the resource.
      */
@@ -39,9 +43,12 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Comment $comment)
+    public function show(Post $post)
     {
-        //
+        $comments =  $this->CommentService->get($post);
+
+        return response()->json(['comments'=> $comments]);
+
     }
 
     /**

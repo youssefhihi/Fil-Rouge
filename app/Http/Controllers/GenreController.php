@@ -4,24 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Genre;
 use Illuminate\Http\Request;
+use App\Services\GenreService;
 use App\Http\Requests\GenreRequest;
 use App\Repositories\GenreRepositoryInterface;
 
 
 class GenreController extends Controller
 {
-    protected $genre_repo = null;
 
-    public function __construct(GenreRepositoryInterface $genre_repo)
-    {
-        $this->genre_repo = $genre_repo;
-    }
+    public function __construct(
+        protected GenreService $GenreService
+      ) {
+      }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $genres = Genre::get();
+       $genres =  $this->GenreService->all();
         return view('admin.genres',compact('genres'));
     }
 
@@ -38,7 +38,7 @@ class GenreController extends Controller
      */
     public function store(GenreRequest $request)
     {
-        $this->genre_repo->insert($request);
+        $this->GenreService->create($request);
        return  redirect()->back()->with('message','Genre added with success');
     }
 
@@ -63,7 +63,7 @@ class GenreController extends Controller
      */
     public function update(GenreRequest $request, Genre $genre)
     {
-        $this->genre_repo->update($request,$genre);
+        $this->GenreService->update($request,$genre);
         return redirect('/dashboard/genres')->with('message','Genre updated with success');
     }
 
@@ -72,7 +72,7 @@ class GenreController extends Controller
      */
     public function destroy(Genre $genre)
     {
-        $this->genre_repo->destroy($genre);
+        $this->GenreService->delete($genre);
        return redirect()->back()->with('message','Genre updated with success');
     }
     
