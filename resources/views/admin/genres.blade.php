@@ -16,6 +16,7 @@
                             <tr>
                                 <x-table.th name="ID"/> 
                                 <x-table.th name="Name"/> 
+                                <x-table.th name="books"/> 
                                 <x-table.th name="Operations"/>                
                             </tr>
                         </thead>
@@ -27,6 +28,9 @@
                                 </x-table.td>
                                 <x-table.td>
                                     <div class="text-sm font-medium text-gray-900">{{$genre->name}}</div>
+                                </x-table.td>
+                                <x-table.td>
+                                    <div class="text-sm font-medium text-gray-900">{{$genre->books_count}}</div>
                                 </x-table.td>
                                 <x-table.td>
                                     <div class="flex justify-center space-x-3">

@@ -13,6 +13,7 @@
                 <x-table.th name="Book"/> 
                 <x-table.th name="Genre"/> 
                 <x-table.th name="Quantity"/> 
+                <x-table.th name="Reservations"/> 
                 <x-table.th name="Operations"/>                
             </tr>
         </thead>
@@ -22,7 +23,7 @@
                 <x-table.td>
                     <div class="flex items-center">
                         <div class="flex-shrink-0 h-20 w-16">
-                            <img class="h-20 w-16" src="{{asset('storage/'. $book->image->path)}}" alt="">
+                            <img class="h-20 w-16 drop-shadow-2xl" src="{{asset('storage/'. $book->image->path)}}" alt="">
                         </div>
                         <div class="text-sm font-medium text-gray-900 ml-4">
                             {{$book->title}}
@@ -30,7 +31,8 @@
                     </div>
                 </x-table.td>
                 <x-table.td>{{$book->genre->name}} </x-table.td>              
-                <x-table.td>{{$book->quantity}}</x-table.td>       
+                <x-table.td>{{$book->quantity}}</x-table.td>     
+                <x-table.td>{{$book->reservations->count()}}</x-table.td>     
                 <x-table.td>
                     <div class="flex justify-center space-x-3">
                         <form id="deleteBookForm{{$book->id}}" action="{{ route('books.destroy', $book) }}" method="post">

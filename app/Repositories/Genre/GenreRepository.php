@@ -10,7 +10,7 @@ class GenreRepository implements GenreRepositoryInterface {
 
     public function all()
     {
-        return Genre::get();
+        return Genre::withCount('books')->orderByDesc('books_count')->get();
 
     }
     public function update($request,$genre)

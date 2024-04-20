@@ -15,7 +15,7 @@
                     <thead class="bg-gray-50">
                         <tr>
                             <x-table.th name="Author"/> 
-                            <x-table.th name="Books Number"/> 
+                            <x-table.th name="Books"/> 
                             <x-table.th name="Operations"/> 
                         </tr>
                     </thead>
@@ -43,7 +43,7 @@
                                     </div>
                             </x-table.td> 
                             <x-table.td> 
-                                    4 books
+                                    {{$author->books_count}} 
                             </x-table.td> 
                             <x-table.td> 
                                 <div class=" flex justify-center space-x-3">
