@@ -38,9 +38,8 @@
             <x-error-input :messages="$errors->get('password')" class="mt-2" />
           </div>
             <div class="links flex justify-between ">
-              <p class="text-gray-500 text-sm ">You don’t have an account? <a href="#" class=" text-blue-600  hover:text-blue-800">Signup For free</a></p>
-              <a href="#" class="text-gray-500 text-sm hover:text-blue-600">Forgot Password ?</a>
-
+              <p class="text-gray-500 text-sm ">You don’t have an account? <a href="/register" class=" text-blue-600  hover:text-blue-800">Signup For free</a></p>
+              <a href="/forget-password" class="text-gray-500 text-sm hover:text-blue-600">Forgot Password ?</a>
             </div>
             <button type="submit" class="px-3 py-1 w-48 text-xl mx-auto bg-black rounded-md  focus:bg-gray-600 text-white ">
                 Login

@@ -199,16 +199,7 @@
 
 
             <script>
-          function openComment(button)
-          {
-            var button = document.getElementById('comment') ;
-             $(button).on('click',function(event){
-                $.ajax({
-                  url:"{{route('comment.show', ${}}}"
-                })
-
-            })
-          }
+         
 
 
   function addLike(button) {

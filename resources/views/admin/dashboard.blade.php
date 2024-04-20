@@ -1,6 +1,5 @@
  <!-- CONTENT -->
  <x-admin-layout>
- <!-- <x-admin.small-nav Fhref="/" Fname="home" Shref="/dashboard/users" Sname="hhhh"/> -->
         <div class = "flex flex-wrap my-5 -mx-2">
             <div class = "w-full lg:w-1/3 p-2">
                 <div class = "flex items-center flex-row w-full bg-gradient-to-r   from-gray-700 via-gray-500 to-blue-500 rounded-md p-3">

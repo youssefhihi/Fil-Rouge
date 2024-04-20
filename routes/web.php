@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\EmpruntsController;
+use App\Http\Controllers\Auth\ForgetPassword;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ReservationController;
@@ -19,21 +20,25 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\WelcomeController;
 
 Route::get('/', [WelcomeController::class, 'data']);
-
 Route::middleware('guest')->group(function () {
+    Route::get('/forget-password',[ForgetPassword::class,'index']);
+    Route::post('/forget-password',[ForgetPassword::class,'forgetPassword'])->name('forgetPassword');
+    Route::get('/reset-password/{token}',[ForgetPassword::class,'ResetPassword'])->name('ResetPassword');
+    Route::post('/reset-password',[ForgetPassword::class,'NewPassword'])->name('NewPassword');
 Route::get('/auth/google',[GoogleAuthController::class,'redirect'])->name('google-auth');
 Route::get('/auth/google/callback-url',[GoogleAuthController::class,'callbackGoogle']);
 Route::get('register', [RegisterController::class, 'create'])->name('register');
 Route::post('register', [RegisterController::class, 'store']);
 Route::get('login', [LoginController::class, 'create'])->name('login');
 Route::post('login', [LoginController::class, 'store']);
+
 });
 Route::middleware(['auth'])->group(function () {
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
 Route::middleware(['auth','role:client','isbanned'])->group(function () {
 Route::get('/home', [PostController::class,'index'])->name('home.index');
-Route::get('/books/search', [ClientController::class,'search'])->name('search');
+Route::get('/books/searchBook', [ClientController::class,'search'])->name('search');
 Route::post('/home/post', [PostController::class,'store'])->name('post.store');
 Route::delete('/profile/{post}/delete', [PostController::class,'destroy'])->name('post.destroy');
 Route::get('/profile/{post}/edit', [PostController::class,'edit'])->name('post.edit');
@@ -87,19 +92,19 @@ Route::get('/test', function () {
 
 
 
-Route::middleware(['auth','role:admin'])->group(function () {
-    Route::get('/dashboard',[AdminController::class,'dashboard']);
-    Route::resource('/dashboard/genres', GenreController::class);
-    Route::resource('/dashboard/books', BookController::class);
-    Route::get('/dashboard/users', [AdminController::class,'index']);
-    Route::patch('/dashboard/users/{user}/block', [AdminController::class,'block'])->name('users.block');
-    Route::patch('/dashboard/users/{user}', [AdminController::class,'canPost'])->name('users.canPost');
-    Route::patch('/dashboard/emprunts/return-date/{reservation}', [EmpruntsController::class,'update'])->name('updateReturn');
-    Route::get('/dashboard/emprunts', [EmpruntsController::class,'emprunts']);
-    Route::get('/dashboard/emprunts/return-date', [EmpruntsController::class,'returnBook']);
-    Route::get('/dashboard/reservations/today', [EmpruntsController::class,'todaysReservation']);
-    Route::resource('/dashboard/authors', AuthorController::class);
-    Route::resource('/dashboard/reservations', ReservationController::class);
+Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('dashboard.index');
+    Route::get('/users', [AdminController::class,'users']);
+    Route::resource('/books', BookController::class);
+    Route::resource('/genres', GenreController::class);
+    Route::patch('/users/{user}/block', [AdminController::class,'block'])->name('users.block');
+    Route::patch('/users/{user}', [AdminController::class,'canPost'])->name('users.canPost');
+    Route::patch('/emprunts/return-date/{reservation}', [EmpruntsController::class,'update'])->name('updateReturn');
+    Route::get('/emprunts', [EmpruntsController::class,'emprunts']);
+    Route::get('/emprunts/return-date', [EmpruntsController::class,'returnBook']);
+    Route::get('/reservations/today', [EmpruntsController::class,'todaysReservation']);
+    Route::resource('/authors', AuthorController::class);
+    Route::resource('/reservations', ReservationController::class);
 
 
    

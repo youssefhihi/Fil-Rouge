@@ -58,7 +58,7 @@
             </div>
             <!-- <p id="passwordLoginRegex" class=" hidden text-red-400 border-b-2 border-red-500 font-mono pl-3 ">Invalid password format</p> -->
             <div class="links flex justify-between ">
-              <p class="text-gray-500 text-sm ">Already have a account?<a href="#" class=" text-blue-600  hover:text-blue-800"> Log in</a></p>
+              <p class="text-gray-500 text-sm ">Already have a account?<a href="/login" class=" text-blue-600  hover:text-blue-800"> Log in</a></p>
             </div>
             <button type="submit" class="px-3 py-1 w-48 text-xl mx-auto bg-black rounded-md  focus:bg-gray-600 text-white ">
                 Create Account
