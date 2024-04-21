@@ -9,6 +9,7 @@ use App\Models\Author;
 use App\Models\Client;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
@@ -121,6 +122,8 @@ class ClientController extends Controller
      */
     public function show(Book $book)
     {   
+        $client_id = Auth::user()->client->id;
+        $clientRate = Review::where('client_id',$client_id )->where('book_id',$book->id)->get();
         $avg_stars = Review::where('book_id',$book->id)->avg('starsCount'); 
         $stars = intval($avg_stars);           
         $genres =  Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
@@ -131,7 +134,7 @@ class ClientController extends Controller
         $posts = Post::where('description', 'like', '%' . $book->title . '%')
                         ->orWhere('description', 'like', '%' . $book->description . '%')
                         ->get();
-        return view("client.bookPage",compact('stars','genres','topBooks','book','authors','posts'));
+        return view("client.bookPage",compact('clientRate','stars','genres','topBooks','book','authors','posts'));
     }
 
     /**

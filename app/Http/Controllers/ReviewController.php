@@ -67,9 +67,16 @@ class ReviewController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Review $review)
+    public function update(ReviewRequest $request, Review $review)
     {
-        //
+        try{
+        $review->update(['starsCount' => $request->starsCount]);
+        return redirect()->back()->with('success','Your review has been submitted Successfully,');
+        } catch (\Exception $e){
+            dd($e->getMessage());
+        return redirect()->back()->with("error", "Error: " . $e->getMessage());
+        
+        }
     }
 
     /**
