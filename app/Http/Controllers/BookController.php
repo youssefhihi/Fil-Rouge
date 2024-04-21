@@ -8,6 +8,7 @@ use App\Models\Author;
 use App\trait\ImageUpload;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookRequest;
+use App\Events\NewsLetterEmail;
 
 class BookController extends Controller
 {
@@ -41,10 +42,11 @@ class BookController extends Controller
         try {
 
             $Book = Book::create($request->validated());
-            $this->storeImg($Book, $request->file('image'));       
+            $this->storeImg($Book, $request->file('image'));          
+            event(new NewsLetterEmail($Book->id));
             return redirect("/dashboard/books")->with("message", "Book added with success.");
         } catch (\Exception $e) {
-
+dd($e->getMessage());
             return redirect()->back()->with("error", "Error: " . $e->getMessage());
 
         }

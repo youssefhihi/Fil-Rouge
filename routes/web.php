@@ -2,24 +2,25 @@
 
 use App\Models\Client;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\RatingController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\EmpruntsController;
 use App\Http\Controllers\Auth\ForgetPassword;
-use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\GoogleAuthController;
-use App\Http\Controllers\PdfController;
-use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\SubscribersController;
+use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', [WelcomeController::class, 'data']);
 Route::middleware('guest')->group(function () {
@@ -86,7 +87,7 @@ Route::get('/test', function () {
 
 
 
-
+Route::post('/subsribe',[SubscribersController::class,'store'])->name('suscriber.store');
 
 
 

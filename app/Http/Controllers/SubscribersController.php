@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\subscibers;
+use App\Models\subscriber;
 use Illuminate\Http\Request;
 
-class SubscibersController extends Controller
+class SubscribersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,13 +28,17 @@ class SubscibersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'email' => 'required|email|unique:subscribers,email',
+        ]);
+        Subscriber::create($request->all());
+        return redirect()->back()->with('success','success');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(subscibers $subscibers)
+    public function show(subscriber $subscriber)
     {
         //
     }
@@ -42,7 +46,7 @@ class SubscibersController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(subscibers $subscibers)
+    public function edit(subscriber $subscriber)
     {
         //
     }
@@ -50,7 +54,7 @@ class SubscibersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, subscibers $subscibers)
+    public function update(Request $request, subscriber $subscriber)
     {
         //
     }
@@ -58,7 +62,7 @@ class SubscibersController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(subscibers $subscibers)
+    public function destroy(subscriber $subscriber)
     {
         //
     }
