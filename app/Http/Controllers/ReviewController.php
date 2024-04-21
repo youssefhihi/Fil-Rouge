@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Http\Requests\ReviewRequest;
+use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
@@ -32,8 +33,19 @@ class ReviewController extends Controller
     {
         $data = $request->validated();
         $data['client_id'] = Auth::user()->client->id;
-        Review::create($data);
-        return redirect()->back()->with('flash_msg_success','Your review has been submitted Successfully,');
+        $reservationExist = Reservation::where('client_id',$data['client_id'] )->where('book_id',$data['book_id'])->where('is_returned',true)->exists();
+        $rateExist = Review::where('client_id',$data['client_id'] )->where('book_id',$data['book_id'])->exists();
+        if(!$reservationExist )
+        {
+            return redirect()->back()->with('error','You should reserve and read this book to rate ');
+        }
+        elseif($rateExist){
+            return redirect()->back()->with('error','already rate');
+        }else{
+            Review::create($data);
+            return redirect()->back()->with('success','Your review has been submitted Successfully,');
+        }
+
     }
 
     /**

@@ -47,7 +47,7 @@ Route::delete('/profile/{post}/delete', [PostController::class,'destroy'])->name
 Route::get('/profile/{post}/edit', [PostController::class,'edit'])->name('post.edit');
 Route::put('/profile/{post}/update', [PostController::class,'update'])->name('post.update');
 Route::get('/comment/{id}', [CommentController::class,'show'])->name('comment.show');
-Route::resource('/book-review', ReviewController::class);
+Route::resource('/review', ReviewController::class);
 Route::resource('/rating', RatingController::class);
 Route::resource('/reservation', ReservationController::class);
 Route::get('/profile', [ProfileController::class,'index'])->name('profile.index');

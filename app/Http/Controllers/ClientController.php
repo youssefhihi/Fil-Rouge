@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Genre;
 use App\Models\Author;
 use App\Models\Client;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -119,7 +120,10 @@ class ClientController extends Controller
      * Display the specified resource.
      */
     public function show(Book $book)
-    {   $genres =  Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
+    {   
+        $avg_stars = Review::where('book_id',$book->id)->avg('starsCount'); 
+        $stars = intval($avg_stars);           
+        $genres =  Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
         $authors =  Author::withCount('books')->orderByDesc('books_count')->limit(4)->get();
         $topBooks = Book::withCount('reservationsNotReturned')
                         ->orderByDesc('reservations_not_returned_count')->limit(4)
@@ -127,7 +131,7 @@ class ClientController extends Controller
         $posts = Post::where('description', 'like', '%' . $book->title . '%')
                         ->orWhere('description', 'like', '%' . $book->description . '%')
                         ->get();
-        return view("client.bookPage",compact('genres','topBooks','book','authors','posts'));
+        return view("client.bookPage",compact('stars','genres','topBooks','book','authors','posts'));
     }
 
     /**
