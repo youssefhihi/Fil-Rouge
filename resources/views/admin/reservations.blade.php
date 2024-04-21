@@ -40,7 +40,7 @@
                 
             <tr>
                  <td class="px-2 py-4 whitespace-nowrap">
-                     <div class="flex items-center">
+                     <a href="{{route('Profile', $reservation->client->user->username)}}" class="flex items-center">
                          <div class="flex-shrink-0">
                          @if ($reservation->client->image)
                          <img class="h-14 w-14 rounded-full" src="{{asset('storage/'. $reservation->client->image->path)}}" alt="">
@@ -54,7 +54,7 @@
                          <div class="text-sm font-medium text-gray-900 ml-4">
                          {{$reservation->client->user->name}}
                          </div>
-                     </div>
+                     </a>
                  </td>
                  <td class="px-5 py-4 whitespace-nowrap">
                      <div class="flex items-center">

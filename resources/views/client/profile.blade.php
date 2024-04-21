@@ -13,7 +13,7 @@
                 <div style="margin-top: -6rem;">
                     <div style="height:9rem; width:9rem;" class="rounded-full relative avatar">
                     @if (Auth::user()->client->image)
-                    <img style="height:9rem; width:9rem;" class="rounded-full relative border-4 border-gray-900" src="{{Auth::user()->client->image->path}}" alt="">                       
+                    <img style="height:9rem; width:9rem;" class="rounded-full relative border-4 border-gray-900" src="{{asset('storage/' . Auth::user()->client->image->path)}}" alt="">                       
                     @else
                     @if (Auth::user()->client->gender === 'female')
                     <img style="height:9rem; width:9rem;" class="rounded-full relative border-4 border-gray-900" src="{{asset('imgs/profileFemale.png')}}" alt="">                       

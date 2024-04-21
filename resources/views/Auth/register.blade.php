@@ -31,6 +31,15 @@
             </div>
             <div class="">
               <div class="inputBox relative w-full "> 
+                  <input type="text"  id="username" name="username"  required="required">
+                  <span>Username</span>
+                  <i id="Registerusernamebox" class=" bg-gray-300 rounded-md"></i>
+              </div>
+              <x-error-input :messages="$errors->get('username')" class="mt-2" />
+              <p id="usernameRegex"class="hidden text-red-400 text-sm ">Invalid Username should have numbers and letters</p>
+            </div>
+            <div class="">
+              <div class="inputBox relative w-full "> 
                   <input type="text"  id="email" name="email"  required="required">
                   <span>Email</span>
                   <i id="RegisterEmailbox" class=" bg-gray-300 rounded-md"></i>

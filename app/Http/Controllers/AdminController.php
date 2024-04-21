@@ -55,9 +55,10 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Admin $admin)
+    public function ShowClientProfile(User $username)
     {
-        //
+        $user = $username;
+        return view('admin.clientProfile',compact('user'));
     }
 
     /**

@@ -27,7 +27,6 @@ return new class extends Migration
             $table->timestamp('joined_at')->default(now());
             $table->boolean('is_banned')->default(false); 
             $table->boolean('can_post')->default(false); 
-            $table->softDeletes(); 
             $table->timestamps();
         });
     }

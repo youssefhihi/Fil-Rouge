@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->timestamps();
-            $table->softDeletes(); 
         });
         
     }
@@ -26,8 +25,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('genres');
-        // Schema::dropIfExists('genres',function(Blueprint $table){
-        //     $table->dropSoftDeletes();
-        //     });
+       
     }
 };

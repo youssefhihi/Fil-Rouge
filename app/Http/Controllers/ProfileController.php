@@ -28,7 +28,7 @@ class ProfileController extends Controller
     public function index(Request $request)
     {
         $id = Auth::user()->client->id;
-        $genres =  Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
+        $genres = Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
         $authors =  Author::withCount('books')->orderByDesc('books_count')->limit(4)->get();
         $books =  Book::limit(4)->get();
         $likesCount = Rating::where('client_id',$id)->count();

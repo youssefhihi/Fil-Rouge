@@ -2,12 +2,14 @@
 var Registerform = document.getElementById('Registerform');
 var fullName = document.getElementById('name');
 var email = document.getElementById('email');
+var username = document.getElementById('username');
 var password = document.getElementById('password');
 var repeatPassword = document.getElementById('confirmPassword');
 var RegisterPasswordBox = document.getElementById('RegisterPasswordbox');
 var RegisterEmailBox = document.getElementById('RegisterEmailbox');
 var nameBox = document.getElementById('namebox');
 var confirmPasswordBox = document.getElementById('confirmPasswordbox');
+var usernameBox = document.getElementById('Registerusernamebox');
 
 
 // error messages variables
@@ -16,8 +18,10 @@ var FullNameInputHelp = document.getElementById('nameRegex');
 var EmailInputHelp = document.getElementById('emailRegex');
 var PasswordInputHelp = document.getElementById('passwordRegex');
 var ReapeatPasswordInputHelp = document.getElementById('confirmPasswordRegex');
-
+var usernameInputHelp = document.getElementById('usernameRegex');
 // Regex values
+
+const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
 
 const NameRegex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
 const EmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -47,6 +51,20 @@ fullName.addEventListener('input', function(e) {
     nameBox.className = "shadow-sm bg-green-200 rounded-md border border-green-700 rounded-lg ";
   }
 })
+
+
+username.addEventListener('input', function (e) {
+  var currentValue = e.target.value;
+  var valid = usernameRegex.test(currentValue);
+
+  if (!valid) {
+      usernameInputHelp.style.display = 'block';
+      usernameBox.className = "bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5";
+  } else {
+      usernameInputHelp.style.display = 'none';
+      usernameBox.className = "shadow-sm bg-green-200 rounded-md border border-green-700 rounded-lg ";
+  }
+});
 
 // Email Error Check
 

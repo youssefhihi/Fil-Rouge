@@ -66,10 +66,14 @@ Route::get('/edit-profile', [ProfileController::class,'show']);
 Route::get('/{post}', [ProfileController::class,'userProfile'])->name('user.profile');
 
 
-Route::get('/test', function () {
-    return view('client.test');
 });
-});
+
+
+
+
+
+
+
 
 
 
@@ -110,6 +114,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->group(function (
     Route::get('/reservations/today', [EmpruntsController::class,'todaysReservation']);
     Route::resource('/authors', AuthorController::class);
     Route::resource('/reservations', ReservationController::class);
+    Route::get('/{username}',[AdminController::class,'ShowClientProfile'])->name('Profile');
 
 
    

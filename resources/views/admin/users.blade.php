@@ -13,15 +13,15 @@
             @foreach ( $users as $user)               
             <x-table.tr>
                 <x-table.td>
-                    <a href="#" class="flex items-center">
-                        <div class="flex-shrink-0 h-10 w-10">
+                    <a href="{{route('Profile', $user->username)}}" class="flex items-center">
+                        <div class="flex-shrink-0 h-10 w-14">
                         @if ($user->client->image)
-                         <img class="h-14 w-16 rounded-full" src="{{asset('storage/'. $user->client->image->path)}}" alt="">
+                         <img class="h-14 w-14 rounded-full" src="{{asset('storage/'. $user->client->image->path)}}" alt="">
                         @else
                         @if ($user->client->gender === 'female')
-                        <img class="h-14 w-16 rounded-full" src="{{asset('imgs/profileFemale.png')}}" alt="">                       
+                        <img class="h-14 w-14 rounded-full" src="{{asset('imgs/profileFemale.png')}}" alt="">                       
                         @else                       
-                        <img class="h-14 w-16 rounded-full" src="{{asset('imgs/profileMale.png')}}" alt="">                       
+                        <img class="h-14 w-14 rounded-full" src="{{asset('imgs/profileMale.png')}}" alt="">                       
                         @endif
                         @endif                        </div>
                         <div class="ml-4">
@@ -32,7 +32,7 @@
                                 {{$user->email  }}
                             </div>
                         </div>
-                    </a href="#">
+                    </a>
                 </x-table.td>
                 
                 <x-table.td>
