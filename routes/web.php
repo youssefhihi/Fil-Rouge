@@ -15,6 +15,7 @@ use App\Http\Controllers\EmpruntsController;
 use App\Http\Controllers\Auth\ForgetPassword;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReviewController;
@@ -89,7 +90,7 @@ Route::get('/test', function () {
 
 
 
-
+Route::get('/generate-reservation',[PdfController::class,'index'])->name('generate.pdf');
 
 
 

@@ -25,7 +25,7 @@
         <h2>Book Return Reminder</h2>
         <div class="message">
             <p>Dear {{$reservation->client->user->name}},</p>
-            <p>This is a friendly reminder that you have borrowed the book "{{$reservation->book->name}}" from our library, and it is due for return tomorrow. Please make sure to return the book on time to avoid any late fees.</p>
+            <p>This is a friendly reminder that you have borrowed the book "{{$reservation->book->totle}}" from our library, and it is due for return tomorrow. Please make sure to return the book on time to avoid any late fees.</p>
             <p>Thank you for your cooperation.</p>
         </div>
         <p>Sincerely,</p>

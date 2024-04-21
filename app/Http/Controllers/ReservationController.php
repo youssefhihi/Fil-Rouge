@@ -86,7 +86,7 @@ class ReservationController extends Controller
     {
 
     try{
-        $reservation->update(['is_taken' => true]);
+        $reservation->update(['is_taken' => true, 'send_email' => 0]);
         return redirect()->back()->with('success','success');
     } catch (\Exception $e){
          dd($e->getMessage());

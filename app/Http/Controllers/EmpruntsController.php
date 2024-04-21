@@ -64,4 +64,21 @@ class EmpruntsController extends Controller
             
         }
     }
+
+
+    public function TakeBookMail(Reservation $reservation)
+    {
+        try{
+            // Mail::to($reservation->client->user->email)->send(new TakeBookEmail($reservation->id));
+            $count = $reservation->send_email + 1;
+            $reservation->update([
+                'send_email' => $count,
+            ]);
+           return redirect()->back()->with('success','Email sent successfully');
+        } catch (\Exception $e){
+             dd($e->getMessage());
+            return redirect()->back()->with("error", "Error: " . $e->getMessage());
+            
+        }
+    }
 }
