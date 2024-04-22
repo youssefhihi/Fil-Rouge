@@ -31,7 +31,9 @@ class ProfileController extends Controller
         $genres = Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
         $authors =  Author::withCount('books')->orderByDesc('books_count')->limit(4)->get();
         $books =  Book::limit(4)->get();
-        $likesCount = Rating::where('client_id',$id)->count();
+        $likesCount = Rating::whereHas('post', function ($query) use ($id) {
+            $query->where('client_id', $id);
+        })->count();        
         $postCount = Post::where('client_id',$id)->count();
         $type = $request->input('type');
         $query = Post::where("client_id",$id)->orderByDesc('created_at');

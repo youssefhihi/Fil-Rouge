@@ -38,13 +38,13 @@
                                 @endif
                             @endfor
                         </div>                            
-                            <p >12<span class="text-sm font-semibold"> reviews</span> </p>
+                            <p >{{$book->reviews->count()}}<span class="text-sm font-semibold"> reviews</span> </p>
                         </div>
                 </div>
                 <div class="flex justify-end mr-2">
-                          <button class="bg-black text-white border-xl flex space-x-2 rounded-xl py-2 px-8">
+                          <a href="{{route('reservePage',$book->ISBN)}}" class="bg-black text-white border-xl flex space-x-2 rounded-xl py-2 px-8">
                              <i class="fas fa-shopping-basket mt-1"></i> <span>Reserve</span>
-                          </button>
+                          </a>
                       </div>
                 </div>
             </div>
@@ -100,12 +100,14 @@
         </div>
 </div>
 <style>
-    .rating:not(:checked) > input {
+
+.rating:not(:checked) > input {
   position: absolute;
   appearance: none;
 }
 
 .rating:not(:checked) > label {
+    float: right;
   cursor: pointer;
   font-size: 35px;
   color: #666;

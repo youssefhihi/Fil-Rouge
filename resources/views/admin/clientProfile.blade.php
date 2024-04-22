@@ -4,7 +4,7 @@
     <div class="container mx-auto my-5 p-5">
         <div class="md:flex no-wrap md:-mx-2 ">
             <!-- Left Side -->
-            <div class="w-full md:w-3/12 md:mx-2">
+            <div class="w-full md:w-3/12 md:mx-2 stickey">
                 <!-- Profile Card -->
                 <div class="bg-white p-3 ">
                     <div class="image overflow-hidden">
@@ -154,24 +154,29 @@
                 <!-- End of about section -->
 
                 <div class="my-4"></div>
-                <table class="min-w-full overflow-x-scroll divide-y divide-gray-200 mt-6 ">
-                        <thead class="bg-gray-300 ">
+                <table class="min-w-full overflow-x-scroll divide-y divide-gray-200 mt-6 rounded-2xl">
+                        <thead class="bg-gray-300 rounded-xl">
                             <tr>
                                 <x-table.th name="Books"/> 
                                 <x-table.th name="Date Reservation "/>              
                                 <x-table.th name="Due Date"/>              
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">   
+                        <tbody class="bg-white divide-y divide-gray-200 rounded-xl">   
                         @foreach ($user->client->reservations as $reservation)
                             <x-table.tr>
                                 <x-table.td>
-                                <div class="flex-shrink-0 h-10 w-8">
-                                    <img class="h-10 w-8 drop-shadow-2xl" src="{{asset('storage/' . $reservation->book->image->path) }}" alt="">
-                                </div>
+                                <a href="{{route('books.show',$reservation->book->ISBN)}}" class="flex items-center">
+                                    <div class="flex-shrink-0 h-14 w-10">
+                                        <img class="h-14 w-10 drop-shadow-2xl" src="{{asset('storage/' . $reservation->book->image->path) }}" alt="">
+                                    </div>
+                                    <div class="text-sm font-medium text-gray-900 ml-4">
+                                        {{$reservation->book->title}}
+                                    </div>
+                                </a>
                                 </x-table.td>
                                 <x-table.td>
-                                    <div class="text-sm font-medium text-gray-900">{{$reservation->startDate}}</div>
+                                    <div class="text-sm font-medium text-gray-900">{{$reservation->created_at->format('Y-m-d')}}</div>
                                 </x-table.td>
                                 <x-table.td>
                                     <div class="text-sm font-medium text-gray-900">{{$reservation->duration()}}</div>

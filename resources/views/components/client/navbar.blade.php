@@ -37,19 +37,13 @@
         </div>
         @if ($page === 'books')  
         <div class="flex space-x-1  ">
-            <div onclick="openSearch()" class=" cursor-pointer flex space-x-3  px-2 border-b-2 border-black  ">
-              <p class="bg-transparent w-full h-full text-md  outline-none text-gray-500">Search Book by title,genre ...</p>
-              <i class="fas fa-search text-sm pt-1 "></i>
+            <div onclick="openSearch()" class=" cursor-pointer flex space-x-1  px-2 border-b-2 border-black  ">
+                <p class="bg-transparent w-full h-full text-sm  outline-none text-gray-500">Search Book by title,genre</p>
+                <i class="fas fa-search text-sm pt-1 "></i>
             </div>
         </div>
-        
-        
-        
-        
         @endif
         <ul class="flex space-x-10">
-           
-                
                 <li class="">
                 <a href="/home" class="flex flex-col px-2 items-center  {{ $page === 'feed' ? 'border-b-2 border-black text-black' : 'text-gray-500 hover:text-black' }}"> 
                         <x-icon name="home"/>

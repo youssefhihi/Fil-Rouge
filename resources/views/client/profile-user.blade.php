@@ -14,7 +14,7 @@
                 <div style="margin-top: -6rem;">
                     <div style="height:9rem; width:9rem;" class="rounded-full relative avatar">
                     @if ($user->client->image)
-                    <img style="height:9rem; width:9rem;" class="rounded-full relative border-4 border-gray-900" src="{{$client->image->path}}" alt="">                       
+                    <img style="height:9rem; width:9rem;" class="rounded-full relative border-4 border-gray-900" src="{{asset('storage/' . $user->client->image->path)}}" alt="">                       
                     @else
                     @if ($user->client->gender === 'female')
                     <img style="height:9rem; width:9rem;" class="rounded-full relative border-4 border-gray-900" src="{{asset('imgs/profileFemale.png')}}" alt="">                       

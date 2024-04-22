@@ -1,7 +1,7 @@
 <x-admin-layout>
     <x-success-alert/>
  <!-- CONTENT -->
- <nav class = "flex px-5 py-3 text-gray-700 mb-6 rounded-lg bg-gray-300  " aria-label="Breadcrumb">
+    <nav class = "flex px-5 py-3 text-gray-700 mb-6 rounded-lg bg-gray-300  " aria-label="Breadcrumb">
             <ol class = "flex justify-center items-center  space-x-1 md:space-x-3">
                 <li class = "inline-flex items-center">
                     <a href="/dashboard/emprunts" class = "inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 ">
@@ -17,7 +17,7 @@
                     </div>
                 </li>
             </ol>
-</nav>
+    </nav>
     <table class="min-w-full divide-y divide-gray-200 overflow-x-auto mt-10">
         <thead class="bg-gray-50">
             <tr>
@@ -39,7 +39,7 @@
                 
             <tr>
                  <td class="px-2 py-4 whitespace-nowrap">
-                     <div class="flex items-center">
+                     <div href="{{route('Profile', $reservation->client->user->username)}}" class="flex items-center">
                          <div class="flex-shrink-0">
                          @if ($reservation->client->image)
                          <img class="h-14 w-14 rounded-full" src="{{asset('storage/'. $reservation->client->image->path)}}" alt="">

@@ -24,13 +24,13 @@
                     </div>    
                     <div class="flex justify-between px-10 ">
                         <div class="flex space-x-3">
-                            <div class="flex text-xl p-1 gap-1 text-yellow-600">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half  "></i>
-                            </div>                            
+                            @for ($i = 0; $i < 5; $i++)
+                            @if ($i < intval($book->reviews->avg('starsCount')))
+                                <i class="fas fa-star text-yellow-600"></i>
+                            @else
+                                <i class="far fa-star" ></i>
+                            @endif
+                            @endfor             
                             <p >12<span class="text-sm font-semibold"> reviews</span> </p>
                         </div>
                 </div>
