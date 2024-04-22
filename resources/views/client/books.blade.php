@@ -10,7 +10,7 @@
     <div class=" w-full flex flex-col gap-7  bg-white p-4 rounded-md"> 
               @foreach ($books as $book)                
               <div class="flex space-x-10 w-full border border-black rounded-md p-2">
-                  <a href="{{route('book.details',$book)}}" class="w-1/4">
+                  <a href="{{route('book.details', $book)}}" class="w-1/4">
                       <img src="{{asset('storage/' . $book->image->path)}}" alt="">
                   </a>
                   <div class="flex flex-col gap-5  w-3/4">
@@ -31,9 +31,9 @@
                         </div>
                       </div>
                       <div class="flex justify-end mr-2">
-                        <button onclick="openReserve('{{$book->id}}')" class="bg-black text-white border-xl flex space-x-2 rounded-xl py-2 px-8">
+                        <a href="{{route('reservePage',$book->ISBN)}}" class="bg-black text-white border-xl flex space-x-2 rounded-xl py-2 px-8">
                              <i class="fas fa-shopping-basket mt-1"></i> <span>Reserve</span>
-                        </button>
+                        </a>
                       </div>
                   </div>
               </div>

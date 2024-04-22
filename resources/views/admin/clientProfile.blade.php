@@ -1,9 +1,6 @@
 <x-admin-layout>
     
-<div class="bg-gray-100">
-
-
-
+<div class="bg-gray-50 p-2">
     <div class="container mx-auto my-5 p-5">
         <div class="md:flex no-wrap md:-mx-2 ">
             <!-- Left Side -->
@@ -52,8 +49,15 @@
             <!-- Right Side -->
             <div class="w-full md:w-9/12 mx-2 h-64">
                 <!-- Profile tab -->
+                <div class = "flex flex-wrap my-5 -mx-2">
+           
+                <x-cards name="Total Posts" :count="$user->client->posts->count()" icon="post"/>
+                <x-cards name="Total Posts" :count="$user->client->likes->count()" icon="like"/>
+                <x-cards name="Total Posts" :count="$user->client->likes->count()" icon="like"/>
+
+                </div>
                 <!-- About Section -->
-                <div class="bg-white p-3 shadow-sm rounded-sm">
+                <div class="bg-white p-3 shadow-sm rounded-sm ">
                     <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                         <span clas="text-green-500">
                             <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -150,7 +154,33 @@
                 <!-- End of about section -->
 
                 <div class="my-4"></div>
-          
+                <table class="min-w-full overflow-x-scroll divide-y divide-gray-200 mt-6 ">
+                        <thead class="bg-gray-300 ">
+                            <tr>
+                                <x-table.th name="Books"/> 
+                                <x-table.th name="Date Reservation "/>              
+                                <x-table.th name="Due Date"/>              
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">   
+                        @foreach ($user->client->reservations as $reservation)
+                            <x-table.tr>
+                                <x-table.td>
+                                <div class="flex-shrink-0 h-10 w-8">
+                                    <img class="h-10 w-8 drop-shadow-2xl" src="{{asset('storage/' . $reservation->book->image->path) }}" alt="">
+                                </div>
+                                </x-table.td>
+                                <x-table.td>
+                                    <div class="text-sm font-medium text-gray-900">{{$reservation->startDate}}</div>
+                                </x-table.td>
+                                <x-table.td>
+                                    <div class="text-sm font-medium text-gray-900">{{$reservation->duration()}}</div>
+                                </x-table.td>
+                            </x-table.tr>                  
+                        @endforeach
+                        </tbody>
+                    </table>
+                    
             </div>
         </div>
     </div>

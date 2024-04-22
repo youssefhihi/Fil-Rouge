@@ -44,7 +44,7 @@
         <p>Thank you for using our reservation service. If you have any questions or need assistance, feel free to contact us.</p>
         <p>Sincerely,</p>
         <p>Bookify</p>
-        <a href="#" class="button">Print Reservation</a>
+        <a href="{{route('generate.pdf',$reservation)}}" class="button">Print Reservation</a>
     </div>
 </body>
 </html>

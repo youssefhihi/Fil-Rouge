@@ -77,7 +77,7 @@
                  </td>
                  <td class=" py-10   whitespace-nowrap text-sm text-gray-500">
                  <div class="flex space-x-2 ">
-                        <form  method="post" action="{{route('returnMail', $reservation)}}">
+                        <form  method="post" action="{{route('TakeBookMail', $reservation)}}">
                             @csrf
                         <div class="group relative ">
                             <button class="">

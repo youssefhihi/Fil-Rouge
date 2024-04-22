@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
 Route::middleware(['auth','role:client','isbanned'])->group(function () {
+Route::get('/reserve/{book}', [EmpruntsController::class,'showReservation'])->name('reservePage');
 Route::get('/home', [PostController::class,'index'])->name('home.index');
 Route::get('/books/searchBook', [ClientController::class,'search'])->name('search');
 Route::post('/home/post', [PostController::class,'store'])->name('post.store');
@@ -95,7 +96,7 @@ Route::post('/subsribe',[SubscribersController::class,'store'])->name('suscriber
 
 
 
-Route::get('/generate-reservation',[PdfController::class,'index'])->name('generate.pdf');
+Route::get('/generate-reservation/{reservation}',[PdfController::class,'index'])->name('generate.pdf');
 
 
 
@@ -109,6 +110,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->group(function (
     Route::patch('/users/{user}', [AdminController::class,'canPost'])->name('users.canPost');
     Route::patch('/emprunts/return-date/{reservation}', [EmpruntsController::class,'update'])->name('updateReturn');
     Route::post('/emprunts/return-Email/{reservation}', [EmpruntsController::class,'returnMail'])->name('returnMail');
+    Route::post('/emprunts/take-Book-Email/{reservation}', [EmpruntsController::class,'TakeBookMail'])->name('TakeBookMail');
     Route::get('/emprunts', [EmpruntsController::class,'emprunts']);
     Route::get('/emprunts/return-date', [EmpruntsController::class,'returnBook']);
     Route::get('/reservations/today', [EmpruntsController::class,'todaysReservation']);

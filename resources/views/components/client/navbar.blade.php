@@ -120,11 +120,10 @@
                 <div class="flex space-x-1  ">
                     <div onclick="openSearch()" class=" cursor-pointer flex space-x-3  px-2 border-b-2 border-black  ">
                     <p class="bg-transparent w-full h-full text-md  outline-none text-gray-500">Search Book by title,genre ...</p>
-                    <i class="fas fa-search text-sm pt-1 "></i>
+                    <i class="fas fa-search text-sm"></i>
                     </div>
                 </div>
-                @else
-                    
+                @else               
                 <form method="get" action="{{route('home.index')}}" class="ml-4 flex border-b-2 border-black ">
                     @csrf
                     <input type="search" name="search" placeholder="Search ..." class="text-sm  text-black px-3 py-1 pr-8 focus:outline-none ">

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Book;
 use App\Models\Client;
+use App\Mail\TakeBookEmail;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Mail\ReturnReminderEmail;
@@ -53,6 +55,7 @@ class EmpruntsController extends Controller
     {
         try{
             // Mail::to($reservation->client->user->email)->send(new ReturnReminderEmail($reservation->id));
+            dd('ff');
             $count = $reservation->send_email + 1;
             $reservation->update([
                 'send_email' => $count,
@@ -69,8 +72,8 @@ class EmpruntsController extends Controller
     public function TakeBookMail(Reservation $reservation)
     {
         try{
-            // Mail::to($reservation->client->user->email)->send(new TakeBookEmail($reservation->id));
-            $count = $reservation->send_email + 1;
+          $dd =  Mail::to($reservation->client->user->email)->send(new TakeBookEmail($reservation->id));
+          $count = $reservation->send_email + 1;
             $reservation->update([
                 'send_email' => $count,
             ]);
@@ -81,4 +84,11 @@ class EmpruntsController extends Controller
             
         }
     }
+
+    
+    public function showReservation(Book $book)
+    {
+        return view('client.reservation',compact('book'));
+    }
+
 }

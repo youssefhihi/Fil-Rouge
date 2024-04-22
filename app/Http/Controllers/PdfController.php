@@ -16,7 +16,7 @@ class PdfController extends Controller
             'reservation' => $reservation,
         ];
 
-        $pdf = Pdf::loadView('pdf.generate-reservation-pdf', $data);
-        return $pdf->download('client.reservartionPDF.pdf');
+        $pdf = Pdf::loadView('client.reservationPDF', $data);
+        return $pdf->download('generate-reservation-pdf.pdf');
     }
 }
