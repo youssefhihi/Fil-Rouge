@@ -63,9 +63,9 @@
            
             <li class="">
                 
-            <a href="/notification" class="flex flex-col px-2 items-center  {{ $page === 'notif' ? 'border-b-2 border-black text-black' : 'text-gray-500 hover:text-black' }}"> 
-                <x-icon name="notif"/>
-                    <span class="text-xs">Notification</span>
+            <a href="/chat" class="flex flex-col px-2 items-center  {{ $page === 'message' ? 'border-b-2 border-black text-black' : 'text-gray-500 hover:text-black' }}"> 
+                <x-icon name="message"/>
+                    <span class="text-xs">message</span>
                 </a>
             </li>
            
@@ -138,9 +138,9 @@
 
 				<span class="tab tab-kategori block text-xs">Books</span>
 			</a>
-			<a href="/notif" class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
-                <x-icon name="notif" class="inline-block mb-1"/> 
-				<span class="tab tab-explore block text-xs">Notification</span>
+			<a href="/chat" class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
+                <x-icon name="message" class="inline-block mb-1"/> 
+				<span class="tab tab-explore block text-xs">message</span>
 			</a>
             <a href="/profile" class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
                 @if (Auth::user()->client->image)             

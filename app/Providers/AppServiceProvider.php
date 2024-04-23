@@ -3,13 +3,16 @@
 namespace App\Providers;
 
 use App\Models\Reservation;
+use App\Services\PostService;
 use App\Services\GenreService;
 use App\Services\CommentService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Post\PostRepository;
 use App\Repositories\Genre\GenreRepository;
 use App\Repositories\Comment\CommentRepository;
+use App\Repositories\Post\PostRepositoryInterface;
 use App\Repositories\Genre\GenreRepositoryInterface;
 use App\Repositories\Comment\CommentRepositoryInterface;
 
@@ -27,6 +30,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CommentRepositoryInterface::class, CommentRepository::class);
         $this->app->bind(CommentService::class, function ($app) {
             return new CommentService($app->make(CommentRepositoryInterface::class));
+        });
+        $this->app->bind(PostRepositoryInterface::class, PostRepository::class);
+        $this->app->bind(PostService::class, function ($app) {
+            return new PostService($app->make(PostRepositoryInterface::class));
         });
 
     }

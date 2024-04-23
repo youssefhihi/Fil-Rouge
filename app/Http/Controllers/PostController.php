@@ -2,19 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Post;
 use App\Models\Genre;
+use App\Models\Author;
+use App\Models\Rating;
 use App\trait\ImageUpload;
 use Illuminate\Http\Request;
+use App\Services\PostService;
 use App\Http\Requests\PostRequest;
-use App\Models\Author;
-use App\Models\Book;
-use App\Models\Rating;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
     use ImageUpload;
+
+    public function __construct(protected PostService $PostService) 
+    {
+
+    }
     /**
      * Display a listing of the resource.
      */
@@ -109,22 +115,7 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         try {
-            $data = $request->validated();
-            if (!$request->hasFile('image') || !$request->file('image')) {
-                if($post->image){
-                $data["image"] = $post->image->path;
-                $post->update($data);
-                }else{
-                    $post->update($data);
-                }
-            } else {
-                if($post->image){
-                    $this->updateImg($post, $request->file('image'));
-                }else{
-                    $this->storeImg($post, $request->file('image'));
-                }
-                $post->update($data);
-            }    
+            $this->PostService->update($request,$post);
             return redirect('/profile')->with("success", "post updated successfully.");
         } catch (\Exception $e) {
             return redirect()->back()->with("error", "Error: " . $e->getMessage());

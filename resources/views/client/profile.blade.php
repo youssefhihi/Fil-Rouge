@@ -60,7 +60,7 @@
                 @if (Auth::user()->client->instagram )
                     
                 <button class="flex justify-center items-center">
-                    <a href="{{ Auth::user()->client->instagram }}" class="group flex justify-center p-2 rounded-md drop-shadow-xl from-gray-800 bg-[#e331f5] text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:from-[#331029] hover:to-[#310413]">
+                    <a target="_blanc" href="{{ Auth::user()->client->instagram }}" class="group flex justify-center p-2 rounded-md drop-shadow-xl from-gray-800 bg-[#e331f5] text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:from-[#331029] hover:to-[#310413]">
                         <x-icon name="inst"/>
                         <span class="absolute opacity-0 group-hover:opacity-100 group-hover:text-gray-700 group-hover:text-sm group-hover:-translate-y-10 duration-700">
                             Instagram
@@ -71,7 +71,7 @@
                 @if (Auth::user()->client->facebook )
                     
                 <button class="flex justify-center items-center">
-                    <a href="/" class="group flex justify-center p-2 rounded-md drop-shadow-xl from-gray-800 bg-[#316FF6] text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:from-[#331029] hover:to-[#310413]">
+                    <a target="_blanc" href="{{ Auth::user()->client->facebook }}" class="group flex justify-center p-2 rounded-md drop-shadow-xl from-gray-800 bg-[#316FF6] text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:from-[#331029] hover:to-[#310413]">
                         <x-icon name="facebook"/>
                         <span
                         class="absolute opacity-0 group-hover:opacity-100 group-hover:text-gray-700 group-hover:text-sm group-hover:-translate-y-10 duration-700" >
@@ -83,7 +83,7 @@
                 @if ( Auth::user()->client->X)
                     
                 <button class="flex justify-center items-center">
-                    <a href="/" class="group flex justify-center p-2 rounded-md drop-shadow-xl bg-gradient-to-r from-gray-800 to-black text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:from-[#331029] hover:to-[#310413]">
+                    <a target="_blanc" href="{{ Auth::user()->client->X }}" class="group flex justify-center p-2 rounded-md drop-shadow-xl bg-gradient-to-r from-gray-800 to-black text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:from-[#331029] hover:to-[#310413]">
                     <x-icon name="x"/>
                     <span
                     class="absolute opacity-0 group-hover:opacity-100 group-hover:text-gray-700 group-hover:text-sm group-hover:-translate-y-10 duration-700">

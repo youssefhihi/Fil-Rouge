@@ -117,7 +117,7 @@
 @else
 <x-client-layout>
 @section('header')
-    <x-client.navbar page="feed" /> 
+    <x-client.navbar page="message" /> 
     @endsection
 @include('Chatify::layouts.headLinks')
     <div class="messenger">
