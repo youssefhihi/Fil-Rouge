@@ -35,7 +35,7 @@
         <p>Thank you for choosing <strong>Bookify</strong>. We appreciate your patronage.</p>
 
         <p>Warm regards,</p>
-        <p><strong>Bookify</strong><br>Admin<br><a href="mailto:bookify@gmail.com">bookify@gmail.com</a></p>
+        <p><strong>Bookify</strong><br><a href="mailto:bookify@gmail.com">bookify@gmail.com</a></p>
     </div>
 </body>
 </html>

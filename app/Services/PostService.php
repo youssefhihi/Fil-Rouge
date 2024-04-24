@@ -11,7 +11,10 @@ class PostService
     ) {
     }
 
-  
+    public function insert($data)
+    {
+        return $this->PostRepository->store($data);
+    }
 
     public function update($data, $Post)
     {

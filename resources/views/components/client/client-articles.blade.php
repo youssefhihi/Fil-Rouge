@@ -58,11 +58,22 @@
                       </div>
                   </div>
 
-                  <button  class="dots w-7 h-7 flex justify-center items-center rounded-full hover:bg-gray-200">
-                      <span class="w-1 h-1 mr-0.5 bg-gray-600 rounded-full"></span>
-                      <span class="w-1 h-1 mr-0.5 bg-gray-600 rounded-full"></span>
-                      <span class="w-1 h-1 mr-0.5 bg-gray-600 rounded-full"></span>
-                  </button>
+                  <div class="relative">
+                      <button onclick="toggleDropDown('{{ $post->id }}')" id="dropDown{{ $post->id }}" data-index="{{ $post->id }}" class="dots w-7 h-7 flex justify-center items-center rounded-full hover:bg-gray-200">
+                          <span class="w-1 h-1 mr-0.5 bg-gray-600 rounded-full"></span>
+                          <span class="w-1 h-1 mr-0.5 bg-gray-600 rounded-full"></span>
+                          <span class="w-1 h-1 mr-0.5 bg-gray-600 rounded-full"></span>
+                      </button>
+                      <div id="dropdownMenu{{ $post->id }}" class="hidden absolute z-20 right-0 top-0 mt-9 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                          <a href="{{ route('post.edit', $post) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" >Update</a>
+                          <form action="{{ route('post.destroy', $post) }}" id="deletePost{{ $post->id }}" method="POST" class="hover:bg-gray-100 bg-red-600">
+                              @csrf
+                              @method('DELETE')
+                              <button type="button" data-index="{{$post->id}}" class="deletePostButton block px-4 py-2 text-sm text-gray-700" >Delete</button>
+                          </form>
+                      </div>
+
+                  </div>
               </div>
              <!-- post article -->
              <div class="px-2">
@@ -120,7 +131,26 @@
  
                <script>
 
-    
+document.querySelectorAll('.deletePostButton').forEach(button => {
+  button.addEventListener('click', function() {
+            const postID = this.getAttribute('data-index');
+            if (confirm("Are you sure you want to delete this item? ")) {
+                document.getElementById('deletePost' + postID).submit();
+            }
+        });
+    });
+ function toggleDropDown(id) {
+        var dropdown = document.getElementById(`dropdownMenu${id}`);
+        dropdown.classList.toggle('hidden');
+     var buttons = document.querySelectorAll('.dots');
+        buttons.forEach(function(button) {
+            if (button.getAttribute('data-index') != id) {
+                button.addEventListener('click', function() {
+                    dropdown.classList.add('hidden');
+                });
+            }
+        });
+    }
 
 function addLike(button) {
     var form = button.closest('form');
@@ -162,7 +192,7 @@ event.preventDefault();
         $(button).find('.span').html(result.countLikes);
             const newForm = `
             @csrf
-            @method('post')
+            @method('POST')
             <input type="hidden" value="${result.post}" name="post_id">
                   <button onclick="addLike(this)" id="like" class="flex text-gray-500 outline-none rounded px-2  text-gray-600 ">
                   <x-icon name="like" class="text-xl  mr-1.5"/>
@@ -174,10 +204,7 @@ event.preventDefault();
      
   });
 })
-
-
 }
-
 
 
 

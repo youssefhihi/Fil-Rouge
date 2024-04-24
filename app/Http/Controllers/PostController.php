@@ -74,18 +74,8 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         try{
-            if(Auth::user()->client->can_post){
-                return redirect()->back()->with("error", "Sorry, you're unable to post at the moment. Please reach out to the administrator for assistance.");
-            }else{
-                
-                $data = $request->validated();
-                $data['client_id'] = Auth::user()->client->id;
-                $post = Post::create($data); 
-                if($request->hasFile('image') || $request->file('image')){         
-                    $this->storeImg($post, $request->file('image'));
-                }         
-                return redirect()->back()->with("success", "Great! Your post has been successfully added.");
-            }
+            $this->PostService->insert($request);
+            return redirect()->back()->with("success", "Great! Your post has been successfully added.");
         } catch (\Exception $e) {
 
             return redirect()->back()->with("error", "Error: " . $e->getMessage());
