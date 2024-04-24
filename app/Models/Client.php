@@ -58,4 +58,9 @@ class Client extends User
         return $this->hasMany(Review::class,'client_id');
 
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class,'client_id');
+    }
 }

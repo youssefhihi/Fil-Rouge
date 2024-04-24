@@ -26,9 +26,9 @@ class CommentService
         return $this->CommentRepository->destroy($Comment);
     }
 
-    public function get($id)
+    public function get($post)
     {
-        return $this->CommentRepository->get($id);
+        return $this->CommentRepository->get($post);
     }
     
    

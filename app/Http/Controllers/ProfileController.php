@@ -125,15 +125,15 @@ class ProfileController extends Controller
     }
 
 
-    public function userProfile(Post $post)
+    public function userProfile(User $username)
     {
-
-        if($post->client->user->id == Auth::user()->id)
+        $user =  $username;
+        if($user->id == Auth::user()->id)
         {
             return redirect('/profile');
         }else{
             
-            $client = $post->client;
+            $client = $user->client;
             $posts = $client->posts;
             $user = $client->user;
             $postsCount = $client->posts->count();

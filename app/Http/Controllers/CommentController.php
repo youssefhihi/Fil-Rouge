@@ -43,7 +43,7 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show($post)
     {
         $comments =  $this->CommentService->get($post);
 

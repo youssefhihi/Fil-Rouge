@@ -5,9 +5,25 @@
   <x-error-message class="m-3"/> 
          <!--Form   -->
          <!-- object-fill -->
-         <div id="comment-popup" class="hidden" >
-         
+         <div id="comment-popup" class="hidden min-w-screen lg:px-14 lg:py-5 h-screen animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
+            <div class="absolute bg-black opacity-80 inset-0 z-0"></div>
+            <div class="w-full max-w-xl p-5 relative rounded-xl shadow-lg h-full bg-white overflow-y-auto">
+                <div class="comments-container w-full flex flex-col gap-4">
+                </div>
+                <form method="post" class="w-full  rounded-md sticky bottom-2" >
+                    @csrf
+                    @method('POST')
+                    <div class="flex items-center border border-gray-300 bg-white px-2 py-1 rounded-xl">
+                        <input type="text" name="content" class="w-full rounded-md focus:outline-none" placeholder="Write a comment...">
+                        <button onclick="addComment(this)" class="bg-gray-500 text-black px-3 py-1 rounded-md ml-2">
+                            <span class="fas fa-paper-plane"></span> 
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
+
+
          <div id="addPost" class=" hidden min-w-screen lg:p-14 h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
             <div class="absolute bg-black opacity-80 inset-0 z-0"></div>
               <div class="w-full max-w-lg lg:max-w-full p-5 relative mx-auto my-auto rounded-xl shadow-lg h-full  bg-white overflow-y-auto ">
@@ -108,7 +124,7 @@
              <!-- top -->
               <div class="p-2 flex justify-between">
                   <div class="flex ">
-                      <a href="{{route('user.profile',  $post)}} " class="w-12 h-12 rounded-full mr-2">
+                      <a href="{{route('user.profile',  $post->client->user->username)}} " class="w-12 h-12 rounded-full mr-2">
                         @if ($post->client->image)
                         <img src="{{asset('storage/'. $post->client->image->path)}}" alt="profile" class="w-full rounded-full">
                         @else
@@ -120,7 +136,7 @@
                         @endif
                       </a>
                       <div>
-                        <a href="{{route('user.profile',$post)}} " >
+                        <a href="{{route('user.profile',  $post->client->user->username)}} " >
                           <span class="text-gray-700 font-bold hover:text-gray-500 hover:underline ">{{$post->client->user->name}}</span>                 
                         </a>
                         <div class="time text-sm text-gray-500 flex space-x-2 items-center">
@@ -139,11 +155,7 @@
                       </div>
                   </div>
 
-                  <button  class="dots w-7 h-7 flex justify-center items-center rounded-full hover:bg-gray-200">
-                      <span class="w-1 h-1 mr-0.5 bg-gray-600 rounded-full"></span>
-                      <span class="w-1 h-1 mr-0.5 bg-gray-600 rounded-full"></span>
-                      <span class="w-1 h-1 mr-0.5 bg-gray-600 rounded-full"></span>
-                  </button>
+                
               </div>
              <!-- post article -->
              <div class="px-2">
@@ -189,7 +201,8 @@
               </form>
               @endif
                <button   onclick="openComment(this,'{{$post->id}}')" class="flex  outline-none rounded  px-2  text-gray-600 hover:bg-gray-200">
-                <i class="far fa-comment-dots text-xl mr-1.5"></i> 
+                  <i class="far fa-comment-dots text-xl mr-1.5"></i>
+                  <span class="commentCount">12</span>  
                </button>
              </div> 
               </div>
@@ -200,42 +213,72 @@
         </div>
 
 
-            <script>
+            <script>              
+              function openComment(button, id) {
+                    $(button).on('click', function(event) {
+                        $.ajax({
+                            url: "{{ route('comment.show', '') }}" + '/' + id,
+                            method: 'GET',
+                            dataType: 'json',
+                            success: function(data) {
+                              console.log(data);
+                              var popup = $('#comment-popup');
+                                  popup.removeClass('hidden');
 
-function comment(data) {
-        var popup = $('#comment-popup');
-        if (data && data.comments && Array.isArray(data.comments)) {
-            popup.empty(); // Clear any existing comments
-            data.comments.forEach(function(comment) {
-                popup.append('<div>' + comment.text + '</div>'); // Append each comment
-            });
-            popup.show(); // Show the popup after adding comments
-        } else {
-            console.error('Invalid comment data:', data);
-        }
-    }
+                                  $('.comments-container').empty();
+                                  data.comments.forEach(function(comment) {
+                                      var commentHtml = `
 
-    // Function to open comments via AJAX
-    function openComment(button, id) {
-        $(button).on('click', function(event) {
-            $.ajax({
-                url: "{{ route('comment.show', '') }}" + '/' + id,
-                method: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    console.log(data);
-                    comment(data); // Call the comment function with retrieved data
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
+                                      <div class="flex items-center space-x-2">
+                                        <div class="group relative flex flex-shrink-0 self-start cursor-pointer">
+                                          <img src=" /storage/${comment.client.image.path}" alt="" class="h-8 w-8 object-fill rounded-full">
+                                          
+                                        </div>
+                                        <div class="  w-full">
+                                        <div class="bg-gray-100 w-auto rounded-xl px-2 pb-2">
+                                        <div class="font-medium">
+                                            <a href="/${comment.client.user.username}" class="hover:underline text-sm flex ">
+                                            <small>${comment.client.user.name}</small>
+                                            </a>
+                                        </div>
+                                        <div class="text-xs">
+                                        ${comment.content}
+                                        </div>
+                                        </div>
+                                      </div>
+                                      `;
+                                      $('.comments-container').append(commentHtml);                                 
+                                     });
+                              },
+                            error: function(xhr, status, error) {
+                                console.error(error);
+                            }
+                        });
+                    });
                 }
-            });
-        });
-    }
+
+
+                function addComment(button)
+                {
+                  var form = button.closest('form');
+                  $(form).on('submit',function(event){
+                    event.preventDefault();
+                    $.ajax({
+                        url: "{{route('comment.store')}}",
+                        data: jQuery(form).serialize(),
+                        method: 'POST',
+                        success: function (result) {
+                          $('.commentCount').html(result.countComment);
+                            $(form).unbind();
+                        },
+                    });
+                  })
+
+                }
 
 
 
-  function addLike(button) {
+    function addLike(button) {
       var form = button.closest('form');
     $(form).on('submit',function(event){
       event.preventDefault();

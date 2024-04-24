@@ -73,12 +73,12 @@ Route::delete('/edit-DeleteImage', [ProfileController::class,'deleteImage'])->na
 Route::get('/edit-profile', [ProfileController::class,'show']);
 Route::patch('/edit-password', [ProfileController::class,'password'])->name('password');
 Route::patch('/edit-socialMedia-Links', [ProfileController::class,'socialeMedia'])->name('socialeMedia');
-Route::get('/{post}', [ProfileController::class,'userProfile'])->name('user.profile');
+Route::get('/{username}', [ProfileController::class,'userProfile'])->name('user.profile');
             //books Page
 Route::get('/books/searchBook', [ClientController::class,'search'])->name('search');            
 Route::get('/books', [ClientController::class,'index'])->name('books.index');
 Route::get('/books/sort/{genre}', [ClientController::class,'sortGenre'])->name('sortGenre');
-Route::get('/books/ss{author}', [ClientController::class,'sortAuthor'])->name('sortAuthor');
+Route::get('/books/sort{author}', [ClientController::class,'sortAuthor'])->name('sortAuthor');
 Route::get('/books/{book}', [ClientController::class,'show'])->name('book.details');
 
 Route::get('/comment/{id}', [CommentController::class,'show'])->name('comment.show');
