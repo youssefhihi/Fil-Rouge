@@ -328,42 +328,49 @@
                   $(form).on('submit',function(event){
                     event.preventDefault();
                     $.ajax({
-                      url: "{{ route('comment.destroy', '') }}" + id,
+                      url: '/comment/delete/' + id,
                         data: jQuery(form).serialize(),
                         method: 'DELETE',
                         success: function(result) {
-                          var popup = $('#comment-popup');
-                          popup.removeClass('hidden');
-                          $('.comments-container').empty();
-                          result.comments.forEach(function(comment) {
-                              var commentHtml = `
-                                  <div class="flex items-center space-x-2">
-                                      <div class="group relative flex flex-shrink-0 self-start cursor-pointer">
-                                          <img src="/storage/${comment.client.image.path}" alt="" class="h-8 w-8 object-fill rounded-full">
-                                      </div>
-                                      <div class="w-full flex justify-between  bg-gray-100 ">
-                                          <div class="w-auto rounded-xl px-2 pb-2">
-                                              <div class="font-medium">
-                                                  <a href="/${comment.client.user.username}" class="hover:underline text-sm flex">
-                                                      <small>${comment.client.user.name}</small>
-                                                  </a>
-                                              </div>
-                                              <div class="text-xs">${comment.content}</div>
-                                          </div>
-                                          <form method="post" >
-                                              @csrf
-                                              @method('DELETE')
-                                                  <button onclick="deleteComment(this,${comment.id})" 
-                                                      <x-icon name="delete" class="text-xs pt-1"/> 
-                                                  </button>
-                                            </form>
-                                      </div>
-                                  </div>
-                              `;
-                              $('.comments-container').append(commentHtml);
-                          });
-                          $(form).unbind();
-                      },
+    var popup = $('#comment-popup');
+    popup.removeClass('hidden');
+
+    // Clear the comments container
+    $('.comments-container').empty();
+
+    // Iterate through the newly received comments and append them to the container
+    result.comments.forEach(function(comment) {
+        var commentHtml = `
+            <div class="flex items-center space-x-2">
+                <div class="group relative flex flex-shrink-0 self-start cursor-pointer">
+                    <img src="/storage/${comment.client.image.path}" alt="" class="h-8 w-8 object-fill rounded-full">
+                </div>
+                <div class="flex justify-between w-full bg-gray-100 rounded-xl">
+                    <div class="w-auto px-2 pb-2">
+                        <div class="font-medium">
+                            <a href="/${comment.client.user.username}" class="hover:underline text-sm flex">
+                                <small>${comment.client.user.name}</small>
+                            </a>
+                        </div>
+                        <div class="text-xs">${comment.content}</div>
+                    </div>
+                    <form method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button onclick="deleteComment(this,${comment.id})">
+                            <x-icon name="delete" class="text-xs pt-1"/>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        `;
+        $('.comments-container').append(commentHtml);
+    });
+
+    // Unbind the form submission event
+    $(form).unbind();
+}
+
 
                     });
                   })
