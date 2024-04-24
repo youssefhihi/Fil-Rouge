@@ -82,6 +82,8 @@ Route::get('/books/sort{author}', [ClientController::class,'sortAuthor'])->name(
 Route::get('/books/{book}', [ClientController::class,'show'])->name('book.details');
 
 Route::get('/comment/{id}', [CommentController::class,'show'])->name('comment.show');
+Route::post('/comment', [CommentController::class,'store'])->name('comment.store');
+Route::delete('/comment/delete/{id}', [CommentController::class,'destroy'])->name('comment.destroy');
 
 });
 

@@ -10,15 +10,8 @@
             <div class="w-full max-w-xl p-5 relative rounded-xl shadow-lg h-full bg-white overflow-y-auto">
                 <div class="comments-container w-full flex flex-col gap-4">
                 </div>
-                <form method="post" class="w-full  rounded-md sticky bottom-2" >
-                    @csrf
-                    @method('POST')
-                    <div class="flex items-center border border-gray-300 bg-white px-2 py-1 rounded-xl">
-                        <input type="text" name="content" class="w-full rounded-md focus:outline-none" placeholder="Write a comment...">
-                        <button onclick="addComment(this)" class="bg-gray-500 text-black px-3 py-1 rounded-md ml-2">
-                            <span class="fas fa-paper-plane"></span> 
-                        </button>
-                    </div>
+                <form id="commentForm" method="post" class="w-full  rounded-md sticky bottom-2" >
+                    
                 </form>
             </div>
         </div>
@@ -234,21 +227,42 @@
                                           <img src=" /storage/${comment.client.image.path}" alt="" class="h-8 w-8 object-fill rounded-full">
                                           
                                         </div>
-                                        <div class="  w-full">
-                                        <div class="bg-gray-100 w-auto rounded-xl px-2 pb-2">
-                                        <div class="font-medium">
-                                            <a href="/${comment.client.user.username}" class="hover:underline text-sm flex ">
-                                            <small>${comment.client.user.name}</small>
-                                            </a>
-                                        </div>
-                                        <div class="text-xs">
-                                        ${comment.content}
-                                        </div>
-                                        </div>
+                                        <div class="flex justify-between rounded-xl bg-gray-100 w-full">
+                                            <div class=" w-auto  px-2 pb-2">
+                                            <div class="font-medium">
+                                                <a href="/${comment.client.user.username}" class="hover:underline text-sm flex ">
+                                                <small>${comment.client.user.name}</small>
+                                                </a>
+                                            </div>
+                                            <div class="text-xs">
+                                            ${comment.content}
+                                            </div>
+                                            </div>
+                                            <form method="post" >
+                                              @csrf
+                                              @method('DELETE')
+                                                  <button onclick="deleteComment(this,${comment.id})" 
+                                                      <x-icon name="delete" class="text-xs pt-1"/> 
+                                                  </button>
+                                            </form>
+                                      </div>
                                       </div>
                                       `;
                                       $('.comments-container').append(commentHtml);                                 
                                      });
+                                     console.log(id);
+                                     var form = `
+                                     @csrf
+                                        @method('POST')
+                                        <div class="flex items-center border border-gray-300 bg-white px-2 py-1 rounded-xl">
+                                            <input type="hidden" name="post_id" value="${id}">
+                                          <input type="text" name="content" class="w-full rounded-md focus:outline-none" placeholder="Write a comment...">
+                                            <button onclick="addComment(this)" class="bg-gray-500 text-black px-3 py-1 rounded-md ml-2">
+                                                <span class="fas fa-paper-plane"></span> 
+                                            </button>
+                                        </div>
+                                     `;
+                                     $('#commentForm').html(form);
                               },
                             error: function(xhr, status, error) {
                                 console.error(error);
@@ -267,10 +281,90 @@
                         url: "{{route('comment.store')}}",
                         data: jQuery(form).serialize(),
                         method: 'POST',
-                        success: function (result) {
-                          $('.commentCount').html(result.countComment);
-                            $(form).unbind();
-                        },
+                        success: function(result) {
+                          var popup = $('#comment-popup');
+                          popup.removeClass('hidden');
+                          $('.comments-container').empty();
+                          result.comments.forEach(function(comment) {
+                              var commentHtml = `
+                                  <div class="flex items-center space-x-2">
+                                      <div class="group relative flex flex-shrink-0 self-start cursor-pointer">
+                                          <img src="/storage/${comment.client.image.path}" alt="" class="h-8 w-8 object-fill rounded-full">
+                                      </div>
+                                      <div class="flex justify-between w-full bg-gray-100 rounded-xl ">
+                                          <div class=" w-auto px-2 pb-2">
+                                              <div class="font-medium">
+                                                  <a href="/${comment.client.user.username}" class="hover:underline text-sm flex">
+                                                      <small>${comment.client.user.name}</small>
+                                                  </a>
+                                              </div>
+                                              <div class="text-xs">${comment.content}</div>
+                                          </div>
+                                          <form method="post" >
+                                              @csrf
+                                              @method('DELETE')
+                                                  <button onclick="deleteComment(this,${comment.id})" 
+                                                      <x-icon name="delete" class="text-xs pt-1"/> 
+                                                  </button>
+                                            </form>
+                                      </div>
+                                  </div>
+                              `;
+                              $('.comments-container').append(commentHtml);
+                          });
+                          jQuery(form)[0].reset();  
+                          $(form).unbind();
+                      },
+
+                    });
+                  })
+
+                }
+
+
+                function deleteComment(button,id)
+                {
+                  var form = button.closest('form');
+                  $(form).on('submit',function(event){
+                    event.preventDefault();
+                    $.ajax({
+                      url: "{{ route('comment.destroy', '') }}" + id,
+                        data: jQuery(form).serialize(),
+                        method: 'DELETE',
+                        success: function(result) {
+                          var popup = $('#comment-popup');
+                          popup.removeClass('hidden');
+                          $('.comments-container').empty();
+                          result.comments.forEach(function(comment) {
+                              var commentHtml = `
+                                  <div class="flex items-center space-x-2">
+                                      <div class="group relative flex flex-shrink-0 self-start cursor-pointer">
+                                          <img src="/storage/${comment.client.image.path}" alt="" class="h-8 w-8 object-fill rounded-full">
+                                      </div>
+                                      <div class="w-full flex justify-between  bg-gray-100 ">
+                                          <div class="w-auto rounded-xl px-2 pb-2">
+                                              <div class="font-medium">
+                                                  <a href="/${comment.client.user.username}" class="hover:underline text-sm flex">
+                                                      <small>${comment.client.user.name}</small>
+                                                  </a>
+                                              </div>
+                                              <div class="text-xs">${comment.content}</div>
+                                          </div>
+                                          <form method="post" >
+                                              @csrf
+                                              @method('DELETE')
+                                                  <button onclick="deleteComment(this,${comment.id})" 
+                                                      <x-icon name="delete" class="text-xs pt-1"/> 
+                                                  </button>
+                                            </form>
+                                      </div>
+                                  </div>
+                              `;
+                              $('.comments-container').append(commentHtml);
+                          });
+                          $(form).unbind();
+                      },
+
                     });
                   })
 

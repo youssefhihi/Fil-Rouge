@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentRequest;
 use App\Models\Post;
 use App\Models\Comment;
 use Illuminate\Http\Request;
@@ -31,12 +32,13 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
-        $data = $request->validated();
-        $data['client_id'] = Auth::user()->client->id;
-        Comment::create($data);
-        return redirect()->back();
+
+        $comment =  $this->CommentService->create($request);
+        $comments =  $this->CommentService->get($comment->post_id);
+
+        return response()->json(['comments'=> $comments]);
         
     }
 
@@ -73,7 +75,8 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        $comment->delete();
-        return redirect()->back();
+        $comments =  $this->CommentService->get($comment->post_id);
+        $this->CommentService->delete($comment);
+        return response()->json(['comments'=> $comments]);
     }
 }
