@@ -20,4 +20,8 @@ class Comment extends Model
    {
     return $this->belongsTo(Client::class,'client_id');
    }
+   public function post()
+   {
+    return $this->belongsTo(Post::class,'post_id');
+   }
 }

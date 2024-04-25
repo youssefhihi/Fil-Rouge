@@ -37,8 +37,10 @@ class CommentController extends Controller
 
         $comment =  $this->CommentService->create($request);
         $comments =  $this->CommentService->get($comment->post_id);
+        $authId = Auth::user()->client->id;
 
-        return response()->json(['comments'=> $comments]);
+
+        return response()->json(['comments'=> $comments, 'authId' => $authId]);
         
     }
 
@@ -48,8 +50,9 @@ class CommentController extends Controller
     public function show($post)
     {
         $comments =  $this->CommentService->get($post);
+        $authId = Auth::user()->client->id;
 
-        return response()->json(['comments'=> $comments]);
+        return response()->json(['comments'=> $comments, 'authId' =>$authId]);
 
     }
 
@@ -77,6 +80,7 @@ class CommentController extends Controller
     {
         $this->CommentService->delete($comment);
         $comments =  $this->CommentService->get($comment->post_id);
-        return response()->json(['comments'=> $comments]);
+        $authId = Auth::user()->client->id;
+        return response()->json(['comments'=> $comments, 'authId' =>$authId]);
     }
 }
