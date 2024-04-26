@@ -114,7 +114,7 @@
          <!-- Posts -->
          <article class="posts">
          @foreach($posts as $post)
-          <section class="post bg-white py-2 my-2 border rounded">
+          <section class="post bg-white p-4 my-2 border rounded">
              <!-- top -->
               <div class="p-2 flex justify-between">
                   <div class="flex ">
