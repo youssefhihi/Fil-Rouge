@@ -54,8 +54,7 @@ class EmpruntsController extends Controller
     public function returnMail(Reservation $reservation)
     {
         try{
-            // Mail::to($reservation->client->user->email)->send(new ReturnReminderEmail($reservation->id));
-            dd('ff');
+            Mail::to($reservation->client->user->email)->send(new ReturnReminderEmail($reservation->id));
             $count = $reservation->send_email + 1;
             $reservation->update([
                 'send_email' => $count,

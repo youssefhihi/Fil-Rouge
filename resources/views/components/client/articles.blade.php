@@ -294,8 +294,12 @@
                               var commentHtml = `
                               <div class="flex items-center space-x-2">
                                     <div class="group relative flex flex-shrink-0 self-start cursor-pointer">
-                                    ${comment.client.image ? `<img src="/storage/${comment.client.image.path}" alt="" class="h-8 w-8 object-fill rounded-full">` : `<img src="/profileMale.png" alt="" class="h-8 w-8 object-fill rounded-full">`}
-                                    </div>
+                                    ${comment.client.image 
+                                          ? `<img src="/storage/${comment.client.image.path}" alt="" class="h-8 w-8 object-fill rounded-full">` 
+                                          : (comment.client.gender === 'female' 
+                                              ? `<img src="{{asset('imgs/profileFemale.png')}}" alt="" class="h-8 w-8 object-fill rounded-full">` 
+                                              : `<img src="{{asset('imgs/profileMale.png')}}" alt="" class="h-8 w-8 object-fill rounded-full">`)
+                                      }                                    </div>
                                     <div class="flex justify-between w-full bg-gray-100 rounded-xl">
                                         <div class="w-auto px-2 pb-2">
                                             <div class="font-medium">
@@ -345,8 +349,12 @@
                             var commentHtml = `
                                 <div class="flex items-center space-x-2">
                                     <div class="group relative flex flex-shrink-0 self-start cursor-pointer">
-                                    ${comment.client.image ? `<img src="/storage/${comment.client.image.path}" alt="" class="h-8 w-8 object-fill rounded-full">` : `<img src="/public/image.png" alt="" class="h-8 w-8 object-fill rounded-full">`}
-                                    </div>
+                                    ${comment.client.image 
+                                          ? `<img src="/storage/${comment.client.image.path}" alt="" class="h-8 w-8 object-fill rounded-full">` 
+                                          : (comment.client.gender === 'female' 
+                                              ? `<img src="{{asset('imgs/profileFemale.png')}}" alt="" class="h-8 w-8 object-fill rounded-full">` 
+                                              : `<img src="{{asset('imgs/profileMale.png')}}" alt="" class="h-8 w-8 object-fill rounded-full">`)
+                                      }                                    </div>
                                     <div class="flex justify-between w-full bg-gray-100 rounded-xl">
                                         <div class="w-auto px-2 pb-2">
                                             <div class="font-medium">

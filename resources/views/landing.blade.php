@@ -6,9 +6,9 @@
 		<div class="container mx-auto text-center text-white">
 			<h1 class="text-5xl font-medium font-normal mb-6">Now In Morroco</h1>
 			<p class="text-xl mb-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <button class="relative px-8 py-2 rounded-xl backdrop-filter backdrop-blur-md isolation-auto z-10 border-2 border-red-500 text-red-600 hover:text-white font-normal font-semibold
+          <a href="/register"> <button class="relative px-8 py-2 rounded-xl backdrop-filter backdrop-blur-md isolation-auto z-10 border-2 border-red-500 text-red-600 hover:text-white font-normal font-semibold
                     before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-right-full before:hover:right-0 before:rounded-full  before:bg-red-600 before:-z-10  before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700">Join Us</button>                </div>
-		</div>
+</a> 		</div>
 	</div>
 </section>
   
@@ -20,7 +20,7 @@
                     <p class="font-normal  text-white leading-6 text-lg  ">At our library, we're more than just a collection of books and shelves. We're a dynamic center of knowledge, innovation, and community engagement. With a diverse range of resources, from traditional printed materials to cutting-edge digital content, we cater to the needs and interests of all our patrons. Our passionate staff members are dedicated to providing personalized assistance and fostering a welcoming environment where curiosity thrives. From educational programs and workshops to cultural events and discussions. Join us on a journey of exploration and discovery as we celebrate the joy of lifelong learning together.</p>
                     <div class="flex justify-start mt-5">
                         <button
-                            class="inline-block py-2 px-6 rounded-l-xl rounded-t-xl bg-red-600 hover:bg-white hover:text-red-600 focus:text-red-600 focus:bg-red-300 text-white font-bold leading-loose transition duration-200"
+                            class="inline-block py-2 px-6 rounded-l-xl rounded-t-xl bg-red-600 hover:bg-white hover:text-red-600 focus:text-red-600 focus:bg-white text-white font-bold leading-loose transition duration-200"
                             >
                             read More
                         </button>
@@ -34,7 +34,7 @@
         
 </section>
 
-<section id="service" class="  py-10 ">
+<section id="service" class="  py-10 " style="background-image: linear-gradient(90deg, #403B4A, #E7E9BB);">
   <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
     <div class="text-center">
       <h2 class="text-2xl text-red-600 font-bold leading-tight text-gray-900 sm:text-4xl xl:text-5xl">
@@ -51,63 +51,65 @@
           <i class="fa-solid fa-chart-column text-3xl text-gray-900"></i>
         </div>
         <h3 class="mt-8 text-xl font-bold text-gray-900">Online Book Catalog</h3>
-        <p class="mt-5 text-base text-gray-600">Access to an extensive collection of books, including fiction, non-fiction, academic, and reference materials, with easy search and filter options to find desired books quickly.</p>
+        <p class="mt-5 text-base text-white">Access to an extensive collection of books, including fiction, non-fiction, academic, and reference materials, with easy search and filter options to find desired books quickly.</p>
       </div>
 
       <!-- Feature 2 -->
-      <div class="md:p-8 lg:p-10 md:border-l md:border-red-300 flex flex-col justify-center items-center">
+      <div class="md:p-8 lg:p-10 md:border-l md:border-white flex flex-col justify-center items-center">
         <div class="w-10 h-10 rounded-full bg-teal-200 flex justify-center items-center">
           <i class="fa-solid fa-truck-fast text-3xl text-gray-900"></i>
         </div>
         <h3 class="mt-8 text-xl font-bold text-gray-900">E-Lending Services</h3>
-        <p class="mt-5 text-base text-gray-600">Explore our vast collection of books covering a variety of topics and genres. From fiction to non-fiction, scholarly articles to popular magazines, there's something for every interest and age group.</p>
+        <p class="mt-5 text-base text-white">Explore our vast collection of books covering a variety of topics and genres. From fiction to non-fiction, scholarly articles to popular magazines, there's something for every interest and age group.</p>
       </div>
 
       <!-- Feature 3 -->
-      <div class="md:p-8 lg:p-10 md:border-l md:border-red-300 flex flex-col justify-center items-center">
+      <div class="md:p-8 lg:p-10 md:border-l md:border-white flex flex-col justify-center items-center">
         <div class="w-10 h-10 rounded-full bg-yellow-200 flex justify-center items-center">
-          <i class="fa-solid fa-shield text-3xl text-gray-900"></i>
+          <i class="fa-solid fa-shield text-3xl text-white"></i>
         </div>
         <h3 class="mt-8 text-xl font-bold text-gray-900">Security First</h3>
-        <p class="mt-5 text-base text-gray-600">Ensure the safety of your data with top-notch security features. Your
+        <p class="mt-5 text-base text-white">Ensure the safety of your data with top-notch security features. Your
           privacy is our priority.</p>
       </div>
 
       <!-- Feature 4 -->
-      <div class="md:p-8 lg:p-10 md:border-t md:border-red-300 flex flex-col justify-center items-center">
+      <div class="md:p-8 lg:p-10 md:border-t md:border-white flex flex-col justify-center items-center">
         <div class="w-10 h-10 rounded-full bg-red-200 flex justify-center items-center">
-          <i class="fa-solid fa-cloud text-3xl text-gray-900"></i>
+          <i class="fa-solid fa-cloud text-3xl text-white"></i>
         </div>
         <h3 class="mt-8 text-xl font-bold text-gray-900">Cloud Integration</h3>
-        <p class="mt-5 text-base text-gray-600">Access your data from anywhere with seamless cloud integration. Work
+        <p class="mt-5 text-base text-white">Access your data from anywhere with seamless cloud integration. Work
           without boundaries.</p>
       </div>
 
       <!-- Feature 5 -->
-      <div class="md:p-8 lg:p-10 md:border-l md:border-red-300 md:border-t flex flex-col justify-center items-center">
+      <div class="md:p-8 lg:p-10 md:border-l md:border-white md:border-t flex flex-col justify-center items-center">
         <div class="w-10 h-10 rounded-full bg-green-200 flex justify-center items-center">
-          <i class="fa-solid fa-pen-nib text-3xl text-gray-900"></i>
+          <i class="fa-solid fa-pen-nib text-3xl text-white"></i>
         </div>
         <h3 class="mt-8 text-xl font-bold text-gray-900">Task Management</h3>
-        <p class="mt-5 text-base text-gray-600">Organize your workflow with efficient task management features. Stay on
+        <p class="mt-5 text-base text-white">Organize your workflow with efficient task management features. Stay on
           top of your projects effortlessly.</p>
       </div>
 
       <!-- Feature 6 -->
-      <div class="md:p-8 lg:p-10 md:border-l md:border-red-300 md:border-t flex flex-col justify-center items-center">
+      <div class="md:p-8 lg:p-10 md:border-l md:border-white md:border-t flex flex-col justify-center items-center">
         <div class="w-10 h-10 rounded-full bg-orange-200 flex justify-center items-center">
-          <i class="fa-solid fa-bolt text-3xl text-gray-900"></i>
+          <i class="fa-solid fa-bolt text-3xl text-white"></i>
         </div>
         <h3 class="mt-8 text-xl font-bold text-gray-900">Performance Metrics</h3>
-        <p class="mt-5 text-base text-gray-600">Monitor and measure your performance with comprehensive metrics.
+        <p class="mt-5 text-base text-white">Monitor and measure your performance with comprehensive metrics.
           Optimize your processes for maximum efficiency.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section>
+<section >
 <div class="2xl:mx-auto 2xl:container mx-4 py-16">
+<x-success-message/>   
+  <x-error-message /> 
   <!--- more free and premium Tailwind CSS components at https://tailwinduikit.com/ --->
   <div class="w-full relative flex items-center justify-center">
     <img src="{{asset('imgs/background.jpg')}}" alt="dining" class="w-full h-full absolute z-0 hidden sm:block" />
@@ -122,33 +124,41 @@
       </p>
       <div class="sm:border border-white rounded-xl flex-col sm:flex-row flex items-center lg:w-5/12 w-full mt-12 space-y-4 sm:space-y-0">
         <input name="email" type="text"  class="border border-white sm:border-transparent text-base w-full font-medium leading-none text-white p-4 focus:outline-none bg-transparent placeholder-white" placeholder="Email Address" />
+
         <button class="focus:outline-none md:rounded-r-xl focus:ring-offset-2 focus:ring border border-white sm:border-transparent w-full sm:w-auto bg-white py-4 px-6 hover:bg-opacity-75">Subscribe</button>
       </div>
+      <x-error-input :messages="$errors->get('email')" class="mt-2 bg-white px-3 py-1 rounded-xl" />
     </form>
   </div>
 </div>
 </section>
 
-<div class="max-w-screen-xl  px-16  min-h-sceen mb-16">
+<div class=" max-w-screen-xl  px-16  min-h-sceen mb-16"  style="background-image: linear-gradient(90deg, #403B4A, #E7E9BB);">
 	<div class="flex flex-col items-right">
-		<h2 class="font-bold underline text-red-600 text-5xl mt-5 tracking-tight">
+		<h2 class="text-3xl lg:text-4xl font-bold leading-9 text-red-600 pb-4 mt-5">
 			FAQ
 		</h2>
-		<p class="text-white text-xl mt-3">
+		<p class="text-white text-l ">
 			Frequenty asked questions
 		</p>
 	</div>
-	<div class="grid divide-y divide-neutral-200 max-w-xl mt-8">	
+	<div class="grid divide-y divide-neutral-200 max-w-xl mt-5">	
 		<div class="py-5">
 			<details class="group">
 				<summary class="flex justify-between items-center font-medium cursor-pointer list-none">
-					<span> Can I try this platform for free?</span>
+					<div class="act flex space-x-2  ml-10">
+           
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="25px" height="25px" viewBox="0 0 24 24" id="cursor-right-2" class="icon line"><path id="primary" d="M12.46,17.86l8.06-5a1.07,1.07,0,0,0,0-1.78l-8.06-5a1,1,0,0,0-1.41,1.2L11.84,10H4a1,1,0,0,0-1,1v2a1,1,0,0,0,1,1h7.84l-.79,2.66A1,1,0,0,0,12.46,17.86Z" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"/>
+            </svg>
+            <p class="text-sm">
+            <span> Can I try this platform for free?</span></p>
+           </div>
 					<span class="transition group-open:rotate-180">
                 <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
 </svg>
               </span>
 				</summary>
-				<p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+				<p class="text-black mt-3 group-open:animate-fadeIn text-sm">
 					We offers a free trial of its  platform for a limited time. During the trial period,
 					you will have access to a limited set of features and functionality, but you will not be charged.
 				</p>
@@ -157,13 +167,18 @@
 		<div class="py-5">
 			<details class="group">
 				<summary class="flex justify-between items-center font-medium cursor-pointer list-none">
-					<span> How do I access   documentation?</span>
+        <div class="act flex space-x-2  ml-10">
+           
+           <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="25px" height="25px" viewBox="0 0 24 24" id="cursor-right-2" class="icon line"><path id="primary" d="M12.46,17.86l8.06-5a1.07,1.07,0,0,0,0-1.78l-8.06-5a1,1,0,0,0-1.41,1.2L11.84,10H4a1,1,0,0,0-1,1v2a1,1,0,0,0,1,1h7.84l-.79,2.66A1,1,0,0,0,12.46,17.86Z" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"/>
+         </svg>
+        <p class="text-sm"><span> How do I access   documentation?</span></p>
+        </div>
 					<span class="transition group-open:rotate-180">
                 <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
 </svg>
               </span>
 				</summary>
-				<p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+				<p class="text-black mt-3 group-open:animate-fadeIn text-sm">
 					  Documentation is available on the company's website and can be accessed by
 					logging in to your account. The documentation provides detailed information on how to use the ,
 					as well as code examples and other resources.
@@ -173,13 +188,17 @@
 		<div class="py-5">
 			<details class="group">
 				<summary class="flex justify-between items-center font-medium cursor-pointer list-none">
-					<span> How do I contact support?</span>
+        <div class="act flex space-x-2  ml-10">
+           
+           <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="25px" height="25px" viewBox="0 0 24 24" id="cursor-right-2" class="icon line"><path id="primary" d="M12.46,17.86l8.06-5a1.07,1.07,0,0,0,0-1.78l-8.06-5a1,1,0,0,0-1.41,1.2L11.84,10H4a1,1,0,0,0-1,1v2a1,1,0,0,0,1,1h7.84l-.79,2.66A1,1,0,0,0,12.46,17.86Z" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"/>
+         </svg>
+        <p class="text-sm"><span> How do I contact support?</span></p></div>
 					<span class="transition group-open:rotate-180">
                 <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
 </svg>
               </span>
 				</summary>
-				<p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+				<p class="text-black mt-3 group-open:animate-fadeIn text-sm">
 					If you need help with the platform or have any other questions, you can contact the
 					company's support team by submitting a support request through the website or by emailing
 					support@We.com.
@@ -189,28 +208,36 @@
 		<div class="py-5">
 			<details class="group">
 				<summary class="flex justify-between items-center font-medium cursor-pointer list-none">
-					<span> Do you offer any discounts or promotions?</span>
+        <div class="act flex space-x-2  ml-10">
+           
+           <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="25px" height="25px" viewBox="0 0 24 24" id="cursor-right-2" class="icon line"><path id="primary" d="M12.46,17.86l8.06-5a1.07,1.07,0,0,0,0-1.78l-8.06-5a1,1,0,0,0-1.41,1.2L11.84,10H4a1,1,0,0,0-1,1v2a1,1,0,0,0,1,1h7.84l-.79,2.66A1,1,0,0,0,12.46,17.86Z" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"/>
+         </svg>
+        <p class="text-sm"><span> Do you offer any discounts or promotions?</span></p></div>
 					<span class="transition group-open:rotate-180">
                 <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
 </svg>
               </span>
 				</summary>
-				<p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+				<p class="text-black mt-3 group-open:animate-fadeIn text-sm">
 					We may offer discounts or promotions from time to time. To stay up-to-date on the latest
 					deals and special offers, you can sign up for the company's newsletter or follow it on social media.
 				</p>
 			</details>
 		</div>
-		<div class="py-5">
+		<div class="py-5 mb-10">
 			<details class="group">
 				<summary class="flex justify-between items-center font-medium cursor-pointer list-none">
-					<span> How do we compare to other similar services?</span>
+        <div class="act flex space-x-2  ml-10">
+           
+           <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="25px" height="25px" viewBox="0 0 24 24" id="cursor-right-2" class="icon line"><path id="primary" d="M12.46,17.86l8.06-5a1.07,1.07,0,0,0,0-1.78l-8.06-5a1,1,0,0,0-1.41,1.2L11.84,10H4a1,1,0,0,0-1,1v2a1,1,0,0,0,1,1h7.84l-.79,2.66A1,1,0,0,0,12.46,17.86Z" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"/>
+         </svg>
+        <p class="text-sm"><span> How do we compare to other similar services?</span></p></div>
 					<span class="transition group-open:rotate-180">
                 <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
 </svg>
               </span>
 				</summary>
-				<p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+				<p class="text-black mt-3 group-open:animate-fadeIn text-sm ">
 					 This platform is a highly reliable and feature-rich service that offers a wide range
 					of tools and functionality. It is competitively priced and offers a variety of billing options to
 					suit different needs and budgets.

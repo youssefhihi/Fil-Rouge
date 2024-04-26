@@ -76,7 +76,7 @@ Route::patch('/edit-socialMedia-Links', [ProfileController::class,'socialeMedia'
 Route::get('/{username}', [ProfileController::class,'userProfile'])->name('user.profile');
             //books Page
 Route::get('/books/searchBook', [ClientController::class,'search'])->name('search');            
-Route::get('/books', [ClientController::class,'index'])->name('books.index');
+Route::get('/home/books', [ClientController::class,'index'])->name('books.client');
 Route::get('/books/sort/{genre}', [ClientController::class,'sortGenre'])->name('sortGenre');
 Route::get('/books/sort{author}', [ClientController::class,'sortAuthor'])->name('sortAuthor');
 Route::get('/books/{book}', [ClientController::class,'show'])->name('book.details');
@@ -88,7 +88,7 @@ Route::delete('/comment/delete/{comment}', [CommentController::class,'destroy'])
 });
 
 //admin
-Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->group(function () {
+Route::middleware(['auth', 'role:admin'])->prefix('/dashboard')->group(function () {
             //CRUD books
     Route::resource('/books', BookController::class);
             //CRUD GENRE

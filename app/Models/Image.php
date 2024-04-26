@@ -17,7 +17,7 @@ class Image extends Model
 
     ];
      /**
-     * Get the parent imageable model (user or post).
+     * Get the parent imageable model (user or post or author).
      */
     public function imageable(): MorphTo
     {

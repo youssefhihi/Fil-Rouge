@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hhh</title>
     <!-- links -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/téailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
     <!-- scripts -->
     <script src="https://kit.fontawesome.com/7d35781f0a.js" crossorigin="anonymous"></script> 
     <script src="https://cdn.tailwindcss.com"></script>

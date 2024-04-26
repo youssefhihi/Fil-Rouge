@@ -1,8 +1,8 @@
 <x-visitor-layout>
 <div class=" w-full p-5 mb-20 mt-28">
     <div class=" flex rounded-lg justify-center ">
-        <div class=" hidden lg:block lg:w-1/2 bg-cover"
-            style="background-image:url('{{asset('imgs/register.jpeg')}}')">
+        <div class=" hidden lg:block lg:w-1/2 bg-cover "
+            style="background-image:url('{{asset('imgs/register.jpeg')}}'); background-position:center; " >
         </div>
         <div class="Registerbox ">
      

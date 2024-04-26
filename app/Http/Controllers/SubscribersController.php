@@ -32,7 +32,7 @@ class SubscribersController extends Controller
             'email' => 'required|email|unique:subscribers,email',
         ]);
         Subscriber::create($request->all());
-        return redirect()->back()->with('success','success');
+        return redirect()->back()->with('success','You subscribe us with success wait our NewsLetter');
     }
 
     /**

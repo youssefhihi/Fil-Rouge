@@ -10,13 +10,13 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/forms.css')}}">
     <!-- scripts -->
-    <script src="https://kit.fontawesome.com/7d35781f0a.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/7d35781f0a.js" crossorigin="anonymous"></script> 
     <script src="https://cdn.tailwindcss.com"></script>
 
     
     
 </head>
-<body class="bg-red-700  bg-opacity-30">
+<body class="bg-black">
 <header class=" text-white w-full fixed left-0 top-0 z-20">
         <nav class=" backdrop-filter backdrop-blur-xl py-4">
             <div class="px-8 md:px-14 lg:px-20 w-full">
@@ -45,12 +45,14 @@
                     @else
                     <div class="hidden md:flex space-x-3 items-center">
                         <a href="/register">
-                            <button class="bg-transparent bg-white hover:bg-red-600 text-red-600  py-1 px-4 border border-red-600 hover:text-white rounded-lg">
+                            <button class="relative px-5 py-1 rounded-xl backdrop-filter backdrop-blur-md bg-white isolation-auto z-10 border-2 border-red-500 text-red-600 hover:text-white font-normal font-semibold
+                    before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-right-full before:hover:right-0 before:rounded-full  before:bg-red-600 before:-z-10  before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700">
                                 Sign Up         
                             </button>
                         </a>
                         <a href="/login">
-                            <button class=" bg-red-600 hover:bg-white text-white  py-1 px-5 border border-white hover:text-red-600 rounded-lg">
+                            <button class="relative px-5 py-1 rounded-xl backdrop-filter backdrop-blur-md bg-red-600 isolation-auto z-10 border-2 border-red-500 text-white hover:text-red-600 font-normal font-semibold
+                    before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-right-full before:hover:right-0 before:rounded-full  before:bg-white before:-z-10  before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700">
                                 Log In   
                         </button>
                         </a>

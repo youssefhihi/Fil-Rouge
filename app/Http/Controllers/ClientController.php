@@ -16,7 +16,7 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
         $genres =  Genre::withCount('books')->orderByDesc('books_count')->limit(4)->get();
         $authors =  Author::withCount('books')->orderByDesc('books_count')->limit(4)->get();

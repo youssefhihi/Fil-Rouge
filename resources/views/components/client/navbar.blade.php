@@ -52,7 +52,7 @@
                 </li>           
          
             <li class="">
-            <a href="/books" class="flex flex-col px-2 items-center  {{ $page === 'books' ? 'border-b-2 border-black text-black' : 'text-gray-500 hover:text-black' }}"> 
+            <a href="{{route('books.client')}}" class="flex flex-col px-2 items-center  {{ $page === 'books' ? 'border-b-2 border-black text-black' : 'text-gray-500 hover:text-black' }}"> 
                     <x-icon name="books"/>                     
                     <span class="text-xs">Books</span>
                 </a>
@@ -74,24 +74,24 @@
             <li class="">
                 <a href="/profile" class="flex flex-col items-center px-2 text-gray-500 hover:text-black">
                 @if (Auth::user()->client->image)             
-                    <img src="{{asset('storage/' .Auth::user()->client->image->path)}}" alt="" class="rounded-full h-7 w-7  ">
+                    <img src="{{asset('storage/' .Auth::user()->client->image->path)}}" alt="" class="rounded-full h-6 w-6  ">
                     @else
                     @if (Auth::user()->client->gender === "female")
-                    <img src="{{asset('imgs/profileFemale.png')}}" alt="" class="rounded-full h-7 w-7  ">
+                    <img src="{{asset('imgs/profileFemale.png')}}" alt="" class="rounded-full h-6 w-6  ">
                     @else
-                    <img src="{{asset('imgs/profileMale.png')}}" alt="" class="rounded-full h-7 w-7  ">
+                    <img src="{{asset('imgs/profileMale.png')}}" alt="" class="rounded-full h-6 w-6  ">
                     @endif 
                     @endif                    
-            <span class="">Me</span>
+            <span class="text-xs">account</span>
                 </a>
             </li>
         
             <div class="border-r-4 border-gray-500  "></div>
-            <li class="/">       
-                    <div class="flex flex-col items-center text-gray-500 hover:text-black ">
+            <li class="">       
+                    <a href="/" class="flex flex-col items-center text-gray-500 hover:text-black ">
                     <x-icon name="about"/>
                       <span class="text-xs">about us</span>
-                    </div>
+                    </a>
             </li>     
            
             
