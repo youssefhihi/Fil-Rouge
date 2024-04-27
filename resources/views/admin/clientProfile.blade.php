@@ -37,7 +37,7 @@
                         class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                        
                         <li class="flex items-center py-3">
-                            <span>Join At</span>
+                            <span>Joined At</span>
                             <span class="ml-auto"> {{ date('F Y', strtotime($user->created_at)) }}</span>
                         </li>
                     </ul>
@@ -52,8 +52,8 @@
                 <div class = "flex flex-wrap my-5 -mx-2">
            
                 <x-cards name="Total Posts" :count="$user->client->posts->count()" icon="post"/>
-                <x-cards name="Total Posts" :count="$user->client->likes->count()" icon="like"/>
-                <x-cards name="Total Posts" :count="$user->client->likes->count()" icon="like"/>
+                <x-cards name="Total Likes" :count="$countLikes" icon="like"/>
+                <x-cards name="Total Comments" :count="$countComments" icon="comments"/>
 
                 </div>
                 <!-- About Section -->

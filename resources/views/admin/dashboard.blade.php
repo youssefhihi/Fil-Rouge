@@ -1,7 +1,6 @@
  <!-- CONTENT -->
  <x-admin-layout>
-        <div class = "flex flex-wrap my-5 -mx-2">
-           
+        <div class = "flex flex-wrap my-5 -mx-2">         
                <x-cards name="Total Users" :count="$usersCount" icon="usersS"/>
                <x-cards name="New Users This Month" :count="$newRegistrations" icon="usersS"/>
                <x-cards name="Daily Posts" :count="$dailyPosts" icon="post"/>
@@ -12,8 +11,8 @@
 
 
 
-       <div>
-        <table>
+       <div >
+        <table >
         <thead class="bg-gray-50">
             <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -31,5 +30,6 @@
             
         </tbody>
         </table>
+      
        </div>
 </x-admin-layout>

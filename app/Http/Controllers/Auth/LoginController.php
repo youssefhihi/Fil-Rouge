@@ -26,7 +26,7 @@ class LoginController extends Controller
         }else{
             if(auth()->user()->client->isbanned){
                 Auth::logout();
-                abort(403);
+                abort(403,'admin banned you');
             }else{
                 return redirect()->intended('/home')->with('success','You logged with success! ,Welcome Back');
             }

@@ -7,6 +7,8 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Client;
+use App\Models\Rating;
+use App\Models\Comment;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 
@@ -58,7 +60,14 @@ class AdminController extends Controller
     public function ShowClientProfile(User $username)
     {
         $user = $username;
-        return view('admin.clientProfile',compact('user'));
+        $client = $user->client;
+        $countLikes = Rating::whereHas('post', function ($query) use ($client) {
+            $query->where('client_id', $client->id);
+        })->count(); 
+        $countComments = Comment::whereHas('post', function ($query) use ($client) {
+            $query->where('client_id', $client->id);
+        })->count();
+        return view('admin.clientProfile',compact('user','countLikes','countComments'));
     }
 
     /**

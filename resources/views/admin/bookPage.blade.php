@@ -31,7 +31,7 @@
                                 <i class="far fa-star" ></i>
                             @endif
                             @endfor             
-                            <p >12<span class="text-sm font-semibold"> reviews</span> </p>
+                            <p >{{$book->reviews->count()}}<span class="text-sm font-semibold"> reviews</span> </p>
                         </div>
                 </div>
                 </div>
