@@ -1,10 +1,12 @@
 <x-visitor-layout>
 <div class="p-5 mb-8 mt-20">
+<x-success-message class="mx-auto max-w-2xl" />   
+<x-error-message class="mx-auto max-w-2xl"/> 
     <div class=" flex rounded-lg justify-center ">
         <!-- <div class=" hidden lg:block lg:w-1/2 bg-cover "
             style="background-image:url('{{asset('imgs/register.jpeg')}}')">
         </div> -->
-        <div class="box " style="height: 350px;">
+        <div class="box " style="height: 450px;">
      
           <form action="{{route('NewPassword')}}" method="post" autocomplete="off"  class=" bg-white px-10 py-4 rounded-md z-10 flex gap-8">        
             @csrf

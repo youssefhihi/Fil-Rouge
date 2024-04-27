@@ -101,7 +101,7 @@
                 </div>
                 <div class=" gap-1">
                     <x-icon name="comments"/>
-                    <p class="text-gray-700 pl-2">11</p>
+                    <p class="text-gray-700 pl-2">{{$countComments}}</p>
                 </div>
             </div>
         </div>

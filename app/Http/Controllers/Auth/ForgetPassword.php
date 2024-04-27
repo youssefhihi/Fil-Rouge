@@ -36,7 +36,7 @@ class ForgetPassword extends Controller
         
          Mail::to( $request->email)->send(new ForgetPasswordMail($token));
         
-        return redirect()->back();
+        return redirect()->back()->with('success','Please check your email for password reset .');
     }
 
     public function ResetPassword($token)

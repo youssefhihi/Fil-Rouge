@@ -33,7 +33,7 @@ class PostController extends Controller
                                 ->get();
         $type = $request->input('type');
         $search = '%'.$request->input('search') .'%';
-        $query = Post::orderByDesc('created_at');
+        $query = Post::query();
         if($type){
             if ($type !== 'all' && $type !== null) {
                 $query->where('type', $type);
@@ -45,6 +45,7 @@ class PostController extends Controller
                 $query->whereAny([
                     'city',
                     'bio',
+                    'gender',
                 ], 'like', $search);
             })
             ->orWhereHas('client.user', function($query) use ($search) {
@@ -53,7 +54,7 @@ class PostController extends Controller
             
             
         }
-        $posts = $query->get();
+        $posts = $query->orderByDesc('id')->get();
         
         return view('client.home',compact('posts','genres','books','authors'));   
     }

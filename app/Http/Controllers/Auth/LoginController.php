@@ -22,13 +22,13 @@ class LoginController extends Controller
         $request->authenticate();
         $request->session()->regenerate();        
         if(auth()->user()->role === 'admin'){
-            return redirect('/dashboard')->with('welcome','Welcome Back');
+            return redirect('/dashboard/statistic')->with('success','You logged with success! ,Welcome Back');
         }else{
             if(auth()->user()->client->isbanned){
                 Auth::logout();
                 abort(403);
             }else{
-                return redirect()->intended('/home');
+                return redirect()->intended('/home')->with('success','You logged with success! ,Welcome Back');
             }
         }
     }

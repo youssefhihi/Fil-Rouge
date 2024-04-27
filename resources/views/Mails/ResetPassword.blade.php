@@ -7,7 +7,7 @@
     <title>Forgot Password</title>
 </head>
 <body>
-    <p>Hello {{$user->name}},</p>
+    <p>Hello,</p>
     <p>We received a request to reset your password. Click the link below to reset it:</p>
     <a href="{{route('ResetPassword',$token)}}" class="button">Reset</a>
     <p>If you didn't request a password reset, you can ignore this email.</p>

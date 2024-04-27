@@ -96,17 +96,17 @@
         
             </div>
             <div class="pt-3 flex justify-between px-16 items-center w-full ">
-                <div class=" gap-1">
-                    <x-icon name="post"/>
-                    <p class="text-gray-700">{{$postCount}}</p>
+                <div class=" gap-1 flex flex-col ">
+                    <p class="flex space-x-3 font-serif ">Posts <x-icon name="post"/></p>
+                    <p class="text-gray-700 text-center">{{$postCount}}</p>
                 </div>
-                <div class=" gap-1">
-                    <x-icon name="heart"/>
-                    <p class="text-gray-700">{{$likesCount}}</p>
+                <div class=" gap-1 flex flex-col ">
+                    <p class="flex space-x-3 font-serif ">Likes <x-icon name="heart"/></p>
+                    <p class="text-gray-700 text-center">{{$likesCount}}</p>
                 </div>
-                <div class=" gap-1">
-                    <x-icon name="comments"/>
-                    <p class="text-gray-700">12</p>
+                <div class=" gap-1 flex flex-col ">
+                    <p class="flex space-x-3 font-serif ">Comments  <x-icon name="comments"/></p>
+                    <p class="text-gray-700 text-center ">{{$commentsCount}}</p>
                 </div>
             </div>
         </div>

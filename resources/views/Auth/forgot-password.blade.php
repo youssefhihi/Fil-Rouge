@@ -1,5 +1,7 @@
 <x-visitor-layout>
 <div class="p-5 mb-8 mt-20">
+<x-success-message />   
+<x-error-message/> 
     <div class=" flex rounded-lg justify-center ">
         <!-- <div class=" hidden lg:block lg:w-1/2 bg-cover "
             style="background-image:url('{{asset('imgs/register.jpeg')}}')">

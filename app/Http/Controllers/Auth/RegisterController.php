@@ -28,6 +28,6 @@ class RegisterController extends Controller
         event(new Registered($user));
         $user->client()->create();
         Auth::login($user);
-        return redirect('/profile');
+        return redirect('/home')->with('success', 'Registration successful! Welcome to our platform.');
     }
 }
