@@ -6,48 +6,49 @@
 <div class="w-full m-auto mt-10 flex flex-col gap-5">
     <x-success-message/>
         <x-error-message/>
-        <div class="flex space-x-10 w-full bg-white rounded-md p-5">
-                <div class="w-1/4">
-                    <img src="{{asset('storage/' . $book->image->path)}}" alt="">
-                </div>
-                <div class="flex flex-col gap-5  w-3/4">
-                    <div class="flex flex-col gap-4">
-                        <p class="text-3xl font-bold text-center mb-2">{{$book->title}}</p>
-                        <p class="text-xl font-medium  px-4">Author : <span class="text-gray-700  font-normal hover:underline">{{$book->author->name}}</span></p>
-                        <p class="text-xl  font-medium px-4">Genre: <span class="text-gray-700 font-normal hover:underline">{{$book->genre->name}}</span></p> 
-                        <div class="flex justify-between max-w-xl">
-                            <p class="text-xl  font-medium px-4">Publication Date: <span class="text-gray-700 font-normal ">{{$book->publicationDate}}</span></p> 
-                            <p class="text-xl  font-medium px-4">Edition: <span class="text-gray-700 font-normal ">{{$book->edition}}</span></p> 
-                        </div>
-                        <div class="flex justify-between max-w-xl">
-                            <p class="text-xl  font-medium px-4">Number of pages: <span class="text-gray-700 font-normal ">{{$book->pagesNumber}} pages</span></p> 
-                            <p class="text-xl  font-medium px-4">Language: <span class="text-gray-700 font-normal ">{{$book->language}}</span></p> 
-                        </div>
-                        <p class="text-xl font-medium px-4">Description: <span class="text-gray-700 font-normal">{{$book->description}}</span></p> 
-
-                    </div>    
-                    <div class="flex justify-between px-10 ">
-                        <div onclick="openReview()" class="cursor-pointer flex space-x-3">
-                            <div class="flex text-xl p-1 gap-1 ">
-                                                       
-                            @for ($i = 0; $i < 5; $i++)
-                                @if ($i < $stars)
-                                    <i class="fas fa-star text-yellow-600"></i>
-                                @else
-                                    <i class="far fa-star" ></i>
-                                @endif
-                            @endfor
-                        </div>                            
-                            <p >{{$book->reviews->count()}}<span class="text-sm font-semibold"> reviews</span> </p>
-                        </div>
-                </div>
-                <div class="flex justify-end mr-2">
-                          <a href="{{route('reservePage',$book->ISBN)}}" class="bg-black text-white border-xl flex space-x-2 rounded-xl py-2 px-8">
-                             <i class="fas fa-shopping-basket mt-1"></i> <span>Reserve</span>
-                          </a>
-                      </div>
-                </div>
+        <div class="flex flex-col md:flex-row space-y-5 md:space-y-0 w-full bg-white rounded-md p-5">
+    <div class="w-full md:w-1/4 lg:pr-5">
+        <img src="{{asset('storage/' . $book->image->path)}}" alt="" class="w-full h-auto">
+    </div>
+    <div class="flex flex-col gap-5 w-full md:w-3/4">
+        <p class="text-3xl font-bold text-center mb-2">{{$book->title}}</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="flex flex-col gap-2 lg:gap-7 ">
+                <p class="text-xl font-medium">Author: <span class="text-gray-700 font-normal hover:underline">{{$book->author->name}}</span></p>
+                <p class="text-xl font-medium">Genre: <span class="text-gray-700 font-normal hover:underline">{{$book->genre->name}}</span></p> 
+                <p class="text-xl font-medium">Language: <span class="text-gray-700 font-normal ">{{$book->language}}</span></p> 
             </div>
+            <div class="flex flex-col gap-2 lg:gap-7  mt-2 lg:mt-0">
+                <p class="text-xl font-medium">Publication Date: <span class="text-gray-700 font-normal ">{{$book->publicationDate}}</span></p> 
+                <p class="text-xl font-medium">Edition: <span class="text-gray-700 font-normal ">{{$book->edition}}</span></p> 
+                <p class="text-xl font-medium">Number of Pages: <span class="text-gray-700 font-normal ">{{$book->PagesNumber}} pages</span></p> 
+            </div>
+        </div>
+        <p class="text-xl font-medium">Description: <span class="text-gray-700 font-normal ">{{$book->description}}</span></p> 
+        <div class="flex flex-col lg:flex-row lg:justify-between items-center px-4 md:px-10">
+            <div onclick="openReview()" class="cursor-pointer flex  items-center lg:space-x-3">
+                <div class="flex text-xl p-1 gap-1">                      
+                    @for ($i = 0; $i < 5; $i++)
+                        @if ($i < $stars)
+                            <i class="fas fa-star text-yellow-600"></i>
+                        @else
+                            <i class="far fa-star" ></i>
+                        @endif
+                    @endfor
+                </div>                            
+                <p>{{$book->reviews->count()}}<span class="text-sm font-semibold">reviews</span></p>
+            </div>
+            <div class="flex lg:justify-end w-full justify-center ">
+                <a href="{{route('reservePage',$book->ISBN)}}" class=" mt-5 lg:mt-0  inline-block w-full max-w-lg lg:max-w-xs  text-center py-2 px-6 rounded-l-xl border border-black rounded-t-xl bg-black hover:bg-white hover:text-black focus:text-gray-700 focus:bg-gray-200 text-white font-bold leading-loose transition duration-200">
+                    <i class="fas fa-shopping-basket"></i>
+                    <span class="">Reserve</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
             <div class="w-11/12 m-auto mt-20 flex justify-evenly">
     <x-client.articles-bookPage :posts="$posts"/>
 

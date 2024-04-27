@@ -100,7 +100,7 @@
                 @csrf
                
                 <button class="items-center p-2 rounded-2xl bg-black relative overflow-hidden " type="submit">  
-                        <x-icon name="logout"/>
+                        <x-icon name="logout"  class="text-white"/>
                 </button>
             </form>
             </li>

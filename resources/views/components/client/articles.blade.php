@@ -1,6 +1,6 @@
   <!-- article -->
   @props(['posts','page'])
-  <div class="lg:w-6/12 md:7/12 mx-2">
+  <div class="lg:w-6/12 md:7/12 mx-2 w-full px-3">
   <x-success-message class="m-3"/>   
   <x-error-message class="m-3"/> 
          <!--Form   -->
