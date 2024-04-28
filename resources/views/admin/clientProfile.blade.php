@@ -9,22 +9,22 @@
                 <div class="bg-white p-3 ">
                     <div class="image overflow-hidden">
                     @if ($user->client->image)
-                    <img class="h-auto w-full mx-auto"
+                    <img class="h-auto w-full mx-auto rounded-full"
                         src="{{asset('storage/' . $user->client->image->path)}}"
                         alt="Profile">
                     @else
                     @if ($user->client->gender === 'female')
-                    <img class="h-auto w-full mx-auto"
+                    <img class="h-auto w-full mx-auto rounded-full"
                         src="{{asset('imgs/profileFemale.png')}}"
                         alt="Profile">
                     @else  
-                    <img class="h-auto w-full mx-auto"
+                    <img class="h-auto w-full mx-auto rounded-full"
                         src="{{asset('imgs/profileMale.png')}}"
                         alt="Profile">
                     @endif
                     @endif
                     </div>
-                    <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{$user->name}}</h1>
+                    <h1 class="text-gray-900 font-bold text-xl leading-8 my-1 text-center">{{$user->name}}</h1>
                     <h3 class="text-gray-600 font-lg text-semibold leading-6">Bio:</h3>
                     <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">
                         @if ($user->client->bio)

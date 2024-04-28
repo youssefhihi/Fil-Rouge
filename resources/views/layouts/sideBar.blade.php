@@ -10,13 +10,13 @@
                     
                 <div class = "flex-none h-full text-center flex space-x-10  items-center justify-center"> 
                     <div class="flex items-center ">
-                        <span id="current-time" class="mr-2"> </span>
+                        <span id="current-time" class=""> </span>
                         <i class="fas fa-calendar-alt"></i>
                     </div>              
-                    <a href="" class = "flex flex-col items-center px-3">
+                    <a href="/" class = "flex flex-col items-center px-3 mt-5">
                         <div class = "flex-none flex justify-center">
-                            <div class="w-8 h-8 flex ">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShta_GXR2xdnsxSzj_GTcJHcNykjVKrCBrZ9qouUl0usuJWG2Rpr_PbTDu3sA9auNUH64&usqp=CAU" alt="profile" class="shadow rounded-full object-cover" />
+                            <div class="w-10 h-10 flex ">
+                                <img src="{{asset('imgs/logo.png')}}" alt="profile" class="shadow rounded-full object-cover" />
                             </div>
                         </div>
                         <div class = " md:block text-sm md:text-md text-black dark:text-white">Youssef Hihi</div>
@@ -151,3 +151,16 @@
    
 
 
+<script>
+    
+function updateCurrentTime() {
+  var now = new Date();
+  
+  var formattedDate = ('0' + now.getDate()).slice(-2) + '/' + ('0' + (now.getMonth() + 1)).slice(-2) + '/' + now.getFullYear();
+  var formattedTime = ('0' + now.getHours()).slice(-2) + ':' + ('0' + now.getMinutes()).slice(-2) + ':' + ('0' + now.getSeconds()).slice(-2);
+  
+  document.getElementById('current-time').textContent = formattedDate + ' ' + formattedTime;
+}
+setInterval(updateCurrentTime, 1000);
+updateCurrentTime();
+</script>
