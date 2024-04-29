@@ -26,7 +26,8 @@ class PostRepository implements PostRepositoryInterface {
             $post = Post::create($data); 
             if($request->hasFile('image') || $request->file('image')){         
                 $this->storeImg($post, $request->file('image'));
-            }   
+            }  
+            return redirect()->back()->with("success", "Great! Your post has been successfully added."); 
         }
     }
 

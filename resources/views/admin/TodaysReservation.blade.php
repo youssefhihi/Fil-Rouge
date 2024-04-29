@@ -114,7 +114,7 @@
             <tr>
                 <td colspan="3">
                     <div class="text-xl text-gray-800 mt-10 text-center">
-                        No reservations for today
+                        No reservations today
                     </div>
                 </td>
             </tr>            

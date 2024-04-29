@@ -76,7 +76,7 @@ class PostController extends Controller
     {
         try{
             $this->PostService->insert($request);
-            return redirect()->back()->with("success", "Great! Your post has been successfully added.");
+            return redirect()->back();
         } catch (\Exception $e) {
 
             return redirect()->back()->with("error", "Error: " . $e->getMessage());

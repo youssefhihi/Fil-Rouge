@@ -73,18 +73,18 @@
           <div class="py-2 flex justify-between items-center font-serif">
             <button onclick="openAddPost()" class="flex space-x-1  text-black font-normal py-1 px-3 rounded-md  transform hover:scale-105  transition duration-300 ease-in-out">
               <span class="text-md pr-1">Advice</span>
-              <x-icon class="rounded-md p-1 bg-gradient-to-r from-red-700 to-red-300 text-white  hover:from-red-600 hover:to-red-200" name="advice"/>
+              <x-icon class="rounded-md p-1 " name="advice"/>
             </button>
 
             <button onclick="openAddPost()" class="flex space-x-1  text-black font-normal py-1 px-3 rounded-md  transform hover:scale-105  transition duration-300 ease-in-out">
               <span class="text-md pr-1">Question</span>
-              <x-icon class="rounded-md p-1 bg-gradient-to-r from-red-700 to-red-300 text-white  hover:from-red-600 hover:to-red-200"  name="question"/>
+              <x-icon class="rounded-md p-1 "  name="question"/>
             </button>
 
 
             <button onclick="openAddPost()" class="flex space-x-1  text-black font-normal py-1 px-3 rounded-md  transform hover:scale-105  transition duration-300 ease-in-out">
             <span class="text-md pr-1 ">General </span>
-            <x-icon  class="rounded-md p-1 bg-gradient-to-r from-red-700 to-red-300  text-white hover:from-red-600 hover:to-red-200" name="general"/>
+            <x-icon  class="rounded-md p-1 " name="general"/>
             </button>
           </div>
          </div>
