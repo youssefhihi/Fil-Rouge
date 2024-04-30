@@ -43,7 +43,7 @@ class BookController extends Controller
 
             $Book = Book::create($request->validated());
             $this->storeImg($Book, $request->file('image'));          
-            event(new NewsLetterEmail($Book->id));
+            // event(new NewsLetterEmail($Book->id));
             return redirect("/dashboard/books")->with("message", "Book added with success.");
         } catch (\Exception $e) {
 dd($e->getMessage());
@@ -79,7 +79,7 @@ dd($e->getMessage());
         try {
             $book->update($request->validated());
             $this->updateImg($book, $request->file('image'));
-            return redirect()->back()->with("success", "book updated with success.");
+            return redirect('/dashboard/books')->with("success", "book updated with success.");
 
         } catch (\Exception $e) {
             return redirect()->back()->with("error", "Error.");

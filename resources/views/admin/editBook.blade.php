@@ -31,7 +31,7 @@
                             Genre</label>
                             <select name="genre_id" id="genre" class="block py-2.5 px-3 w-full text-md  bg-transparent border-0 border-b-2 border-gray-800 appearance-none  dark:border-black dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 ">
                                 @foreach ( $genres as $genre )    
-                                @if ($genre === $book->genre->name)                            
+                                @if ($genre->name === $book->genre->name)                            
                                 <option value="{{$genre->id}}" selected>{{$genre->name}}</option>           
                                 @else                                
                                 <option value="{{$genre->id}}">{{$genre->name}}</option>
@@ -43,8 +43,10 @@
                 </div>
                 <div class="grid xl:grid-cols-2 xl:gap-6">
                     <div class="relative z-0 mb-6 w-full group">
-                        <label for="edition" class="text-gray-500 dark:text-black ">Edition</label>
-                        <input type="month" value="{{$book->edition}}" name="edition" id="edition" class="block py-2.5 px-0 w-full text-md  bg-transparent border-0 border-b-2 border-gray-800 appearance-none  dark:border-black dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600" placeholder=" " required />
+                        <input type="text" name="edition" id="edition" value="{{$book->edition}}" class="block py-2.5 px-0 w-full text-md  bg-transparent border-0 border-b-2 border-gray-800 appearance-none  dark:border-black dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 peer" placeholder=" " required />
+                        <label for="edition" class="absolute text-md text-gray-500 dark:text-black duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-ray-600 peer-focus:dark:text-gray-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                        Edition
+                        </label>
                     </div>
                     <div class="relative z-0 mb-6 w-full group">
                         <label for="publication date" class="text-gray-500 dark:text-black ">Publication Date</label>
@@ -74,7 +76,7 @@
                             Author</label>
                             <select name="author_id" id="author" class="block py-2.5 px-3 w-full text-md  bg-transparent border-0 border-b-2 border-gray-800 appearance-none  dark:border-black dark:focus:border-gray-500 focus:outline-none focus:ring-0 focus:border-gray-600 ">
                                 @foreach ( $authors as $author )                            
-                                @if ($author === $book->author->name)               
+                                @if ($author->name === $book->author->name)               
                                 <option value="{{$author->id}}" selected>{{$author->name}}</option>           
                                 @else                                
                                 <option value="{{$author->id}}">{{$author->name}}</option>

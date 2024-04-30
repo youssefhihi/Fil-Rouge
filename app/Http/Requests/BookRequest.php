@@ -28,7 +28,7 @@ class BookRequest extends FormRequest
             'author_id' =>'required|exists:authors,id',
             'description' => 'required|string',
             'ISBN'=> 'required|string',
-            'edition' => 'required|date_format:Y-m',
+            'edition' => 'required|string',
             'publicationDate' =>'required|date',
             'pagesNumber' => 'required|integer',
             'quantity' => 'required|integer',

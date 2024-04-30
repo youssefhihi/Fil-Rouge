@@ -38,7 +38,7 @@
                         <form id="deleteBookForm{{$book->id}}" action="{{ route('books.destroy', $book) }}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button type="button" class="deleteBookButton" data-index="{{$book->id}}"><x-icon name="delete"/></button>
+                            <button type="button" class="deleteBookButton" data-index="{{$book->id}}"><x-icon name="delete" class="w-8 h-8"/></button>
                         </form>  
                         <a href="{{route('books.edit',$book->ISBN)}}"><x-icon name="update"/> </a> 
                         <a href="{{route('books.show',$book->ISBN)}}"><x-icon name="details"/></a>

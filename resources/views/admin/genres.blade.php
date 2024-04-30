@@ -37,7 +37,7 @@
                                     <form id="deleteForm{{$genre->id}}" action="{{ route('genres.destroy', $genre) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="deleteButton" data-index="{{$genre->id}}"><x-icon name="delete"/></button>
+                                        <button type="button" class="deleteButton" data-index="{{$genre->id}}"><x-icon name="delete" class="w-8 h-8"/></button>
                                     </form>                 
                                     <a href="{{route('genres.edit',$genre)}}"><x-icon name="update"/></a>
                                     </div>

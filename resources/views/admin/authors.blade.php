@@ -50,7 +50,7 @@
                                     <form id="deleteFormAuthor{{$author->id}}" action="{{ route('authors.destroy', $author) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="deleteButtonAuthor" data-index="{{$author->id}}"><x-icon name="delete"/></button>
+                                        <button type="button" class="deleteButtonAuthor" data-index="{{$author->id}}"><x-icon name="delete" class="w-8 h-8"/></button>
                                     </form>                               
                                     <a href="{{ route('authors.edit', $author) }}"><x-icon name="update"/></a>
                                 </div>
