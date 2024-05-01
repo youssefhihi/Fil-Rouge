@@ -5,7 +5,8 @@
     <!-- meta -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hhh</title>
+    <title>Bookify</title>
+    <link rel="icon" type="image/png" href="{{asset('imgs/logo.png')}}"/>
     <!-- links -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
     <!-- scripts -->

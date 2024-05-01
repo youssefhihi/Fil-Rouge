@@ -43,7 +43,7 @@ class BookController extends Controller
 
             $Book = Book::create($request->validated());
             $this->storeImg($Book, $request->file('image'));          
-            // event(new NewsLetterEmail($Book->id));
+            event(new NewsLetterEmail($Book->id));
             return redirect("/dashboard/books")->with("message", "Book added with success.");
         } catch (\Exception $e) {
 dd($e->getMessage());

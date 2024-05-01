@@ -63,7 +63,7 @@
            
             <li class="">
                 
-            <a href="/chat" class="flex flex-col px-2 items-center  {{ $page === 'message' ? 'border-b-2 border-black text-black' : 'text-gray-500 hover:text-black' }}"> 
+            <a href="/chatify" class="flex flex-col px-2 items-center  {{ $page === 'message' ? 'border-b-2 border-black text-black' : 'text-gray-500 hover:text-black' }}"> 
                 <x-icon name="message"/>
                     <span class="text-xs">message</span>
                 </a>
@@ -133,12 +133,12 @@
 				 <x-icon name="home" class="inline-block mb-1"/> 
 				<span class="tab tab-home block text-xs">Home</span>
             </a>
-			<a href="/books" class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
+			<a href="/home/books" class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
             <x-icon name="books" class="inline-block mb-1"/> 
 
 				<span class="tab tab-kategori block text-xs">Books</span>
 			</a>
-			<a href="/chat" class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
+			<a href="/chatify" class="w-full focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1">
                 <x-icon name="message" class="inline-block mb-1"/> 
 				<span class="tab tab-explore block text-xs">message</span>
 			</a>

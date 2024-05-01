@@ -39,7 +39,7 @@ class GenreController extends Controller
     public function store(GenreRequest $request)
     {
         $this->GenreService->create($request);
-       return  redirect()->back()->with('message','Genre added with success');
+       return  redirect()->back()->with('success','Genre added with success');
     }
 
     /**
@@ -64,7 +64,7 @@ class GenreController extends Controller
     public function update(GenreRequest $request, Genre $genre)
     {
         $this->GenreService->update($request,$genre);
-        return redirect('/dashboard/genres')->with('message','Genre updated with success');
+        return redirect('/dashboard/genres')->with('success','Genre updated with success');
     }
 
     /**
@@ -73,12 +73,7 @@ class GenreController extends Controller
     public function destroy(Genre $genre)
     {
         $this->GenreService->delete($genre);
-       return redirect()->back()->with('message','Genre updated with success');
+       return redirect()->back()->with('success','Genre updated with success');
     }
-    
-    public function restore(Genre $genre)
-    {
-        $genre->restore();
-        redirect()->back()->with('message','Genre restored with success');
-    }
+  
 }
