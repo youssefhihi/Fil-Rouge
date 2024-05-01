@@ -4,9 +4,9 @@
     <x-client.navbar page="profile" /> 
 @endsection
 
-<div class=" flex rounded-lg justify-evenly px-10 bg-white ">
-        <div class=" hidden lg:block lg:w-1/2  p-5 rounded-xl">
-            <img src="{{asset('storage/' . $book->image->path)}}" alt="" class=" rounded-2xl bg-cover drop-shdow-xl ">
+<div class=" flex rounded-lg justify-evenly w-full  bg-white ">
+        <div class=" hidden lg:block lg:w-1/2 h-full p-5 rounded-xl">
+            <img src="{{asset('storage/' . $book->image->path)}}" alt="" class=" w-full object-fill h-full rounded-2xl bg-cover drop-shdow-xl ">
         </div>
         <div class="w-full  p-5 relative  rounded-xl shadow-lg  bg-white ">
               

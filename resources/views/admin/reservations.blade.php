@@ -67,9 +67,16 @@
                  <td class="px-6 py-4 whitespace-nowrap text-md text-gray-500">
                  <span>{{ $reservation->duration() }} Days</span>
                  </td>
-                 <td class=" py-10 flex space-x-3  whitespace-nowrap text-sm text-gray-500">                                   
-                        <button onclick="openModal('{{ $reservation->id}}')"><x-icon name="refuse"/></button>         
-                     <x-icon name="detailsB"/>
+                 <td class=" py-10 flex  whitespace-nowrap text-sm text-gray-500">  
+                    
+                 <div class="group relative ">
+                 <button onclick="openModal('{{ $reservation->id}}')"><x-icon name="refuse"/></button>         
+                            <span class="absolute -top-14 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 px-3 rounded-lg border border-gray-300 bg-white py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">
+                               refuse reservation
+                                <span>
+                                     </span
+                            ></span>
+                        </div>
                  </td>
              </tr>
                       

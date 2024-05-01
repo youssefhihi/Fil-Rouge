@@ -38,8 +38,6 @@ class CommentController extends Controller
         $comment =  $this->CommentService->create($request);
         $comments =  $this->CommentService->get($comment->post_id);
         $authId = Auth::user()->client->id;
-
-
         return response()->json(['comments'=> $comments, 'authId' => $authId]);
         
     }
@@ -52,7 +50,7 @@ class CommentController extends Controller
         $comments =  $this->CommentService->get($post);
         $authId = Auth::user()->client->id;
 
-        return response()->json(['comments'=> $comments, 'authId' =>$authId]);
+        return response()->json(['comments'=> $comments, 'authId' => $authId]);
 
     }
 
@@ -69,8 +67,7 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        $comment->update($request->validated());
-        return redirect()->back();
+       
     }
 
     /**
@@ -81,6 +78,6 @@ class CommentController extends Controller
         $this->CommentService->delete($comment);
         $comments =  $this->CommentService->get($comment->post_id);
         $authId = Auth::user()->client->id;
-        return response()->json(['comments'=> $comments, 'authId' =>$authId]);
+        return response()->json(['comments'=> $comments, 'authId' => $authId]);
     }
 }

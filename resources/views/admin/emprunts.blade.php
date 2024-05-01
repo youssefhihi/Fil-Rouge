@@ -28,7 +28,7 @@
                     Book
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Duration
+                    Days to return
                 </th>
             </tr>
         </thead>
@@ -69,7 +69,13 @@
 
  </tr>
 @empty
-    noo
+<tr>
+        <td>
+            <td>
+                no Emprunts
+            </td>
+        </td>
+    </tr>
 @endforelse
 
         </tbody>

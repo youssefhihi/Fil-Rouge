@@ -56,10 +56,10 @@ class ReservationController extends Controller
             $book->update(['quantity' => $new_quantity]);
             $reservation = Reservation::create($data);
             //send Email     
-            Mail::to(Auth::user()->email)->send(new ReservationEmail($reservation->id));
+            // Mail::to(Auth::user()->email)->send(new ReservationEmail($reservation->id));
             return redirect('/home/books')->with('success', 'The reservation has been sent to the admin for confirmation.');
         } else {
-            return redirect('/home/books')->with('success', 'Quantity not enough.');
+            return redirect('/home/books')->with('error', 'Quantity not enough.');
         }
     }
 

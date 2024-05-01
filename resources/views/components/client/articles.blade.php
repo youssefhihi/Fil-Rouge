@@ -219,7 +219,7 @@
                             method: 'GET',
                             dataType: 'json',
                             success: function(data) {
-                              console.log(data);
+                              console.log(data.authId);
                               var popup = $('#comment-popup');
                                   popup.removeClass('hidden');
                                   $('.comments-container').empty();
@@ -244,12 +244,12 @@
                                             </div>
                                             <div class="text-xs">${comment.content}</div>
                                         </div>
-                                        ${comment.client.id == data.authId ? 
+                                        ${comment.client.id === data.authId ? 
                                           `<form method="post">
                                           @csrf
                                           @method('DELETE')
                                           <button onclick="deleteComment(this,${comment.id})" class=" pt-3">
-                                              <x-icon name="delete" />
+                                              <x-icon name="delete"  class="w-6 h-6"/>
                                           </button>
                                       </form>` : ``}
                                     </div>
@@ -286,6 +286,7 @@
                         data: jQuery(form).serialize(),
                         method: 'POST',
                         success: function(result) {
+                          console.log(result.authId);
                           var popup = $('#comment-popup');
                           popup.removeClass('hidden');
                           $('.comments-container').empty();
@@ -309,12 +310,12 @@
                                             </div>
                                             <div class="text-xs">${comment.content}</div>
                                         </div>
-                                        ${comment.client.id == result.authId ? 
+                                        ${comment.client.id === result.authId ? 
                                           `<form method="post">
                                           @csrf
                                           @method('DELETE')
                                           <button onclick="deleteComment(this,${comment.id})" class="text-xs pt-1">
-                                              <x-icon name="delete" />
+                                              <x-icon name="delete"   class="w-6 h-6"/>
                                           </button>
                                       </form>` : ``}
                                     </div>
@@ -369,7 +370,7 @@
                                           @csrf
                                           @method('DELETE')
                                           <button onclick="deleteComment(this,${comment.id})">
-                                              <x-icon name="delete" class="text-xs pt-1"/>
+                                              <x-icon name="delete"  class="w-6 h-6"/>
                                           </button>
                                       </form>` : ``}
                                     </div>

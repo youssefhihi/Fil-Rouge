@@ -1,7 +1,7 @@
 
 <x-admin-layout>
     <!-- CONTENT -->
-    <x-success-alert/>
+    <x-success-alert :messages="$errors->all()" />
     <x-error-alert :messages="$errors->all()" />
  <title-pages name="Genres"/>
  

@@ -264,7 +264,7 @@ function closeComment()
                                           @csrf
                                           @method('DELETE')
                                           <button onclick="deleteComment(this,${comment.id})" class=" pt-3">
-                                              <x-icon name="delete" />
+                                              <x-icon name="delete" class="w-6 h-6" />
                                           </button>
                                       </form>` : ``}
                                     </div>
@@ -329,7 +329,7 @@ function closeComment()
                                           @csrf
                                           @method('DELETE')
                                           <button onclick="deleteComment(this,${comment.id})" class="text-xs pt-1">
-                                              <x-icon name="delete" />
+                                              <x-icon name="delete" class="w-6 h-6" />
                                           </button>
                                       </form>` : ``}
                                     </div>
@@ -384,7 +384,7 @@ function closeComment()
                                           @csrf
                                           @method('DELETE')
                                           <button onclick="deleteComment(this,${comment.id})">
-                                              <x-icon name="delete" class="text-xs pt-1"/>
+                                              <x-icon name="delete" class="w-6 h-6"/>
                                           </button>
                                       </form>` : ``}
                                     </div>

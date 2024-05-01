@@ -26,7 +26,9 @@ class AdminController extends Controller
         $weekReservation = Reservation::where('is_returned',true)->where('is_taken',true)->whereDate('created_at', '>=', now()->subweek())->count();
         $newRegistrations = User::where('role', 'client')->whereDate('created_at', '>=', now()->subMonth())->count();
         $dailyPosts = Post::whereDate('created_at','>=',now()->subDays())->count();
-        return view('admin.dashboard',compact('dailyPosts','booksCount','usersCount','weekReservation','monthlyReservation','newRegistrations'));
+        $reservations = Reservation::get();
+
+        return view('admin.dashboard',compact('reservations','dailyPosts','booksCount','usersCount','weekReservation','monthlyReservation','newRegistrations'));
     }
     
     public function users()
